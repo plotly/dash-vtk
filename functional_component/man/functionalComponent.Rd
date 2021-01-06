@@ -6,19 +6,19 @@
 \title{FunctionalComponent component}
 
 \description{
-ExampleComponent is an example component. It takes a property, `label`, and displays it. It renders an input with the property `value` which is editable by the user.
+Some arbitrary description
 }
 
 \usage{
-functionalComponent(id=NULL, label=NULL, value=NULL)
+functionalComponent(id=NULL, value=NULL, n_clicks=NULL)
 }
 
 \arguments{
-\item{id}{Character. The ID used to identify this component in Dash callbacks.}
+\item{id}{The ID used to identify this component in Dash callbacks.}
 
-\item{label}{Character. A label that will be printed when this component is rendered.}
+\item{value}{The value displayed in the input.}
 
-\item{value}{Character. The value displayed in the input.}
+\item{n_clicks}{Number of time button was clicked}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

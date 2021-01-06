@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-function FunctionalComponent() {
+/**
+ * Some arbitrary description
+ */
+function FunctionalComponent(props) {
   const [count, setCount] = useState(0);
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     // Update the document title using the browser API
     document.title = `You clicked ${count} times`;
-    setProps({n_clicks: count});
+    props.setProps({n_clicks: count});
   });
 
   return (
@@ -30,10 +33,6 @@ FunctionalComponent.propTypes = {
      */
     id: PropTypes.string,
 
-    /**
-     * A label that will be printed when this component is rendered.
-     */
-    label: PropTypes.string.isRequired,
 
     /**
      * The value displayed in the input.
@@ -52,3 +51,5 @@ FunctionalComponent.propTypes = {
     n_clicks: PropTypes.number,
 
 };
+
+export default FunctionalComponent;

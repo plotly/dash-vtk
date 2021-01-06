@@ -7,17 +7,18 @@ app = dash.Dash(__name__)
 
 app.layout = html.Div([
     functional_component.FunctionalComponent(
-        id='input',
-        value='my-value',
-        label='my-label'
+        id='fc',
     ),
     html.Div(id='output')
 ])
 
 
-@app.callback(Output('output', 'children'), [Input('input', 'value')])
-def display_output(value):
-    return 'You have entered {}'.format(value)
+@app.callback(Output('output', 'children'), [Input('fc', 'n_clicks')])
+def display_output(n_clicks):
+    print("n_clicks =", n_clicks)
+    
+    return dash.no_update
+    
 
 
 if __name__ == '__main__':
