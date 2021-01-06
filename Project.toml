@@ -1,0 +1,12 @@
+
+name = "DashVtk"
+uuid = "1b08a953-4be3-4667-9a23-818b1eccd4c7"
+authors = ["Kitware Inc <sebastien.jourdain@kitware.com>"]
+version = "0.0.1"
+
+[deps]
+Dash = "1b08a953-4be3-4667-9a23-3db579824955"
+
+[compat]
+julia = "1.2"
+Dash = "0.1.3"

@@ -1,0 +1,7 @@
+include dash_vtk/dash_vtk.min.js
+include dash_vtk/dash_vtk.min.js.map
+include dash_vtk/metadata.json
+include dash_vtk/package-info.json
+include README.md
+include LICENSE
+include package.json
