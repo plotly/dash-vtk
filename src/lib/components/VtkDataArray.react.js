@@ -116,8 +116,4 @@ VtkDataArray.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  /**
-   * Passed by parent
-   */
-  fields: PropTypes.object,
 };

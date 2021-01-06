@@ -11,7 +11,7 @@ VtkGeometryRepresentation is responsible to convert a vtkPolyData into rendering
 
 \usage{
 vtkVtkGeometryRepresentation(children=NULL, id=NULL, colorBy=NULL, pointSize=NULL,
-color=NULL, view=NULL)
+color=NULL)
 }
 
 \arguments{
@@ -26,8 +26,6 @@ color=NULL, view=NULL)
 \item{pointSize}{Numeric. pointSize for vertex rendering}
 
 \item{color}{List of numerics. When no colorBy array is provided use provided solid color}
-
-\item{view}{Named list. Passed by parent}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

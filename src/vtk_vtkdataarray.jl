@@ -23,10 +23,9 @@ Keyword arguments:
 - `values` (Array of Reals; optional): Actual values to use inside our array
 - `numberOfComponents` (Real; optional): Number of components / Tuple size
 - `registration` (String; optional): Name of the method to call on the fieldData (addArray, setScalars, setVectors...)
-- `fields` (Dict; optional): Passed by parent
 """
 function vtk_vtkdataarray(; kwargs...)
-        available_props = Symbol[:children, :id, :type, :name, :values, :numberOfComponents, :registration, :fields]
+        available_props = Symbol[:children, :id, :type, :name, :values, :numberOfComponents, :registration]
         wild_props = Symbol[]
         return Component("vtk_vtkdataarray", "VtkDataArray", "dash_vtk", available_props, wild_props; kwargs...)
 end

@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkVtkGeometryRepresentation <- function(children=NULL, id=NULL, colorBy=NULL, pointSize=NULL, color=NULL, view=NULL) {
+vtkVtkGeometryRepresentation <- function(children=NULL, id=NULL, colorBy=NULL, pointSize=NULL, color=NULL) {
     
-    props <- list(children=children, id=id, colorBy=colorBy, pointSize=pointSize, color=color, view=view)
+    props <- list(children=children, id=id, colorBy=colorBy, pointSize=pointSize, color=color)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkVtkGeometryRepresentation <- function(children=NULL, id=NULL, colorBy=NULL, p
         props = props,
         type = 'VtkGeometryRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'colorBy', 'pointSize', 'color', 'view'),
+        propNames = c('children', 'id', 'colorBy', 'pointSize', 'color'),
         package = 'dashVtk'
         )
 

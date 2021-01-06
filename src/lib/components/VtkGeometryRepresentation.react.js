@@ -148,8 +148,4 @@ VtkGeometryRepresentation.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  /**
-   * Passed by parent
-   */
-  view: PropTypes.object,
 };

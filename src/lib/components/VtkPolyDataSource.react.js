@@ -165,12 +165,4 @@ VtkPolyDataSource.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  /**
-   * Passed by parent
-   */
-  view: PropTypes.object,
-  /**
-   * Passed by parent
-   */
-  representation: PropTypes.object,
 };

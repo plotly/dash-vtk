@@ -25,10 +25,9 @@ Keyword arguments:
 - ['cellData', 'pressure']
 - `pointSize` (Real; optional): pointSize for vertex rendering
 - `color` (Array of Reals; optional): When no colorBy array is provided use provided solid color
-- `view` (Dict; optional): Passed by parent
 """
 function vtk_vtkgeometryrepresentation(; kwargs...)
-        available_props = Symbol[:children, :id, :colorBy, :pointSize, :color, :view]
+        available_props = Symbol[:children, :id, :colorBy, :pointSize, :color]
         wild_props = Symbol[]
         return Component("vtk_vtkgeometryrepresentation", "VtkGeometryRepresentation", "dash_vtk", available_props, wild_props; kwargs...)
 end

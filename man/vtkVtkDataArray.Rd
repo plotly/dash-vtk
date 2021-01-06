@@ -11,7 +11,7 @@ VtkDataArray is creating a vtkDataArray for the container fields It takes the fo
 
 \usage{
 vtkVtkDataArray(children=NULL, id=NULL, type=NULL, name=NULL, values=NULL,
-numberOfComponents=NULL, registration=NULL, fields=NULL)
+numberOfComponents=NULL, registration=NULL)
 }
 
 \arguments{
@@ -28,8 +28,6 @@ numberOfComponents=NULL, registration=NULL, fields=NULL)
 \item{numberOfComponents}{Numeric. Number of components / Tuple size}
 
 \item{registration}{Character. Name of the method to call on the fieldData (addArray, setScalars, setVectors...)}
-
-\item{fields}{Named list. Passed by parent}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

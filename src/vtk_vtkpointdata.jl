@@ -16,12 +16,9 @@ It provides the following properties to its children:
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional): List of representation to show
 - `id` (String; optional): The ID used to identify this component in Dash callbacks.
-- `view` (Dict; optional): Passed by parent
-- `representation` (Dict; optional): Passed by parent
-- `dataset` (Dict; optional): Passed by parent
 """
 function vtk_vtkpointdata(; kwargs...)
-        available_props = Symbol[:children, :id, :view, :representation, :dataset]
+        available_props = Symbol[:children, :id]
         wild_props = Symbol[]
         return Component("vtk_vtkpointdata", "VtkPointData", "dash_vtk", available_props, wild_props; kwargs...)
 end
