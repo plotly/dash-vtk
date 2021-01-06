@@ -25,7 +25,7 @@ export default class VtkGeometryRepresentation extends Component {
   }
 
   render() {
-    console.log('VtkGeometryRepresentation', this.props);
+    console.log('VtkGeometryRepresentation', this);
     const { id, setProps, children, view } = this.props;
     const addOnProps = {
       downstream: this.mapper,

@@ -38,11 +38,15 @@ export default class VtkView extends Component {
 
         // Resize handling
         this.resizeObserver = new ResizeObserver(() => this.onResize());
+
+        // expose helper methods
+        this.resetCamera = this.renderer.resetCamera;
+        this.renderView = this.renderWindow.render;
     }
 
     render() {
-        const { id, children, setProps } = this.props;
-        const addOnProps = { view: this, setProps };
+        const { id, children } = this.props;
+        const addOnProps = { view: this };
         const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
         return (
             <div

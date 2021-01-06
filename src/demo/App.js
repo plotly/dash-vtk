@@ -5,19 +5,28 @@ import { VtkView, VtkGeometryRepresentation, VtkPolyDataSource, VtkPointData, Vt
 
 class App extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.vtkViewRef = React.createRef();
         this.setProps = this.setProps.bind(this);
+        this.onResetCamera = this.onResetCamera.bind(this);
     }
 
     setProps(newProps) {
         this.setState(newProps);
     }
 
+    onResetCamera() {
+        const view = this.vtkViewRef.current;
+        view.resetCamera();
+        view.renderView();
+    }
+
     render() {
         return (
             <div>
-                <VtkView setProps={this.setProps} background={[0.1, 0.1, 0.1]} >
+                <button onClick={this.onResetCamera} style={{ position: 'absolute', zIndex: 10 }}>reset camera</button>
+                <VtkView ref={this.vtkViewRef} setProps={this.setProps} background={[0.1, 0.1, 0.1]} >
                     <VtkGeometryRepresentation
                         colorBy={['pointData', 'Temperature']}
                     >
