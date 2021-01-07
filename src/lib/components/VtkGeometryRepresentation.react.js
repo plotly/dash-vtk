@@ -25,8 +25,9 @@ export default class VtkGeometryRepresentation extends Component {
   }
 
   render() {
-    console.log('VtkGeometryRepresentation', this);
+    console.log('VtkGeometryRepresentation:', Object.keys(this.props));
     const { id, setProps, children, view } = this.props;
+    console.log(' - view:', view);
     const addOnProps = {
       downstream: this.mapper,
       representation: this,
@@ -42,8 +43,12 @@ export default class VtkGeometryRepresentation extends Component {
   }
 
   componentDidMount() {
-    const { renderer } = this.props.view;
-    renderer.addActor(this.actor);
+    const { renderer } = this.props.view || {};
+    if (renderer) {
+      renderer.addActor(this.actor);
+    } else {
+      console.log('Could not connect actor to renderer');
+    }
     this.update(this.props);
   }
 
@@ -53,7 +58,9 @@ export default class VtkGeometryRepresentation extends Component {
 
   componentWillUnmount() {
     const { renderer } = this.props.view;
-    renderer.remoteActor(this.actor);
+    if (renderer) {
+      renderer.remoteActor(this.actor);
+    }
 
     this.actor.delete();
     this.actor = null;
@@ -79,7 +86,12 @@ export default class VtkGeometryRepresentation extends Component {
     let colorMode = vtkMapper.ColorMode.DEFAULT;
     let scalarMode = vtkMapper.ScalarMode.DEFAULT;
     const colorByArrayName = arrayName;
-    const fields = this.mapper.getInputData().getReferenceByName(arrayLocation);
+    const dataset = this.mapper.getInputData();
+    if (!dataset) {
+      console.log('No mapper input');
+      return;
+    }
+    const fields = dataset.getReferenceByName(arrayLocation);
     const activeArray = fields && fields.getArray(arrayName);
     const scalarVisibility = !!activeArray;
 
@@ -148,4 +160,7 @@ VtkGeometryRepresentation.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+
+  // pass by parent
+  view: PropTypes.object,
 };

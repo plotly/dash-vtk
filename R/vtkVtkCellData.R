@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkVtkCellData <- function(children=NULL, id=NULL) {
+vtkVtkCellData <- function(children=NULL, id=NULL, view=NULL, representation=NULL, dataset=NULL) {
     
-    props <- list(children=children, id=id)
+    props <- list(children=children, id=id, view=view, representation=representation, dataset=dataset)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkVtkCellData <- function(children=NULL, id=NULL) {
         props = props,
         type = 'VtkCellData',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id'),
+        propNames = c('children', 'id', 'view', 'representation', 'dataset'),
         package = 'dashVtk'
         )
 

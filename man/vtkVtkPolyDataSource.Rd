@@ -11,7 +11,8 @@ VtkPolyDataSource is exposing a polydata to a downstream filter or representatio
 
 \usage{
 vtkVtkPolyDataSource(children=NULL, id=NULL, port=NULL, points=NULL, verts=NULL,
-lines=NULL, polys=NULL, strips=NULL, pointCloud=NULL)
+lines=NULL, polys=NULL, strips=NULL, pointCloud=NULL,
+view=NULL, representation=NULL)
 }
 
 \arguments{
@@ -32,6 +33,10 @@ lines=NULL, polys=NULL, strips=NULL, pointCloud=NULL)
 \item{strips}{List of numerics. strips cells}
 
 \item{pointCloud}{Logical. Is it point cloud}
+
+\item{view}{Named list. }
+
+\item{representation}{Named list. }
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

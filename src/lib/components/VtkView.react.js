@@ -47,7 +47,22 @@ export default class VtkView extends Component {
     render() {
         const { id, children } = this.props;
         const addOnProps = { view: this };
+
+        // debug ++++++++++++++++++++++++++++++++++++++++++
+        React.Children.forEach(children, (child) => {
+            console.log('before child props:', Object.keys(child.props));
+        });
+        // debug ------------------------------------------
+
         const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
+
+        // debug ++++++++++++++++++++++++++++++++++++++++++
+        React.Children.forEach(childrenWithViewProp, (child) => {
+            console.log('after child props:', Object.keys(child.props));
+            console.log(' => view:', child.props.view);
+        });
+        // debug ------------------------------------------
+
         return (
             <div
                 id={id}

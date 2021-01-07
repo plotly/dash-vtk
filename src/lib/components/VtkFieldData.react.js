@@ -1,33 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * VtkFieldData is exposing a VtkFieldData to a downstream element
+ * VtkFieldData is exposing a vtkFieldData to a downstream element
  * It provides the following properties to its children:
  *   - pass along: 'view', 'representation`, `setProps`
- *   - `fields` == `VtkFieldData`
+ *   - `fields` == `vtkFieldData`
  */
-export default class VtkFieldData extends Component {
-  render() {
-    const { id, setProps, children, view, representation, dataset } = this.props;
-    const addOnProps = {
-      fields: dataset.getFieldData(),
-      dataset,
-      representation,
-      view,
-      setProps,
-    };
-    const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
-    return (
-      <div id={id}>
-        {childrenWithViewProp}
-      </div>
-    );
-  }
+export default function VtkFieldData(props) {
+  const { id, setProps, children, view, representation, dataset } = props;
+  const addOnProps = {
+    fields: dataset.getFieldData(),
+    dataset,
+    representation,
+    view,
+    setProps,
+  };
+  const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
+  return (
+    <div id={id}>
+      {childrenWithViewProp}
+    </div>
+  );
 }
 
-VtkFieldData.defaultProps = {
-};
+VtkFieldData.defaultProps = {};
 
 VtkFieldData.propTypes = {
   /**
@@ -48,4 +45,9 @@ VtkFieldData.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+
+  // pass by parent
+  view: PropTypes.object,
+  representation: PropTypes.object,
+  dataset: PropTypes.object,
 };

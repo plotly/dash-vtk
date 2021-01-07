@@ -9,16 +9,19 @@ export vtk_vtkcelldata
 
 
 A VtkCellData component.
-VtkCellData is exposing a VtkCellData to a downstream element
+VtkCellData is exposing a vtkCellData to a downstream element
 It provides the following properties to its children:
   - pass along: 'view', 'representation`, `setProps`
-  - `fields` == `VtkCellData`
+  - `fields` == `vtkCellData`
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional): List of representation to show
 - `id` (String; optional): The ID used to identify this component in Dash callbacks.
+- `view` (Dict; optional)
+- `representation` (Dict; optional)
+- `dataset` (Dict; optional)
 """
 function vtk_vtkcelldata(; kwargs...)
-        available_props = Symbol[:children, :id]
+        available_props = Symbol[:children, :id, :view, :representation, :dataset]
         wild_props = Symbol[]
         return Component("vtk_vtkcelldata", "VtkCellData", "dash_vtk", available_props, wild_props; kwargs...)
 end

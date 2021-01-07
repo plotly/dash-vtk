@@ -21,7 +21,7 @@ export default class VtkDataArray extends Component {
   }
 
   render() {
-    console.log('VtkDataArray', this.props);
+    console.log('VtkDataArray:', Object.keys(this.props));
     return null;
   }
 
@@ -116,4 +116,10 @@ VtkDataArray.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+
+  // pass by parent
+  view: PropTypes.object,
+  representation: PropTypes.object,
+  dataset: PropTypes.object,
+  fields: PropTypes.object,
 };

@@ -30,9 +30,11 @@ Keyword arguments:
 - `polys` (Array of Reals; optional): polys cells
 - `strips` (Array of Reals; optional): strips cells
 - `pointCloud` (Bool; optional): Is it point cloud
+- `view` (Dict; optional)
+- `representation` (Dict; optional)
 """
 function vtk_vtkpolydatasource(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :points, :verts, :lines, :polys, :strips, :pointCloud]
+        available_props = Symbol[:children, :id, :port, :points, :verts, :lines, :polys, :strips, :pointCloud, :view, :representation]
         wild_props = Symbol[]
         return Component("vtk_vtkpolydatasource", "VtkPolyDataSource", "dash_vtk", available_props, wild_props; kwargs...)
 end

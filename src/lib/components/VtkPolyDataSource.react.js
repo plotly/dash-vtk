@@ -25,8 +25,10 @@ export default class VtkPolyDataSource extends Component {
   }
 
   render() {
-    console.log('VtkPolyDataSource', this.props);
+    console.log('VtkPolyDataSource:', Object.keys(this.props));
     const { id, setProps, children, view, representation } = this.props;
+    console.log(' - view:', view);
+    console.log(' - representation:', representation);
     const addOnProps = {
       dataset: this.polydata,
       representation,
@@ -44,7 +46,11 @@ export default class VtkPolyDataSource extends Component {
   componentDidMount() {
     const { downstream, port } = this.props;
     this.update(this.props);
-    downstream.setInputData(this.polydata, port);
+    if (downstream) {
+      downstream.setInputData(this.polydata, port);
+    } else {
+      console.log('Could not connect to downstream...');
+    }
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -165,4 +171,8 @@ VtkPolyDataSource.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+
+  // pass by parent
+  view: PropTypes.object,
+  representation: PropTypes.object,
 };

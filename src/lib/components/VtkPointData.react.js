@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
@@ -7,28 +7,32 @@ import PropTypes from 'prop-types';
  *   - pass along: 'view', 'representation`, `setProps`
  *   - `fields` == `vtkPointData`
  */
-export default class VtkPointData extends Component {
-  render() {
-    console.log('VtkPointData', this.props);
-    const { id, setProps, children, view, representation, dataset } = this.props;
-    const addOnProps = {
-      fields: dataset.getPointData(),
-      dataset,
-      representation,
-      view,
-      setProps,
-    };
-    const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
-    return (
-      <div id={id}>
-        {childrenWithViewProp}
-      </div>
-    );
+export default function VtkPointData(props) {
+  console.log('VtkPointData:', Object.keys(props));
+  const { id, setProps, children, view, representation, dataset } = props;
+  console.log(' - view:', view);
+  console.log(' - representation:', representation);
+  console.log(' - dataset:', dataset);
+  if (!dataset) {
+    console.log('!! Skip render');
+    return null;
   }
+  const addOnProps = {
+    fields: dataset.getPointData(),
+    dataset,
+    representation,
+    view,
+    setProps,
+  };
+  const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
+  return (
+    <div id={id}>
+      {childrenWithViewProp}
+    </div>
+  );
 }
 
-VtkPointData.defaultProps = {
-};
+VtkPointData.defaultProps = {};
 
 VtkPointData.propTypes = {
   /**
@@ -49,4 +53,9 @@ VtkPointData.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+
+  // pass by parent
+  view: PropTypes.object,
+  representation: PropTypes.object,
+  dataset: PropTypes.object,
 };
