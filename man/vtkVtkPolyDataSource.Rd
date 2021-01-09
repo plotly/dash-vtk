@@ -6,13 +6,12 @@
 \title{VtkPolyDataSource component}
 
 \description{
-VtkPolyDataSource is exposing a polydata to a downstream filter or representation It takes the following set of properties:   - points: [x, y, z, x, y, z, ...],   - verts: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - lines: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - polys: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - strips: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - pointCloud: false/true (if on it will generate verts automatically) It provides the following properties to its children:   - pass along: 'view', 'representation`, `setProps`   - `dataset` == `this.dataset`
+VtkPolyDataSource is exposing a polydata to a downstream filter It takes the following set of properties:   - points: [x, y, z, x, y, z, ...],   - connectivity: 'manual', // [manual, points, triangles, strips]   - verts: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - lines: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - polys: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]   - strips: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
 }
 
 \usage{
 vtkVtkPolyDataSource(children=NULL, id=NULL, port=NULL, points=NULL, verts=NULL,
-lines=NULL, polys=NULL, strips=NULL, pointCloud=NULL,
-view=NULL, representation=NULL)
+lines=NULL, polys=NULL, strips=NULL, connectivity=NULL)
 }
 
 \arguments{
@@ -32,11 +31,7 @@ view=NULL, representation=NULL)
 
 \item{strips}{List of numerics. strips cells}
 
-\item{pointCloud}{Logical. Is it point cloud}
-
-\item{view}{Named list. }
-
-\item{representation}{Named list. }
+\item{connectivity}{Character. Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

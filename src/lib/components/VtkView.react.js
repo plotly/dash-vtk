@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// Context to pass parent variables to children
+export const VueContext = React.createContext(null);
+export const RepresentationContext = React.createContext(null);
+export const DataSetContext = React.createContext(null);
+export const FieldsContext = React.createContext(null);
+export const DownstreamContext = React.createContext(null);
+
+// vtk.js Rendering stack
 import vtkOpenGLRenderWindow from 'vtk.js/Sources/Rendering/OpenGL/RenderWindow';
 import vtkRenderWindow from 'vtk.js/Sources/Rendering/Core/RenderWindow';
 import vtkRenderWindowInteractor from 'vtk.js/Sources/Rendering/Core/RenderWindowInteractor';
 import vtkRenderer from 'vtk.js/Sources/Rendering/Core/Renderer';
 import vtkInteractorStyleTrackballCamera from 'vtk.js/Sources/Interaction/Style/InteractorStyleTrackballCamera';
 
+// Default css styles
 const CONTAINER_STYLE = { width: '100%', height: '100%', position: 'relative' };
 const RENDERER_STYLE = { position: 'absolute', width: '100%', height: '100%', overflow: 'hidden' };
 const HIDDEN_STYLE = { display: 'none' };
@@ -14,7 +23,7 @@ const HIDDEN_STYLE = { display: 'none' };
 /**
  * VtkView is responsible to render vtk.js data.
  * It takes the following set of properties:
- *   - `background`:
+ *   - `background`: [0.2, 0.3, 0.4]
  */
 export default class VtkView extends Component {
     constructor(props) {
@@ -46,22 +55,6 @@ export default class VtkView extends Component {
 
     render() {
         const { id, children } = this.props;
-        const addOnProps = { view: this };
-
-        // debug ++++++++++++++++++++++++++++++++++++++++++
-        React.Children.forEach(children, (child) => {
-            console.log('before child props:', Object.keys(child.props));
-        });
-        // debug ------------------------------------------
-
-        const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
-
-        // debug ++++++++++++++++++++++++++++++++++++++++++
-        React.Children.forEach(childrenWithViewProp, (child) => {
-            console.log('after child props:', Object.keys(child.props));
-            console.log(' => view:', child.props.view);
-        });
-        // debug ------------------------------------------
 
         return (
             <div
@@ -73,7 +66,9 @@ export default class VtkView extends Component {
                     ref={this.containerRef}
                 />
                 <div style={HIDDEN_STYLE}>
-                    {childrenWithViewProp}
+                    <VueContext.Provider value={this}>
+                        {children}
+                    </VueContext.Provider>
                 </div>
             </div>
         );

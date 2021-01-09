@@ -11,7 +11,7 @@ export vtk_vtkview
 A VtkView component.
 VtkView is responsible to render vtk.js data.
 It takes the following set of properties:
-  - `background`:
+  - `background`: [0.2, 0.3, 0.4]
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional): List of representation to show
 - `id` (String; optional): The ID used to identify this component in Dash callbacks.

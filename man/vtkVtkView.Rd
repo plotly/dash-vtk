@@ -6,7 +6,7 @@
 \title{VtkView component}
 
 \description{
-VtkView is responsible to render vtk.js data. It takes the following set of properties:   - `background`:
+VtkView is responsible to render vtk.js data. It takes the following set of properties:   - `background`: [0.2, 0.3, 0.4]
 }
 
 \usage{

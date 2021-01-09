@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { RepresentationContext, DownstreamContext, DataSetContext } from './VtkView.react';
+
 import vtkPolyData from 'vtk.js/Sources/Common/DataModel/PolyData';
 
 /**
- * VtkPolyDataSource is exposing a polydata to a downstream filter or representation
+ * VtkPolyDataSource is exposing a polydata to a downstream filter
  * It takes the following set of properties:
  *   - points: [x, y, z, x, y, z, ...],
+ *   - connectivity: 'manual', // [manual, points, triangles, strips]
  *   - verts: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
  *   - lines: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
  *   - polys: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
  *   - strips: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
- *   - pointCloud: false/true (if on it will generate verts automatically)
- * It provides the following properties to its children:
- *   - pass along: 'view', 'representation`, `setProps`
- *   - `dataset` == `this.dataset`
  */
 export default class VtkPolyDataSource extends Component {
   constructor(props) {
@@ -25,32 +24,32 @@ export default class VtkPolyDataSource extends Component {
   }
 
   render() {
-    console.log('VtkPolyDataSource:', Object.keys(this.props));
-    const { id, setProps, children, view, representation } = this.props;
-    console.log(' - view:', view);
-    console.log(' - representation:', representation);
-    const addOnProps = {
-      dataset: this.polydata,
-      representation,
-      view,
-      setProps,
-    };
-    const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
     return (
-      <div id={id}>
-        {childrenWithViewProp}
-      </div>
+      <RepresentationContext.Consumer>
+        {(representation) => (
+          <DownstreamContext.Consumer>
+            {(downstream) => {
+              this.representation = representation;
+              if (!this.downstream) {
+                this.downstream = downstream;
+              }
+              return (
+                <DataSetContext.Provider value={this.polydata}>
+                  <div id={this.props.id}>
+                    {this.props.children}
+                  </div>
+                </DataSetContext.Provider>
+              );
+            }}
+          </DownstreamContext.Consumer>
+        )}
+      </RepresentationContext.Consumer>
     );
   }
 
   componentDidMount() {
-    const { downstream, port } = this.props;
     this.update(this.props);
-    if (downstream) {
-      downstream.setInputData(this.polydata, port);
-    } else {
-      console.log('Could not connect to downstream...');
-    }
+    this.downstream.setInputData(this.polydata, this.props.port);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -63,7 +62,7 @@ export default class VtkPolyDataSource extends Component {
   }
 
   update(props, previous) {
-    const { pointCloud, points, verts, lines, polys, strips } = props;
+    const { connectivity, points, verts, lines, polys, strips } = props;
     let changeDetected = false;
     let pointChanged = false;
     if (points && (!previous || points !== previous.points)) {
@@ -92,27 +91,65 @@ export default class VtkPolyDataSource extends Component {
       changeDetected = true;
     }
 
-    if (pointCloud && (pointChanged || !previous || pointCloud !== previous.pointCloud)) {
+    if (connectivity && (connectivity || !previous || connectivity !== previous.connectivity)) {
       const nbPoints = points.length / 3;
-      const values = new Uint16Array(nbPoints + 1);
-      values[0] = nbPoints;
-      for (let i = 0; i < nbPoints; i++) {
-        values[i + 1] = i;
+      switch (connectivity) {
+        case 'points':
+          {
+            const values = new Uint16Array(nbPoints + 1);
+            values[0] = nbPoints;
+            for (let i = 0; i < nbPoints; i++) {
+              values[i + 1] = i;
+            }
+            this.polydata.getVerts().setData(values);
+            changeDetected = true;
+          }
+          break;
+        case 'triangles':
+          {
+            const values = new Uint16Array(nbPoints + (nbPoints / 3));
+            let offset = 0;
+            for (let i = 0; i < nbPoints; i+=3) {
+              values[offset++] = 3;
+              values[offset++] = i + 0;
+              values[offset++] = i + 1;
+              values[offset++] = i + 2;
+            }
+            this.polydata.getPolys().setData(values);
+            changeDetected = true;
+          }
+          break;
+        case 'strips':
+          {
+            const values = new Uint16Array(nbPoints + 1);
+            values[0] = nbPoints;
+            for (let i = 0; i < nbPoints; i++) {
+              values[i + 1] = i;
+            }
+            this.polydata.getStrips().setData(values);
+            changeDetected = true;
+          }
+          break;
+        default:
+          // do nothing for manual or anything else...
       }
-      this.polydata.getVerts().setData(values);
-      changeDetected = true;
     }
 
     if (changeDetected) {
       this.polydata.modified();
     }
+
+    // // Force prop update now that the downstream has data
+    // if (this.downstream === this.representation.mapper) {
+    //   this.representation.update(this.representation.props);
+    // }
   }
 }
 
 VtkPolyDataSource.defaultProps = {
   port: 0,
   points: [],
-  pointCloud: false,
+  connectivity: 'manual',
 };
 
 VtkPolyDataSource.propTypes = {
@@ -160,9 +197,9 @@ VtkPolyDataSource.propTypes = {
   strips: PropTypes.arrayOf(PropTypes.number),
 
   /**
-   * Is it point cloud
+   * Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`
    */
-  pointCloud: PropTypes.bool,
+  connectivity: PropTypes.string,
 
   /**
    * List of representation to show
@@ -171,8 +208,4 @@ VtkPolyDataSource.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-
-  // pass by parent
-  view: PropTypes.object,
-  representation: PropTypes.object,
 };

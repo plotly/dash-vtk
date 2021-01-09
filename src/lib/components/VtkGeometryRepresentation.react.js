@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { VueContext, RepresentationContext, DownstreamContext } from './VtkView.react';
+
 import vtkActor from 'vtk.js/Sources/Rendering/Core/Actor';
 import vtkMapper from 'vtk.js/Sources/Rendering/Core/Mapper';
 
@@ -10,9 +12,6 @@ import vtkMapper from 'vtk.js/Sources/Rendering/Core/Mapper';
  *   - colorBy: ['POINTS', ''],
  *   - pointSize: 1,
  *   - color: [1,1,1],
- * It provides the following properties to its children:
- *   - 'representation`: this
- *   - `downstream` == `mapper` which should be used to call setInputConnection/setInputData
  */
 export default class VtkGeometryRepresentation extends Component {
   constructor(props) {
@@ -25,30 +24,28 @@ export default class VtkGeometryRepresentation extends Component {
   }
 
   render() {
-    console.log('VtkGeometryRepresentation:', Object.keys(this.props));
-    const { id, setProps, children, view } = this.props;
-    console.log(' - view:', view);
-    const addOnProps = {
-      downstream: this.mapper,
-      representation: this,
-      view,
-      setProps,
-    };
-    const childrenWithViewProp = React.Children.map(children, child => React.cloneElement(child, addOnProps));
     return (
-      <div id={id}>
-        {childrenWithViewProp}
-      </div>
+      <VueContext.Consumer>
+        {(view) => {
+          if (!this.view) {
+            view.renderer.addActor(this.actor);
+            this.view = view;
+          }
+          return (
+            <RepresentationContext.Provider value={this}>
+              <DownstreamContext.Provider value={this.mapper}>
+                <div id={this.props.id}>
+                  {this.props.children}
+                </div>
+              </DownstreamContext.Provider>
+            </RepresentationContext.Provider>
+          );
+        }}
+      </VueContext.Consumer>
     );
   }
 
   componentDidMount() {
-    const { renderer } = this.props.view || {};
-    if (renderer) {
-      renderer.addActor(this.actor);
-    } else {
-      console.log('Could not connect actor to renderer');
-    }
     this.update(this.props);
   }
 
@@ -57,9 +54,8 @@ export default class VtkGeometryRepresentation extends Component {
   }
 
   componentWillUnmount() {
-    const { renderer } = this.props.view;
-    if (renderer) {
-      renderer.remoteActor(this.actor);
+    if (this.view) {
+      this.view.renderer.remoteActor(this.actor);
     }
 
     this.actor.delete();
@@ -88,7 +84,6 @@ export default class VtkGeometryRepresentation extends Component {
     const colorByArrayName = arrayName;
     const dataset = this.mapper.getInputData();
     if (!dataset) {
-      console.log('No mapper input');
       return;
     }
     const fields = dataset.getReferenceByName(arrayLocation);
@@ -119,7 +114,7 @@ export default class VtkGeometryRepresentation extends Component {
 VtkGeometryRepresentation.defaultProps = {
   colorBy: ['pointData', ''],
   pointSize: 1,
-  color: [1,1,1],
+  color: [1, 1, 1],
 };
 
 VtkGeometryRepresentation.propTypes = {
@@ -160,7 +155,4 @@ VtkGeometryRepresentation.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-
-  // pass by parent
-  view: PropTypes.object,
 };

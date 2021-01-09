@@ -11,6 +11,15 @@ app.layout = html.Div(
         dash_vtk.VtkView(
             id='view',
             children=[
+                dash_vtk.VtkGeometryRepresentation([
+                    dash_vtk.VtkAlgorithm(
+                        vtkClass='vtkConeSource',
+                        state={
+                            'resolution': 64,
+                            'capping': False,
+                        }
+                    )
+                ]),
                 dash_vtk.VtkGeometryRepresentation(
                     id='rep',
                     pointSize=10,

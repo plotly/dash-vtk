@@ -1,10 +1,12 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+export(vtkVtkAlgorithm)
 export(vtkVtkCellData)
 export(vtkVtkDataArray)
 export(vtkVtkFieldData)
 export(vtkVtkGeometryRepresentation)
 export(vtkVtkPointData)
 export(vtkVtkPolyDataSource)
+export(vtkVtkReader)
 export(vtkVtkView)
 export(vtkVtkPolyData)

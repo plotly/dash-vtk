@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { FieldsContext } from './VtkView.react';
+
 import vtkDataArray from 'vtk.js/Sources/Common/Core/DataArray';
 import { TYPED_ARRAYS } from 'vtk.js/Sources/macro';
 
@@ -21,14 +23,20 @@ export default class VtkDataArray extends Component {
   }
 
   render() {
-    console.log('VtkDataArray:', Object.keys(this.props));
-    return null;
+    return (
+      <FieldsContext.Consumer>
+        {(fields) => {
+          if (!this.fields) {
+            this.fields = fields;
+          }
+        }}
+      </FieldsContext.Consumer>
+    );
   }
 
   componentDidMount() {
-    const { fields, registration } = this.props;
     this.update(this.props);
-    fields[registration](this.array);
+    this.fields[this.props.registration](this.array);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -36,8 +44,7 @@ export default class VtkDataArray extends Component {
   }
 
   componentWillUnmount() {
-    const { fields } = this.props;
-    fields.removeArray(this.array);
+    this.fields.removeArray(this.array);
     this.array.delete();
     this.array = null;
   }
@@ -45,13 +52,15 @@ export default class VtkDataArray extends Component {
   update(props, previous) {
     const { name, type, values, numberOfComponents } = props;
     const klass = TYPED_ARRAYS[type];
+    let changeDetected = false;
 
+    // NoOp if same...
     this.array.setName(name);
 
-    let changeDetected = false;
     if (type && (!previous || type !== previous.type)) {
       changeDetected = true;
     }
+
     if (numberOfComponents && (!previous || numberOfComponents !== previous.numberOfComponents)) {
       changeDetected = true;
     }
@@ -108,18 +117,4 @@ VtkDataArray.propTypes = {
    * Name of the method to call on the fieldData (addArray, setScalars, setVectors...)
    */
   registration: PropTypes.string,
-
-  /**
-   * List of representation to show
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
-
-  // pass by parent
-  view: PropTypes.object,
-  representation: PropTypes.object,
-  dataset: PropTypes.object,
-  fields: PropTypes.object,
 };

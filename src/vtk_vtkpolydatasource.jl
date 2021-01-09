@@ -9,17 +9,14 @@ export vtk_vtkpolydatasource
 
 
 A VtkPolyDataSource component.
-VtkPolyDataSource is exposing a polydata to a downstream filter or representation
+VtkPolyDataSource is exposing a polydata to a downstream filter
 It takes the following set of properties:
   - points: [x, y, z, x, y, z, ...],
+  - connectivity: 'manual', // [manual, points, triangles, strips]
   - verts: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
   - lines: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
   - polys: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
   - strips: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]
-  - pointCloud: false/true (if on it will generate verts automatically)
-It provides the following properties to its children:
-  - pass along: 'view', 'representation`, `setProps`
-  - `dataset` == `this.dataset`
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional): List of representation to show
 - `id` (String; optional): The ID used to identify this component in Dash callbacks.
@@ -29,12 +26,10 @@ Keyword arguments:
 - `lines` (Array of Reals; optional): lines cells
 - `polys` (Array of Reals; optional): polys cells
 - `strips` (Array of Reals; optional): strips cells
-- `pointCloud` (Bool; optional): Is it point cloud
-- `view` (Dict; optional)
-- `representation` (Dict; optional)
+- `connectivity` (String; optional): Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`
 """
 function vtk_vtkpolydatasource(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :points, :verts, :lines, :polys, :strips, :pointCloud, :view, :representation]
+        available_props = Symbol[:children, :id, :port, :points, :verts, :lines, :polys, :strips, :connectivity]
         wild_props = Symbol[]
         return Component("vtk_vtkpolydatasource", "VtkPolyDataSource", "dash_vtk", available_props, wild_props; kwargs...)
 end

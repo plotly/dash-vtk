@@ -5,12 +5,14 @@ using Dash
 const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
 const version = "0.0.1"
 
+include("vtk_vtkalgorithm.jl")
 include("vtk_vtkcelldata.jl")
 include("vtk_vtkdataarray.jl")
 include("vtk_vtkfielddata.jl")
 include("vtk_vtkgeometryrepresentation.jl")
 include("vtk_vtkpointdata.jl")
 include("vtk_vtkpolydatasource.jl")
+include("vtk_vtkreader.jl")
 include("vtk_vtkview.jl")
 
 function __init__()

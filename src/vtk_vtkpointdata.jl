@@ -10,18 +10,11 @@ export vtk_vtkpointdata
 
 A VtkPointData component.
 VtkPointData is exposing a vtkPointData to a downstream element
-It provides the following properties to its children:
-  - pass along: 'view', 'representation`, `setProps`
-  - `fields` == `vtkPointData`
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional): List of representation to show
-- `id` (String; optional): The ID used to identify this component in Dash callbacks.
-- `view` (Dict; optional)
-- `representation` (Dict; optional)
-- `dataset` (Dict; optional)
 """
 function vtk_vtkpointdata(; kwargs...)
-        available_props = Symbol[:children, :id, :view, :representation, :dataset]
+        available_props = Symbol[:children]
         wild_props = Symbol[]
         return Component("vtk_vtkpointdata", "VtkPointData", "dash_vtk", available_props, wild_props; kwargs...)
 end

@@ -6,24 +6,15 @@
 \title{VtkCellData component}
 
 \description{
-VtkCellData is exposing a vtkCellData to a downstream element It provides the following properties to its children:   - pass along: 'view', 'representation`, `setProps`   - `fields` == `vtkCellData`
+VtkCellData is exposing a vtkCellData to a downstream element
 }
 
 \usage{
-vtkVtkCellData(children=NULL, id=NULL, view=NULL, representation=NULL,
-dataset=NULL)
+vtkVtkCellData(children=NULL)
 }
 
 \arguments{
 \item{children}{List of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number. List of representation to show}
-
-\item{id}{Character. The ID used to identify this component in Dash callbacks.}
-
-\item{view}{Named list. }
-
-\item{representation}{Named list. }
-
-\item{dataset}{Named list. }
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}
