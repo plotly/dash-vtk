@@ -20,6 +20,12 @@ app.layout = html.Div(
                         }
                     )
                 ]),
+                dash_vtk.VtkGeometryRepresentation([
+                    dash_vtk.VtkReader(
+                        vtkClass="vtkOBJReader",
+                        url="https://kitware.github.io/vtk-js-datasets/data/obj-mtl/star-wars-vader-tie-fighter.obj"
+                    )
+                ]),
                 dash_vtk.VtkGeometryRepresentation(
                     id='rep',
                     pointSize=10,
