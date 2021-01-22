@@ -2,13 +2,13 @@
 import React, {Component} from 'react';
 
 import {
-    VtkView,
-    VtkReader,
-    VtkGeometryRepresentation,
-    VtkPolyDataSource,
-    VtkPointData,
-    VtkDataArray,
-    VtkAlgorithm,
+    View,
+    Reader,
+    GeometryRepresentation,
+    PolyData,
+    PointData,
+    DataArray,
+    Algorithm,
 } from '../lib';
 
 class App extends Component {
@@ -41,27 +41,51 @@ class App extends Component {
             <div>
                 <button onClick={this.onResetCamera} style={{ position: 'absolute', zIndex: 10 }}>reset camera</button>
                 <input type="range" min="0" max="90" onChange={this.onAngle} style={{ position: 'absolute', zIndex: 10, left: '150px' }}/>
-                <VtkView ref={this.vtkViewRef} setProps={this.setProps} background={[0.1, 0.1, 0.1]} >
-                    <VtkGeometryRepresentation
-                        colorBy={['pointData', 'Temperature']}
+                <View ref={this.vtkViewRef} background={[0.1, 0.1, 0.1]} >
+                    <GeometryRepresentation
+                        mapper={{
+                            colorByArrayName: 'Temperature',
+                            scalarMode: 3,
+                            interpolateScalarsBeforeMapping: true,
+                        }}
+                        colorDataRange={[0, 3]}
                     >
-                        <VtkPolyDataSource
+                        <PolyData
                             points={[0,0,0,1,0,0,1,1,0,0,1,0]}
                             polys={[4,0,1,2,3]}
                         >
-                            <VtkPointData>
-                                <VtkDataArray
+                            <PointData>
+                                <DataArray
                                     name="Temperature"
                                     values={[0,3,2,1]}
                                 />
-                            </VtkPointData>
-                        </VtkPolyDataSource>
-                    </VtkGeometryRepresentation>
-                    <VtkGeometryRepresentation color={[1, 0, 0]}>
-                        <VtkAlgorithm vtkClass="vtkConeSource" state={{ resolution: 24, radius: 0.2 }} />
-                    </VtkGeometryRepresentation>
-                    <VtkGeometryRepresentation colorBy={['cellData', 'layer']}>
-                        <VtkAlgorithm
+                            </PointData>
+                        </PolyData>
+                    </GeometryRepresentation>
+                    <GeometryRepresentation
+                        color={[1, 0, 0]}
+                        property={{
+                            edgeVisibility: true,
+                        }}
+                    >
+                        <Algorithm
+                            vtkClass="vtkConeSource"
+                            state={{
+                                resolution: Math.round(this.state.startTheta / 2) + 3,
+                                radius: 0.2,
+                            }}
+                        />
+                    </GeometryRepresentation>
+                    <GeometryRepresentation
+                        mapper={{
+                            colorByArrayName: 'layer',
+                            scalarMode: 4,
+                            interpolateScalarsBeforeMapping: false,
+                        }}
+                        colorMapPreset="jet"
+                        colorDataRange={[0.2, 0.9]}
+                    >
+                        <Algorithm
                             vtkClass="vtkConcentricCylinderSource"
                             state={{
                                 height: 0.25,
@@ -75,14 +99,14 @@ class App extends Component {
                                 center: [0,0,0.5],
                             }}
                         />
-                    </VtkGeometryRepresentation>
-                    <VtkGeometryRepresentation>
-                        <VtkReader
+                    </GeometryRepresentation>
+                    <GeometryRepresentation>
+                        <Reader
                             vtkClass="vtkOBJReader"
                             url="https://kitware.github.io/vtk-js-datasets/data/obj-mtl/star-wars-vader-tie-fighter.obj"
                         />
-                    </VtkGeometryRepresentation>
-                </VtkView>
+                    </GeometryRepresentation>
+                </View>
             </div>
         );
     }

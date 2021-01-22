@@ -75,16 +75,6 @@ module.exports = (env, argv) => {
                         },
                     ],
                 },
-                {
-                    test: /\.glsl$/i,
-                    loader: 'shader-loader',
-                },
-                {
-                    test: /\.worker\.js$/,
-                    use: [
-                        { loader: 'worker-loader', options: { inline: 'no-fallback' } },
-                    ],
-                },
             ],
         },
     }
