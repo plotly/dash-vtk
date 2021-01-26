@@ -1,0 +1,7 @@
+# Demo of `dash_vtk.Algorithm`
+
+![A demo of the usage-algorithm app](./demo.gif)
+
+## Instructions
+
+See instructions from [README.md](../../README.md) to create a virtual environment and install the dependencies.
