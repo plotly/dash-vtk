@@ -1,6 +1,6 @@
 # Demo of `dash_vtk.Algorithm`
 
-![A demo of the usage-algorithm app](./demo.gif)
+![A demo of the usage-algorithm app](./demo.jpg)
 
 ## Instructions
 

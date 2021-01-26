@@ -62,23 +62,24 @@ See [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md) to learn about:
 
 ## Running the demos
 
-First clone the project:
+First clone the project (replace `<name>` with the desired demo):
 
-```
+``` bash
 git clone https://github.com/plotly/dash-vtk.git
-cd dash-vtk/
+cd dash-vtk/demos/<name>/
 ```
 
 Create a venv and install the requirements:
-```
+```bash
 python -m venv venv
 source venv/bin/activate  # for Windows, use venv\Scripts\activate.bat
+pip install -e ../../  # IMPORTANT! If you skip you will get the pip version of dash-vtk
 pip install -r requirements.txt
 ```
 
-Run the demos:
-```
-python demos/<name>.py
+Run the demo:
+```bash
+python app.py
 ```
 
 ## References
@@ -101,3 +102,13 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 - [VolumeController](./docs/REFERENCES.md#VolumeController)
 - [VolumeDataRepresentation](./docs/REFERENCES.md#VolumeDataRepresentation)
 - [VolumeRepresentation](./docs/REFERENCES.md#VolumeRepresentation)
+
+
+## Demos
+
+### Usage for `dash_vtk.Algorithm`
+
+* [Code](./demos/usage-algorithm)
+* Online Demo (coming soon)
+
+![A demo of the usage-algorithm app](demos/usage-algorithm/demo.jpg)
