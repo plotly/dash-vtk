@@ -66,10 +66,10 @@ layout <- htmlDiv(
         GeometryRepresentation(
             Algorithm(
                 vtkClass = "vtkConeSource",
-                state=list("resolution" = 64, "capping" = FALSE),
+                state = list("resolution" = 64, "capping" = FALSE),
             )
-        )),
-    ),
+        ),
+    )),
 )
 
 app <- Dash$new()
