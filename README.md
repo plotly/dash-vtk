@@ -61,15 +61,15 @@ library(dashHtmlComponents)
 
 
 layout <- htmlDiv(
-    style=list("width" = "100%", "height" = "calc(100vh - 16px)"),
+    style = list("width" = "100%", "height" = "calc(100vh - 16px)"),
     children = View(list(
         GeometryRepresentation(
             Algorithm(
                 vtkClass = "vtkConeSource",
                 state = list("resolution" = 64, "capping" = FALSE),
             )
-        ),
-    )),
+        )
+    ))
 )
 
 app <- Dash$new()
