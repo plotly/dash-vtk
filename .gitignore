@@ -275,3 +275,7 @@ GitHub.sublime-settings
 
 *hmr.js
 .vscode/settings.json
+
+dash_vtk
+deps
+inst
