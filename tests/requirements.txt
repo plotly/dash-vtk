@@ -4,5 +4,4 @@
 
 dash[dev,testing]>=1.15.0
 Pillow
--e .
--r ./demos/usage-algorithm/requirements.txt
+-r ../demos/usage-algorithm/requirements.txt
