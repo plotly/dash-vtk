@@ -47,8 +47,35 @@ For a more detailed example, see `usage.py`.
 
 ### Quickstart (R)
 
-This section will be added soon.
+First, install the package from GitHub (the package is not yet available via CRAN):
+```
+remotes::install_github("plotly/dash-deck")
+```
 
+then, create your component and add it to your layout:
+
+```r
+library(dash)
+library(dashVtk)
+library(dashHtmlComponents)
+
+
+layout = htmlDiv(
+    style=list("width" = "100%", "height" = "calc(100vh - 16px)"),
+    children = View(list(
+        GeometryRepresentation(
+            Algorithm(
+                vtkClass="vtkConeSource",
+                state=list("resolution" = 64, "capping" = FALSE),
+            )
+        )),
+    ]),
+)
+
+app <- Dash$new()
+
+app$layout(layout)
+```
 ## Contributing
 
 See [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md) to learn about:
