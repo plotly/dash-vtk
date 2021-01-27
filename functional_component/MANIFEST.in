@@ -1,7 +1,0 @@
-include functional_component/functional_component.min.js
-include functional_component/functional_component.min.js.map
-include functional_component/metadata.json
-include functional_component/package-info.json
-include README.md
-include LICENSE
-include package.json

@@ -1,0 +1,1317 @@
+{
+  "src/lib/components/Algorithm.react.js": {
+    "description": "Algorithm is exposing a source or filter to a downstream filter\nIt takes the following set of properties:\n  - vtkClass: vtkClassName\n  - state: {}",
+    "displayName": "Algorithm",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "vtkClass": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "vtkClass name",
+        "defaultValue": {
+          "value": "'vtkConeSource'",
+          "computed": false
+        }
+      },
+      "state": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "set of property values for vtkClass",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/Calculator.react.js": {
+    "description": "Calculator is exposing a source or filter to a downstream filter\nIt takes the following set of properties:\n  - name: 'scalars'    // name of the generated field\n  - location: 'POINT'  // POINT/CELL\n  - arrays: []         // Name of array to have access in formula\n  - formula: fn",
+    "displayName": "Calculator",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Field name",
+        "defaultValue": {
+          "value": "'scalars'",
+          "computed": false
+        }
+      },
+      "location": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Field location [POINT, CELL, COORDINATE, SCALARS, ]",
+        "defaultValue": {
+          "value": "'POINT'",
+          "computed": false
+        }
+      },
+      "arrays": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "List of fields you want available for your formula",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "formula": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Field formula",
+        "defaultValue": {
+          "value": "(xyz) => xyz[0]",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/CellData.react.js": {
+    "description": "CellData is exposing a vtkCellData to a downstream element",
+    "displayName": "CellData",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/DataArray.react.js": {
+    "description": "DataArray is creating a vtkDataArray for the container fields\nIt takes the following set of properties:\n  - type: 'Float32Array', 'Float64Array', 'Uint16Array', ...\n  - values: [number, number, ...]\n  - numberOfComponents: 1,\n  - registration: 'addArray', 'setScalars', ...",
+    "displayName": "DataArray",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "type": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Typed array name",
+        "defaultValue": {
+          "value": "'Float32Array'",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Field name",
+        "defaultValue": {
+          "value": "'scalars'",
+          "computed": false
+        }
+      },
+      "values": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Actual values to use inside our array",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "numberOfComponents": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Number of components / Tuple size",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      },
+      "registration": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Name of the method to call on the fieldData (addArray, setScalars, setVectors...)",
+        "defaultValue": {
+          "value": "'addArray'",
+          "computed": false
+        }
+      }
+    }
+  },
+  "src/lib/components/FieldData.react.js": {
+    "description": "FieldData is exposing a FieldData to a downstream element",
+    "displayName": "FieldData",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/GeometryRepresentation.react.js": {
+    "description": "GeometryRepresentation is responsible to convert a vtkPolyData into rendering\nIt takes the following set of properties:\n  - colorBy: ['POINTS', ''],\n  - pointSize: 1,\n  - color: [1,1,1],",
+    "displayName": "GeometryRepresentation",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "actor": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the actor"
+      },
+      "mapper": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the actor"
+      },
+      "property": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the actor.property"
+      },
+      "colorMapPreset": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Preset name for the lookup table color map",
+        "defaultValue": {
+          "value": "'erdc_rainbow_bright'",
+          "computed": false
+        }
+      },
+      "colorDataRange": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Data range use for the colorMap",
+        "defaultValue": {
+          "value": "[0, 1]",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/ImageData.react.js": {
+    "description": "ImageData is exposing a vtkImageData to a downstream filter\nIt takes the following set of properties:\n  - dimensions: [nx, ny, nz],\n  - origin: [0, 0, 0]\n  - spacing: [1, 1, 1]",
+    "displayName": "ImageData",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "dimensions": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Number of points along x, y, z",
+        "defaultValue": {
+          "value": "[1, 1, 1]",
+          "computed": false
+        }
+      },
+      "spacing": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Spacing along x, y, z between points in world coordinates",
+        "defaultValue": {
+          "value": "[1, 1, 1]",
+          "computed": false
+        }
+      },
+      "origin": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).",
+        "defaultValue": {
+          "value": "[0, 0, 0]",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/PointCloudRepresentation.react.js": {
+    "description": "PointCloudRepresentation expect the following set of properties\n  - xyz: [x0, y0, z0, x1, ..., zn]\n  - rgb: [...]\n  - rgba: [...]\n  - scalars: [...]",
+    "displayName": "PointCloudRepresentation",
+    "methods": [],
+    "props": {
+      "xyz": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Points coordinates",
+        "defaultValue": {
+          "value": "[0, 0, 0]",
+          "computed": false
+        }
+      },
+      "rgb": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Use RGB values to attach to the points/vertex"
+      },
+      "rgba": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Use RGBA values to attach to the points/vertex"
+      },
+      "scalars": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Field values to attach to the points"
+      },
+      "colorMapPreset": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Preset name for the lookup table color map",
+        "defaultValue": {
+          "value": "'erdc_rainbow_bright'",
+          "computed": false
+        }
+      },
+      "colorDataRange": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Data range use for the colorMap",
+        "defaultValue": {
+          "value": "[0, 1]",
+          "computed": false
+        }
+      },
+      "property": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the actor.property"
+      }
+    }
+  },
+  "src/lib/components/PointData.react.js": {
+    "description": "PointData is exposing a vtkPointData to a downstream element",
+    "displayName": "PointData",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/PolyData.react.js": {
+    "description": "PolyData is exposing a vtkPolyData to a downstream filter\nIt takes the following set of properties:\n  - points: [x, y, z, x, y, z, ...],\n  - verts: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]\n  - lines: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]\n  - polys: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]\n  - strips: [cellSize, pointId0, pointId1, ..., cellSize, pointId0, ...]\nCell connectivity helper property:\n  - connectivity: 'manual', // [manual, points, triangles, strips]",
+    "displayName": "PolyData",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "points": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "xyz coordinates",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
+      "verts": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "verts cells"
+      },
+      "lines": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "lines cells"
+      },
+      "polys": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "polys cells"
+      },
+      "strips": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "strips cells"
+      },
+      "connectivity": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`",
+        "defaultValue": {
+          "value": "'manual'",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/Reader.react.js": {
+    "description": "Reader is exposing a reader to a downstream filter\nIt takes the following set of properties:\n  - vtkClass: vtk.js reader class name\n  - url: string\n  - parseAsText: string\n  - parseAsArrayBuffer: base64String",
+    "displayName": "Reader",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "vtkClass": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "vtkClass name",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "url": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "set of url to fetch data from"
+      },
+      "parseAsText": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "set text data to process"
+      },
+      "parseAsArrayBuffer": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "set binary data to process from base64 string"
+      },
+      "renderOnUpdate": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Automatically render on data loaded",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "resetCameraOnUpdate": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Automatically reset camera on data loaded",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/ShareDataSet.react.js": {
+    "description": "ShareDataSet capture a dataset or a source and allow it to use it in another\npipeline or representation.",
+    "displayName": "ShareDataSet",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "name": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Unique dataset name to cross reference",
+        "defaultValue": {
+          "value": "'shared'",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/SliceRepresentation.react.js": {
+    "description": "SliceRepresentation is responsible to convert a vtkPolyData into rendering\nIt takes the following set of properties:\n  - colorBy: ['POINTS', ''],\n  - pointSize: 1,\n  - color: [1,1,1],",
+    "displayName": "SliceRepresentation",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "mapper": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the mapper"
+      },
+      "actor": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the slice/actor"
+      },
+      "property": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the volume.property"
+      },
+      "colorMapPreset": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Preset name for the lookup table color map",
+        "defaultValue": {
+          "value": "'erdc_rainbow_bright'",
+          "computed": false
+        }
+      },
+      "colorDataRange": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "number"
+              }
+            },
+            {
+              "name": "string"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Data range use for the colorMap",
+        "defaultValue": {
+          "value": "'auto'",
+          "computed": false
+        }
+      },
+      "iSlice": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "index of the slice along i"
+      },
+      "jSlice": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "index of the slice along j"
+      },
+      "kSlice": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "index of the slice along k"
+      },
+      "xSlice": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "index of the slice along x"
+      },
+      "ySlice": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "index of the slice along y"
+      },
+      "zSlice": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "index of the slice along z"
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
+  "src/lib/components/View.react.js": {
+    "description": "View is responsible to render vtk.js data.\nIt takes the following set of properties:\n  - `background`: [0.2, 0.3, 0.4]\n  - `cameraPosition`: [0, 0, 1]\n  - `cameraViewUp`: [0, 1, 0]\n  - `cameraParallelProjection`: false",
+    "displayName": "View",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "background": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "The color of the view background using 3 floating numbers\nbetween 0-1 of Red, Green, Blue component.",
+        "defaultValue": {
+          "value": "[0.2, 0.3, 0.4]",
+          "computed": false
+        }
+      },
+      "interactorSettings": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Configure the interactions",
+        "defaultValue": {
+          "value": "[\n  {\n    button: 1,\n    action: 'Rotate',\n  },\n  {\n    button: 2,\n    action: 'Pan',\n  },\n  {\n    button: 3,\n    action: 'Zoom',\n    scrollEnabled: true,\n  },\n  {\n    button: 1,\n    action: 'Pan',\n    shift: true,\n  },\n  {\n    button: 1,\n    action: 'Zoom',\n    alt: true,\n  },\n  {\n    button: 1,\n    action: 'ZoomToMouse',\n    control: true,\n  },\n  {\n    button: 1,\n    action: 'Roll',\n    alt: true,\n    shift: true,\n  },\n]",
+          "computed": false
+        }
+      },
+      "cameraPosition": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Initial camera position from an object in [0,0,0]",
+        "defaultValue": {
+          "value": "[0, 0, 1]",
+          "computed": false
+        }
+      },
+      "cameraViewUp": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Initial camera position from an object in [0,0,0]",
+        "defaultValue": {
+          "value": "[0, 1, 0]",
+          "computed": false
+        }
+      },
+      "cameraParallelProjection": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Use parallel projection (default: false)",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": "List of representation to show"
+      }
+    }
+  },
+  "src/lib/components/VolumeController.react.js": {
+    "description": "VolumeController is a GUI to control the piecewise function",
+    "displayName": "VolumeController",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "size": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Controller size in pixels",
+        "defaultValue": {
+          "value": "[400, 150]",
+          "computed": false
+        }
+      },
+      "rescaleColorMap": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Use opacity range to rescale color map",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      }
+    }
+  },
+  "src/lib/components/VolumeDataRepresentation.react.js": {
+    "description": "VolumneDataRepresentation expect the following set of properties\n  - dimensions: [10, 20, 5]\n  - spacing: [1, 1, 1]\n  - origin: [0, 0, 0]\n  - rgb: [...]\n  - rgba: [...]\n  - scalars: [...]\n  - scalarsType: Float32Array",
+    "displayName": "VolumneDataRepresentation",
+    "methods": [],
+    "props": {
+      "dimensions": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Number of points along x, y, z"
+      },
+      "spacing": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Spacing along x, y, z between points in world coordinates"
+      },
+      "origin": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0)."
+      },
+      "rgb": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Use RGB values to attach to the points/vertex"
+      },
+      "rgba": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Use RGBA values to attach to the points/vertex"
+      },
+      "scalars": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Field values to attach to the points"
+      },
+      "scalarsType": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Types of numbers provided in scalars",
+        "defaultValue": {
+          "value": "'Float32Array'",
+          "computed": false
+        }
+      },
+      "mapper": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the mapper"
+      },
+      "volume": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the volume"
+      },
+      "property": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the volume.property"
+      },
+      "colorMapPreset": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Preset name for the lookup table color map",
+        "defaultValue": {
+          "value": "'erdc_rainbow_bright'",
+          "computed": false
+        }
+      },
+      "volumeController": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Show volumeController",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "controllerSize": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Controller size in pixels",
+        "defaultValue": {
+          "value": "[400, 150]",
+          "computed": false
+        }
+      },
+      "rescaleColorMap": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Use opacity range to rescale color map",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "colorDataRange": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "number"
+              }
+            },
+            {
+              "name": "string"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Data range use for the colorMap",
+        "defaultValue": {
+          "value": "'auto'",
+          "computed": false
+        }
+      }
+    }
+  },
+  "src/lib/components/VolumeRepresentation.react.js": {
+    "description": "VolumeRepresentation is responsible to convert a vtkPolyData into rendering\nIt takes the following set of properties:\n  - colorBy: ['POINTS', ''],\n  - pointSize: 1,\n  - color: [1,1,1],",
+    "displayName": "VolumeRepresentation",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "mapper": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the mapper"
+      },
+      "volume": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the volume"
+      },
+      "property": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the volume.property"
+      },
+      "colorMapPreset": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Preset name for the lookup table color map",
+        "defaultValue": {
+          "value": "'erdc_rainbow_bright'",
+          "computed": false
+        }
+      },
+      "colorDataRange": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "number"
+              }
+            },
+            {
+              "name": "string"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Data range use for the colorMap",
+        "defaultValue": {
+          "value": "'auto'",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  }
+}

@@ -16,8 +16,21 @@ setup(
     include_package_data=True,
     license=package['license'],
     description=package.get('description', package_name),
-    install_requires=[],
-    classifiers = [
-        'Framework :: Dash',
-    ],    
+    install_requires=['dash'],
+    classifiers=[
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Education',
+        'Intended Audience :: Financial and Insurance Industry',
+        'Intended Audience :: Healthcare Industry',
+        'Intended Audience :: Manufacturing',
+        'Intended Audience :: Science/Research',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: Database :: Front-Ends',
+        'Topic :: Scientific/Engineering :: Visualization',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
+    ]
 )

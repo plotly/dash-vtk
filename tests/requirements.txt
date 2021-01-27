@@ -3,3 +3,6 @@
 # pip install -r requirements.txt
 
 dash[dev,testing]>=1.15.0
+Pillow
+-e .
+-r ./demos/usage-algorithm/requirements.txt
