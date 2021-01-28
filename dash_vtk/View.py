@@ -55,14 +55,16 @@ between 0-1 of Red, Green, Blue component.
 ]): Configure the interactions
 - cameraPosition (list; default [0, 0, 1]): Initial camera position from an object in [0,0,0]
 - cameraViewUp (list; default [0, 1, 0]): Initial camera position from an object in [0,0,0]
-- cameraParallelProjection (boolean; default False): Use parallel projection (default: false)"""
+- cameraParallelProjection (boolean; default False): Use parallel projection (default: false)
+- triggerRender (number; default 0): Property use to trigger a render when changing.
+- triggerResetCamera (number; default 0): Property use to trigger a resetCamera when changing."""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, background=Component.UNDEFINED, interactorSettings=Component.UNDEFINED, cameraPosition=Component.UNDEFINED, cameraViewUp=Component.UNDEFINED, cameraParallelProjection=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection']
+    def __init__(self, children=None, id=Component.UNDEFINED, background=Component.UNDEFINED, interactorSettings=Component.UNDEFINED, cameraPosition=Component.UNDEFINED, cameraViewUp=Component.UNDEFINED, cameraParallelProjection=Component.UNDEFINED, triggerRender=Component.UNDEFINED, triggerResetCamera=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection', 'triggerRender', 'triggerResetCamera']
         self._type = 'View'
         self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection']
+        self.available_properties = ['children', 'id', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection', 'triggerRender', 'triggerResetCamera']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

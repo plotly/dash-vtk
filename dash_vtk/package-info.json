@@ -25,7 +25,7 @@
   "license": "BSD",
   "dependencies": {
     "ramda": "^0.26.1",
-    "react-vtk-js": "1.0.0"
+    "react-vtk-js": "1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
