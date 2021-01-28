@@ -1,4 +1,4 @@
-# Demo of `dash_vtk.Algorithm`
+# Demo of VTK for data processing and dash-vtk for rendering
 
 ![A demo of the usage-pyvista-point-cloud app](./demo.jpg)
 
@@ -8,5 +8,4 @@ See instructions from [README.md](../../README.md) to create a virtual environme
 
 ## Goal
 
-The goal of that example is to show you how you can use PyVista
-to get a PointCloud and render it using dash-vtk on the client side.
+The goal of that example is to show you how you can use PyVista/VTK to load and process some CFD dataset and dynamically adjust some filter parameters and render the result in a 3D Web view using dash-vtk.

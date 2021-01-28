@@ -5,6 +5,7 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 
+import random
 import numpy as np
 import pyvista as pv
 from pyvista import examples
@@ -12,34 +13,45 @@ from vtk.util.numpy_support import vtk_to_numpy
 
 from color_maps import presets
 
-def toDropMenu(name):
-    return dbc.DropdownMenuItem(name)
+
+def toDropOption(name):
+    return {'label': name, 'value': name}
 
 # Get point cloud data from PyVista
 uniformGrid = examples.download_crater_topo()
 subset = uniformGrid.extract_subset((500, 900, 400, 800, 0, 0), (5, 5, 1))
-terrain = subset.warp_by_scalar()
-polydata = terrain.extract_geometry()
-polys = vtk_to_numpy(polydata.GetPolys().GetData())
-elevation = polydata['scalar1of1']
-min_elevation = np.amin(elevation)
-max_elevation = np.amax(elevation)
+
+def updateWarp(factor=1):
+    terrain = subset.warp_by_scalar(factor=factor)
+    polydata = terrain.extract_geometry()
+    points = polydata.points.ravel()
+    polys = vtk_to_numpy(polydata.GetPolys().GetData())
+    elevation = polydata['scalar1of1']
+    min_elevation = np.amin(elevation)
+    max_elevation = np.amax(elevation)
+    return [points, polys, elevation, [min_elevation, max_elevation]]
+
+
+points, polys, elevation, color_range = updateWarp(1)
 
 # Setup VTK rendering of PointCloud
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 vtk_view = dash_vtk.View(
-    [
+    id="vtk-view",
+    children=[
         dash_vtk.GeometryRepresentation(
             id="vtk-representation",
             children=[
                 dash_vtk.PolyData(
-                    points=polydata.points.ravel(),
+                    id="vtk-polydata",
+                    points=points,
                     polys=polys,
                     children=[
                         dash_vtk.PointData([
                             dash_vtk.DataArray(
+                                id="vtk-array",
                                 registration="setScalars",
                                 name="elevation",
                                 values=elevation,
@@ -49,7 +61,7 @@ vtk_view = dash_vtk.View(
                 )
             ],
             colorMapPreset="erdc_blue2green_muted",
-            colorDataRange=[min_elevation, max_elevation],
+            colorDataRange=color_range,
             property={
                 'edgeVisibility': True,
             },
@@ -63,18 +75,31 @@ app.layout = dbc.Container(
         dbc.Row(
             [
                 dbc.Col(
-                    width=10,
+                    width=6,
                     children=[
-                        html.H1("Demo of dash_vtk.PolyData"),
+                        html.H1("Terrain deformation"),
                     ]
                 ),
                 dbc.Col(
-                    width=2,
+                    width=3,
                     children=[
-                        dbc.DropdownMenu(
+                        dcc.Slider(
+                            id="scale-factor",
+                            min=0.1,
+                            max=5,
+                            step=0.1,
+                            value=1,
+                            marks={0.1: "0.1", 5: "5"},
+                        ),
+                    ],
+                ),
+                dbc.Col(
+                    width=3,
+                    children=[
+                        dcc.Dropdown(
                             id="dropdown-preset",
-                            label="ColorMap",
-                            children=list(map(toDropMenu, presets)),
+                            options=list(map(toDropOption, presets)),
+                            value="erdc_rainbow_bright",
                         ),
                     ]
                 ),
@@ -99,12 +124,17 @@ app.layout = dbc.Container(
 
 
 @app.callback(
-    Output("vtk-representation", "colorMapPreset"),
-    [Input("dropdown-preset", "value")]
+    [Output("vtk-representation", "colorMapPreset"),
+     Output("vtk-representation", "colorDataRange"),
+     Output("vtk-polydata", 'points'),
+     Output("vtk-polydata", 'polys'),
+     Output("vtk-array", 'values'),
+     Output("vtk-view", "triggerResetCamera")],
+    [Input("dropdown-preset", "value"), Input("scale-factor", "value")]
 )
-def updatePresetName(name):
-    print(name)
-    return "erdc_blue2green_muted"
+def updatePresetName(name, scale_factor):
+    points, polys, elevation, color_range = updateWarp(scale_factor)
+    return [name, color_range, points, polys, elevation, random.random()]
 
 if __name__ == "__main__":
     app.run_server(debug=True)
