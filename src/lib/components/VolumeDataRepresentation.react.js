@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { VolumneDataRepresentation as VtkItem } from 'react-vtk-js';
+import { VolumeDataRepresentation as VtkItem } from 'react-vtk-js';
 
 /**
  * VolumneDataRepresentation expect the following set of properties
@@ -28,6 +28,11 @@ VolumneDataRepresentation.defaultProps = {
 };
 
 VolumneDataRepresentation.propTypes = {
+  /**
+   * The ID used to identify this component.
+   */
+  id: PropTypes.string,
+
   /**
    * Number of points along x, y, z
    */
