@@ -49,7 +49,7 @@ For a more detailed example, see `usage.py`.
 
 First, install the package from GitHub (the package is not yet available via CRAN):
 ```
-remotes::install_github("plotly/dash-deck")
+remotes::install_github("plotly/dash-vtk")
 ```
 
 then, create your component and add it to your layout:
