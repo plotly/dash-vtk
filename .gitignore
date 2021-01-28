@@ -274,4 +274,7 @@ bh_unicode_properties.cache
 GitHub.sublime-settings
 
 *hmr.js
+*hmr.json
+dash_vtk/output.js
+*deps/output.js
 .vscode/settings.json
