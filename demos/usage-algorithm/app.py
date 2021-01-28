@@ -1,3 +1,5 @@
+import random
+
 import dash
 import dash_vtk
 import dash_bootstrap_components as dbc
@@ -9,7 +11,8 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 vtk_view = dash_vtk.View(
-    [
+    id='vtk-view',
+    children=[
         dash_vtk.GeometryRepresentation(
             [
                 dash_vtk.Algorithm(
@@ -72,11 +75,12 @@ app.layout = dbc.Container(
 
 
 @app.callback(
-    Output("vtk-algorithm", "state"),
+    [Output("vtk-algorithm", "state"), Output("vtk-view", "triggerResetCamera")],
     [Input("slider-resolution", "value"), Input("capping-checklist", "value")],
 )
 def update_cone(slider_val, checked_values):
-    return {"resolution": slider_val, "capping": "capping" in checked_values}
+    new_state = {"resolution": slider_val, "capping": "capping" in checked_values}
+    return new_state, random.random()
 
 
 if __name__ == "__main__":
