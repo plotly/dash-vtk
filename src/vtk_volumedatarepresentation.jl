@@ -15,6 +15,7 @@ VolumneDataRepresentation expect the following set of properties
   - scalars: [...]
   - scalarsType: Float32Array
 Keyword arguments:
+- `id` (String; optional): The ID used to identify this component.
 - `dimensions` (Array of Reals; optional): Number of points along x, y, z
 - `spacing` (Array of Reals; optional): Spacing along x, y, z between points in world coordinates
 - `origin` (Array of Reals; optional): World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
@@ -32,7 +33,7 @@ Keyword arguments:
 - `colorDataRange` (Array of Reals | String; optional): Data range use for the colorMap
 """
 function vtk_volumedatarepresentation(; kwargs...)
-        available_props = Symbol[:dimensions, :spacing, :origin, :rgb, :rgba, :scalars, :scalarsType, :mapper, :volume, :property, :colorMapPreset, :volumeController, :controllerSize, :rescaleColorMap, :colorDataRange]
+        available_props = Symbol[:id, :dimensions, :spacing, :origin, :rgb, :rgba, :scalars, :scalarsType, :mapper, :volume, :property, :colorMapPreset, :volumeController, :controllerSize, :rescaleColorMap, :colorDataRange]
         wild_props = Symbol[]
         return Component("vtk_volumedatarepresentation", "VolumeDataRepresentation", "dash_vtk", available_props, wild_props; kwargs...)
 end

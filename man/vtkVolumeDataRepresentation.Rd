@@ -10,14 +10,17 @@ VolumneDataRepresentation expect the following set of properties   - dimensions:
 }
 
 \usage{
-vtkVolumeDataRepresentation(dimensions=NULL, spacing=NULL, origin=NULL, rgb=NULL,
-rgba=NULL, scalars=NULL, scalarsType=NULL, mapper=NULL,
-volume=NULL, property=NULL, colorMapPreset=NULL,
-volumeController=NULL, controllerSize=NULL,
-rescaleColorMap=NULL, colorDataRange=NULL)
+vtkVolumeDataRepresentation(id=NULL, dimensions=NULL, spacing=NULL, origin=NULL,
+rgb=NULL, rgba=NULL, scalars=NULL, scalarsType=NULL,
+mapper=NULL, volume=NULL, property=NULL,
+colorMapPreset=NULL, volumeController=NULL,
+controllerSize=NULL, rescaleColorMap=NULL,
+colorDataRange=NULL)
 }
 
 \arguments{
+\item{id}{Character. The ID used to identify this component.}
+
 \item{dimensions}{List of numerics. Number of points along x, y, z}
 
 \item{spacing}{List of numerics. Spacing along x, y, z between points in world coordinates}

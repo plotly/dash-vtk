@@ -15,6 +15,7 @@ VolumneDataRepresentation expect the following set of properties
   - scalarsType: Float32Array
 
 Keyword arguments:
+- id (string; optional): The ID used to identify this component.
 - dimensions (list of numbers; optional): Number of points along x, y, z
 - spacing (list of numbers; optional): Spacing along x, y, z between points in world coordinates
 - origin (list of numbers; optional): World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
@@ -31,12 +32,12 @@ Keyword arguments:
 - rescaleColorMap (boolean; default True): Use opacity range to rescale color map
 - colorDataRange (list of numbers | string; default 'auto'): Data range use for the colorMap"""
     @_explicitize_args
-    def __init__(self, dimensions=Component.UNDEFINED, spacing=Component.UNDEFINED, origin=Component.UNDEFINED, rgb=Component.UNDEFINED, rgba=Component.UNDEFINED, scalars=Component.UNDEFINED, scalarsType=Component.UNDEFINED, mapper=Component.UNDEFINED, volume=Component.UNDEFINED, property=Component.UNDEFINED, colorMapPreset=Component.UNDEFINED, volumeController=Component.UNDEFINED, controllerSize=Component.UNDEFINED, rescaleColorMap=Component.UNDEFINED, colorDataRange=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['dimensions', 'spacing', 'origin', 'rgb', 'rgba', 'scalars', 'scalarsType', 'mapper', 'volume', 'property', 'colorMapPreset', 'volumeController', 'controllerSize', 'rescaleColorMap', 'colorDataRange']
+    def __init__(self, id=Component.UNDEFINED, dimensions=Component.UNDEFINED, spacing=Component.UNDEFINED, origin=Component.UNDEFINED, rgb=Component.UNDEFINED, rgba=Component.UNDEFINED, scalars=Component.UNDEFINED, scalarsType=Component.UNDEFINED, mapper=Component.UNDEFINED, volume=Component.UNDEFINED, property=Component.UNDEFINED, colorMapPreset=Component.UNDEFINED, volumeController=Component.UNDEFINED, controllerSize=Component.UNDEFINED, rescaleColorMap=Component.UNDEFINED, colorDataRange=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'dimensions', 'spacing', 'origin', 'rgb', 'rgba', 'scalars', 'scalarsType', 'mapper', 'volume', 'property', 'colorMapPreset', 'volumeController', 'controllerSize', 'rescaleColorMap', 'colorDataRange']
         self._type = 'VolumeDataRepresentation'
         self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['dimensions', 'spacing', 'origin', 'rgb', 'rgba', 'scalars', 'scalarsType', 'mapper', 'volume', 'property', 'colorMapPreset', 'volumeController', 'controllerSize', 'rescaleColorMap', 'colorDataRange']
+        self.available_properties = ['id', 'dimensions', 'spacing', 'origin', 'rgb', 'rgba', 'scalars', 'scalarsType', 'mapper', 'volume', 'property', 'colorMapPreset', 'volumeController', 'controllerSize', 'rescaleColorMap', 'colorDataRange']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

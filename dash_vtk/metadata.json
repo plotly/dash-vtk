@@ -1087,6 +1087,13 @@
     "displayName": "VolumneDataRepresentation",
     "methods": [],
     "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
       "dimensions": {
         "type": {
           "name": "arrayOf",
