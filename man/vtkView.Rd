@@ -12,7 +12,8 @@ View is responsible to render vtk.js data. It takes the following set of propert
 \usage{
 vtkView(children=NULL, id=NULL, background=NULL,
 interactorSettings=NULL, cameraPosition=NULL,
-cameraViewUp=NULL, cameraParallelProjection=NULL)
+cameraViewUp=NULL, cameraParallelProjection=NULL,
+triggerRender=NULL, triggerResetCamera=NULL)
 }
 
 \arguments{
@@ -30,6 +31,10 @@ between 0-1 of Red, Green, Blue component.}
 \item{cameraViewUp}{Unnamed list. Initial camera position from an object in [0,0,0]}
 
 \item{cameraParallelProjection}{Logical. Use parallel projection (default: false)}
+
+\item{triggerRender}{Numeric. Property use to trigger a render when changing.}
+
+\item{triggerResetCamera}{Numeric. Property use to trigger a resetCamera when changing.}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

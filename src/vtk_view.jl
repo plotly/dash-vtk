@@ -24,9 +24,11 @@ between 0-1 of Red, Green, Blue component.
 - `cameraPosition` (Array; optional): Initial camera position from an object in [0,0,0]
 - `cameraViewUp` (Array; optional): Initial camera position from an object in [0,0,0]
 - `cameraParallelProjection` (Bool; optional): Use parallel projection (default: false)
+- `triggerRender` (Real; optional): Property use to trigger a render when changing.
+- `triggerResetCamera` (Real; optional): Property use to trigger a resetCamera when changing.
 """
 function vtk_view(; kwargs...)
-        available_props = Symbol[:children, :id, :background, :interactorSettings, :cameraPosition, :cameraViewUp, :cameraParallelProjection]
+        available_props = Symbol[:children, :id, :background, :interactorSettings, :cameraPosition, :cameraViewUp, :cameraParallelProjection, :triggerRender, :triggerResetCamera]
         wild_props = Symbol[]
         return Component("vtk_view", "View", "dash_vtk", available_props, wild_props; kwargs...)
 end

@@ -1001,6 +1001,28 @@
           "computed": false
         }
       },
+      "triggerRender": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Property use to trigger a render when changing.",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "triggerResetCamera": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Property use to trigger a resetCamera when changing.",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
       "children": {
         "type": {
           "name": "union",
