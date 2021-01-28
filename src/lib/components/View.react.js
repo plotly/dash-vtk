@@ -17,6 +17,8 @@ export default function View(props) {
 };
 
 View.defaultProps = {
+  triggerRender: 0,
+  triggerResetCamera: 0,
   background: [0.2, 0.3, 0.4],
   cameraPosition: [0, 0, 1],
   cameraViewUp: [0, 1, 0],
@@ -90,6 +92,16 @@ View.propTypes = {
    * Use parallel projection (default: false)
    */
   cameraParallelProjection: PropTypes.bool,
+
+  /**
+   * Property use to trigger a render when changing.
+   */
+  triggerRender: PropTypes.number,
+
+  /**
+   * Property use to trigger a resetCamera when changing.
+   */
+  triggerResetCamera: PropTypes.number,
 
   /**
    * List of representation to show
