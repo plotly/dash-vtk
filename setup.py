@@ -1,6 +1,7 @@
+import io
 import json
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open('package.json') as f:
@@ -12,10 +13,13 @@ setup(
     name=package_name,
     version=package["version"],
     author=package['author'],
-    packages=[package_name],
+    packages=find_packages(include=[package_name, package_name + ".*"]),
     include_package_data=True,
     license=package['license'],
     description=package.get('description', package_name),
+    long_description=io.open('README.md', encoding='utf-8').read(),
+    long_description_content_type='text/markdown',
+    url='https://github.com/plotly/dash-vtk',
     install_requires=['dash'],
     classifiers=[
         'Environment :: Web Environment',
