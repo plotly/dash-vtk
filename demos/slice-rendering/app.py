@@ -1,3 +1,4 @@
+import os
 import random
 
 import dash
@@ -7,6 +8,34 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 
+import vtk
+from vtk.util.numpy_support import vtk_to_numpy
+
+# Numpy to JS TypedArray
+to_js_type = {
+    'int8': 'Int8Array',
+    'uint8': 'Uint8Array',
+    'int16': 'Int16Array',
+    'uint16': 'Uint16Array',
+    'float32': 'Float32Array',
+    'float64': 'Float64Array',
+}
+
+# Data file path
+demo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+head_vti = os.path.join(demo_dir, 'data', 'head.vti')
+
+# Load dataset from dist
+reader = vtk.vtkXMLImageDataReader()
+reader.SetFileName(head_vti)
+reader.Update()
+
+image_data = reader.GetOutput()
+dimensions = image_data.GetDimensions()
+spacing = image_data.GetSpacing()
+origin = image_data.GetOrigin()
+scalars = vtk_to_numpy(image_data.GetPointData().GetScalars())
+js_type = to_js_type[str(scalars.dtype)]
 
 def custom_card(children):
     return dbc.Card(
@@ -41,12 +70,22 @@ slice_view = dash_vtk.View(
     cameraPosition=[1, 0, 0],
     cameraViewUp=[0, 0, -1],
     cameraParallelProjection=False,
-    background=[1, 1, 1],
+    background=[.9, .9, 1],
     children=[
         dash_vtk.ShareDataSet(
-            dash_vtk.Reader(
-                vtkClass="vtkXMLImageDataReader",
-                url="https://data.kitware.com/api/v1/item/59e12e988d777f31ac6455c5/download",
+            dash_vtk.ImageData(
+                dimensions=dimensions,
+                spacing=spacing,
+                origin=origin,
+                children=[
+                    dash_vtk.PointData([
+                        dash_vtk.DataArray(
+                            registration="setScalars",
+                            values=scalars,
+                            type=js_type,
+                        )
+                    ])
+                ],
             )
         ),
         dash_vtk.SliceRepresentation(
@@ -112,32 +151,24 @@ app.layout = dbc.Container(
     [
         Output("slice-view", "triggerRender"),
         Output("slice-repr-i", "property"),
-        Output("slice-repr-j", "property"),
-        Output("slice-repr-k", "property"),
-    ],
-    [Input("slider-lvl", "value"), Input("slider-window", "value")],
-)
-def update_slice_property(color_lvl, color_window):
-    new_prop = {"colorWindow": color_window, "colorLevel": color_lvl}
-    return random.random(), new_prop, new_prop, new_prop
-
-
-@app.callback(
-    [
-        Output("slice-view", "triggerRender"),
         Output("slice-repr-i", "iSlice"),
+        Output("slice-repr-j", "property"),
         Output("slice-repr-j", "jSlice"),
+        Output("slice-repr-k", "property"),
         Output("slice-repr-k", "kSlice"),
     ],
     [
         Input("slider-i", "value"),
         Input("slider-j", "value"),
         Input("slider-k", "value"),
+        Input("slider-lvl", "value"),
+        Input("slider-window", "value"),
     ],
 )
-def update_slice_property(i, j, k):
-    return random.random(), i, j, k
-
+def update_slice_property(i, j, k, level, window):
+    render_call = random.random()
+    slice_prop = {"colorLevel": level, "colorWindow": window}
+    return render_call, slice_prop, i, slice_prop, j, slice_prop, k
 
 if __name__ == "__main__":
     app.run_server(debug=True)

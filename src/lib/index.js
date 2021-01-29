@@ -6,6 +6,7 @@ import DataArray from './components/DataArray.react';
 import FieldData from './components/FieldData.react';
 import GeometryRepresentation from './components/GeometryRepresentation.react';
 import ImageData from './components/ImageData.react';
+import Mesh from './components/Mesh.react';
 import PointCloudRepresentation from './components/PointCloudRepresentation.react';
 import PointData from './components/PointData.react';
 import PolyData from './components/PolyData.react';
@@ -25,6 +26,7 @@ export {
     FieldData,
     GeometryRepresentation,
     ImageData,
+    Mesh,
     PointCloudRepresentation,
     PointData,
     PolyData,
