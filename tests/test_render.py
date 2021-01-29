@@ -24,7 +24,7 @@ names = [
     "demos.volume-rendering.app",
     "demos.usage-vtk-cfd.app",
     "demos.usage-algorithm.app",
-    # "demos.synthetic-volume-rendering.app",
+    "demos.synthetic-volume-rendering.app",
 ]
 
 
@@ -41,5 +41,5 @@ def build_test(name, sleep=5):
 
 
 for n in names:
-    var_name = "test_" + n.replace("-", "_").replace("demos.", "")
+    var_name = "test_" + n.replace("-", "_").replace("demos.", "").replace(".app", "")
     locals()[var_name] = build_test(n)
