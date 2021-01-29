@@ -28,7 +28,7 @@ names = [
 ]
 
 
-def build_test(name, sleep=5):
+def build_test(name, sleep=10):
     def test_fn(dash_duo):
         app = import_app(name)
         dash_duo.start_server(app)
