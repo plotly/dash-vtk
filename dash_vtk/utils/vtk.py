@@ -19,6 +19,7 @@ to_js_type = {
 
 
 def to_mesh_state(dataset, field_to_keep=None):
+  '''Expect any dataset and extract its surface into a dash_vtk.Mesh state property'''
   if dataset is None:
     return None
 
@@ -94,6 +95,36 @@ def to_mesh_state(dataset, field_to_keep=None):
     })
 
   return state
+
+
+def to_volume_state(dataset):
+    '''Expect a vtkImageData and extract its setting for the dash_vtk.Volume state'''
+    if dataset is None or not dataset.IsA('vtkImageData'):
+        return None
+
+    state = {
+        'image': {
+            'dimensions': dataset.GetDimensions(),
+            'spacing': dataset.GetSpacing(),
+            'origin': dataset.GetOrigin(),
+        },
+    }
+    scalars = dataset.GetPointData().GetScalars()
+
+    if scalars is not None:
+        values = vtk_to_numpy(scalars).ravel()
+        js_types = to_js_type[str(values.dtype)]
+        state['field'] = {
+            'name': scalars.GetName(),
+            'numberOfComponents': scalars.GetNumberOfComponents(),
+            'dataRange': scalars.GetRange(-1),
+            'type': js_types,
+            'values': values,
+        }
+
+
+    return state
+
 
 presets = [
     "KAAMS",
@@ -285,3 +316,9 @@ presets = [
     "Viridis (matplotlib)",
     "BlueObeliskElements",
 ]
+
+def toDropOption(name):
+    return {'label': name, 'value': name}
+
+
+preset_as_options = list(map(toDropOption, presets))

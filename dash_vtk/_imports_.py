@@ -13,6 +13,7 @@ from .Reader import Reader
 from .ShareDataSet import ShareDataSet
 from .SliceRepresentation import SliceRepresentation
 from .View import View
+from .Volume import Volume
 from .VolumeController import VolumeController
 from .VolumeDataRepresentation import VolumeDataRepresentation
 from .VolumeRepresentation import VolumeRepresentation
@@ -33,6 +34,7 @@ __all__ = [
     "ShareDataSet",
     "SliceRepresentation",
     "View",
+    "Volume",
     "VolumeController",
     "VolumeDataRepresentation",
     "VolumeRepresentation"

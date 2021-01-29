@@ -1079,6 +1079,42 @@
       }
     }
   },
+  "src/lib/components/Volume.react.js": {
+    "description": "Volume is exposing a vtkImageData to a downstream filter\nIt takes the following set of properties:\n  - state: { image: { ...imagedata-props }, field: { ...dataArray } }",
+    "displayName": "Volume",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "state": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "State of the volume",
+        "defaultValue": {
+          "value": "{\n  image: { dimension: [10, 10, 10] },\n}",
+          "computed": false
+        }
+      }
+    }
+  },
   "src/lib/components/VolumeController.react.js": {
     "description": "VolumeController is a GUI to control the piecewise function",
     "displayName": "VolumeController",
