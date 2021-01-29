@@ -5,7 +5,7 @@ Description: React based declarative usage of vtk.js for Dash
 Depends: R (>= 3.0.2)
 Imports: 
 Suggests: 
-License: BSD + file LICENSE
+License: MIT + file LICENSE
 URL: https://github.com/plotly/dash-vtk
 BugReports: https://github.com/plotly/dash-vtk/issues
 Encoding: UTF-8

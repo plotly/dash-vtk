@@ -22,7 +22,7 @@
     "build:activated": "npm run build:js && npm run build:py_and_r-activated"
   },
   "author": "Kitware Inc <sebastien.jourdain@kitware.com>",
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
     "ramda": "^0.26.1",
     "react-vtk-js": "1.0.4"
