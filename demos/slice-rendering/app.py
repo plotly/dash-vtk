@@ -2,24 +2,15 @@ import os
 import random
 
 import dash
-import dash_vtk
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Input, Output, State
 
-import vtk
-from vtk.util.numpy_support import vtk_to_numpy
+import dash_vtk
+from dash_vtk.utils import to_volume_state
 
-# Numpy to JS TypedArray
-to_js_type = {
-    'int8': 'Int8Array',
-    'uint8': 'Uint8Array',
-    'int16': 'Int16Array',
-    'uint16': 'Uint16Array',
-    'float32': 'Float32Array',
-    'float64': 'Float64Array',
-}
+import vtk
 
 # Data file path
 demo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,12 +21,7 @@ reader = vtk.vtkXMLImageDataReader()
 reader.SetFileName(head_vti)
 reader.Update()
 
-image_data = reader.GetOutput()
-dimensions = image_data.GetDimensions()
-spacing = image_data.GetSpacing()
-origin = image_data.GetOrigin()
-scalars = vtk_to_numpy(image_data.GetPointData().GetScalars())
-js_type = to_js_type[str(scalars.dtype)]
+volume_state = to_volume_state(reader.GetOutput())
 
 def custom_card(children):
     return dbc.Card(
@@ -72,22 +58,7 @@ slice_view = dash_vtk.View(
     cameraParallelProjection=False,
     background=[.9, .9, 1],
     children=[
-        dash_vtk.ShareDataSet(
-            dash_vtk.ImageData(
-                dimensions=dimensions,
-                spacing=spacing,
-                origin=origin,
-                children=[
-                    dash_vtk.PointData([
-                        dash_vtk.DataArray(
-                            registration="setScalars",
-                            values=scalars,
-                            type=js_type,
-                        )
-                    ])
-                ],
-            )
-        ),
+        dash_vtk.ShareDataSet(dash_vtk.Volume(state=volume_state)),
         dash_vtk.SliceRepresentation(
             id="slice-repr-i",
             iSlice=128,

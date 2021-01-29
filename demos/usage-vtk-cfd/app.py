@@ -1,78 +1,98 @@
 import os
 import random
-import vtk
+
 
 import dash
-import dash_vtk
-from dash_vtk.utils import to_mesh_state, presets
-
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 
 from dash.dependencies import Input, Output, State
 
+import dash_vtk
+from dash_vtk.utils import to_mesh_state, preset_as_options
 
-def toDropOption(name):
-    return { 'label': name, 'value': name}
+import vtk
 
 # -----------------------------------------------------------------------------
 # VTK Pipeline
 # -----------------------------------------------------------------------------
 
-# Figure out file path to load
-data_basedir = os.path.join(os.path.dirname(__file__), 'data')
-bike_filename = os.path.join(data_basedir, 'bike.vtp')
-tunnel_filename = os.path.join(data_basedir, 'tunnel.vtu')
+class Viz():
+    def __init__(self, data_directory):
+        self.color_range = [0, 1]
+        bike_filename = os.path.join(data_directory, 'bike.vtp')
+        tunnel_filename = os.path.join(data_directory, 'tunnel.vtu')
 
-# Seed positions
-point1 = [-0.4, 0, 0.05]
-point2 = [-0.4, 0, 1.5]
+        # Seeds settings
+        self.resolution = 10
+        self.point1 = [-0.4, 0, 0.05]
+        self.point2 = [-0.4, 0, 1.5]
 
-# VTK Pipeline setup
-bikeReader = vtk.vtkXMLPolyDataReader()
-bikeReader.SetFileName(bike_filename)
-bikeReader.Update()
+        # VTK Pipeline setup
+        bikeReader = vtk.vtkXMLPolyDataReader()
+        bikeReader.SetFileName(bike_filename)
+        bikeReader.Update()
+        self.bike_mesh = to_mesh_state(bikeReader.GetOutput())
 
-tunnelReader = vtk.vtkXMLUnstructuredGridReader()
-tunnelReader.SetFileName(tunnel_filename)
-tunnelReader.Update()
+        tunnelReader = vtk.vtkXMLUnstructuredGridReader()
+        tunnelReader.SetFileName(tunnel_filename)
+        tunnelReader.Update()
 
-lineSeed = vtk.vtkLineSource()
-lineSeed.SetPoint1(*point1)
-lineSeed.SetPoint2(*point2)
-lineSeed.SetResolution(50)
+        self.lineSeed = vtk.vtkLineSource()
+        self.lineSeed.SetPoint1(*self.point1)
+        self.lineSeed.SetPoint2(*self.point2)
+        self.lineSeed.SetResolution(self.resolution)
 
-streamTracer = vtk.vtkStreamTracer()
-streamTracer.SetInputConnection(tunnelReader.GetOutputPort())
-streamTracer.SetSourceConnection(lineSeed.GetOutputPort())
-streamTracer.SetIntegrationDirectionToForward()
-streamTracer.SetIntegratorTypeToRungeKutta45()
-streamTracer.SetMaximumPropagation(3)
-streamTracer.SetIntegrationStepUnit(2)
-streamTracer.SetInitialIntegrationStep(0.2)
-streamTracer.SetMinimumIntegrationStep(0.01)
-streamTracer.SetMaximumIntegrationStep(0.5)
-streamTracer.SetMaximumError(0.000001)
-streamTracer.SetMaximumNumberOfSteps(2000)
-streamTracer.SetTerminalSpeed(0.00000000001)
+        streamTracer = vtk.vtkStreamTracer()
+        streamTracer.SetInputConnection(tunnelReader.GetOutputPort())
+        streamTracer.SetSourceConnection(self.lineSeed.GetOutputPort())
+        streamTracer.SetIntegrationDirectionToForward()
+        streamTracer.SetIntegratorTypeToRungeKutta45()
+        streamTracer.SetMaximumPropagation(3)
+        streamTracer.SetIntegrationStepUnit(2)
+        streamTracer.SetInitialIntegrationStep(0.2)
+        streamTracer.SetMinimumIntegrationStep(0.01)
+        streamTracer.SetMaximumIntegrationStep(0.5)
+        streamTracer.SetMaximumError(0.000001)
+        streamTracer.SetMaximumNumberOfSteps(2000)
+        streamTracer.SetTerminalSpeed(0.00000000001)
 
-tubeFilter = vtk.vtkTubeFilter()
-tubeFilter.SetInputConnection(streamTracer.GetOutputPort())
-tubeFilter.SetRadius(0.01)
-tubeFilter.SetNumberOfSides(6)
-tubeFilter.CappingOn()
-tubeFilter.Update()
+        self.tubeFilter = vtk.vtkTubeFilter()
+        self.tubeFilter.SetInputConnection(streamTracer.GetOutputPort())
+        self.tubeFilter.SetRadius(0.01)
+        self.tubeFilter.SetNumberOfSides(6)
+        self.tubeFilter.CappingOn()
+        self.tubeFilter.Update()
 
-def updateTubesGeometry(field_name):
-    tubeFilter.Update()
-    streamlineState = to_mesh_state(tubeFilter.GetOutput(), field_name)
-    colorRange = streamlineState['field']['dataRange']
+    def updateSeedPoints(self, p1_y, p2_y, resolution):
+        self.point1[1] = p1_y
+        self.point2[1] = p2_y
+        self.resolution = resolution
 
-    return [streamlineState, colorRange]
+        self.lineSeed.SetPoint1(*self.point1)
+        self.lineSeed.SetPoint2(*self.point2)
+        self.lineSeed.SetResolution(resolution)
 
-streamline_mesh_state, color_range = updateTubesGeometry('p')
-bike_mesh_state = to_mesh_state(bikeReader.GetOutput())
+    def getTubesMesh(self, color_by_field_name):
+        self.tubeFilter.Update()
+        ds = self.tubeFilter.GetOutput()
+        mesh_state = to_mesh_state(ds, color_by_field_name)
+        self.color_range = mesh_state['field']['dataRange']
+        return mesh_state
+
+    def getBikeMesh(self):
+        return self.bike_mesh
+
+    def getColorRange(self):
+        return self.color_range
+
+    def getSeedState(self):
+        return {
+            'point1': self.point1,
+            'point2': self.point2,
+            'resolution': self.resolution,
+        }
 
 # -----------------------------------------------------------------------------
 # GUI setup
@@ -80,6 +100,11 @@ bike_mesh_state = to_mesh_state(bikeReader.GetOutput())
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
+viz = Viz(os.path.join(os.path.dirname(__file__), 'data'))
+
+# -----------------------------------------------------------------------------
+# 3D Viz
+# -----------------------------------------------------------------------------
 
 vtk_view = dash_vtk.View(
     id="vtk-view",
@@ -89,18 +114,18 @@ vtk_view = dash_vtk.View(
             children=[
                 dash_vtk.Mesh(
                     id="bike",
-                    state=bike_mesh_state,
+                    state=viz.getBikeMesh(),
                 )
             ],
         ),
         dash_vtk.GeometryRepresentation(
             id="tubes-rep",
             colorMapPreset="erdc_rainbow_bright",
-            colorDataRange=color_range,
+            colorDataRange=viz.getColorRange(),
             children=[
                 dash_vtk.Mesh(
                     id="tubes-mesh",
-                    state=streamline_mesh_state,
+                    state=viz.getTubesMesh('p'),
                 )
             ],
         ),
@@ -115,12 +140,16 @@ vtk_view = dash_vtk.View(
                 dash_vtk.Algorithm(
                     id="seed-line",
                     vtkClass="vtkLineSource",
-                    state={'point1': point1, 'point2': point2 },
+                    state=viz.getSeedState(),
                 )
             ],
         )
     ]
 )
+
+# -----------------------------------------------------------------------------
+# Control UI
+# -----------------------------------------------------------------------------
 
 controls = dbc.Col(children=[
     dbc.Card(
@@ -180,7 +209,7 @@ controls = dbc.Col(children=[
                     html.P("Color Preset"),
                     dcc.Dropdown(
                         id="preset",
-                        options=list(map(toDropOption, presets)),
+                        options=preset_as_options,
                         value="erdc_rainbow_bright",
                     ),
                 ]
@@ -189,11 +218,14 @@ controls = dbc.Col(children=[
     ),
 ])
 
+# -----------------------------------------------------------------------------
+# App UI
+# -----------------------------------------------------------------------------
 
 app.layout = dbc.Container(
     fluid=True,
     children=[
-        html.H1("Demo of dash_vtk.CFD"),
+        html.H1("dash_vtk rendering with VTK processing"),
         html.Hr(),
         dbc.Row(
             [
@@ -216,7 +248,7 @@ app.layout = dbc.Container(
 )
 
 # -----------------------------------------------------------------------------
-# Handle seeds
+# Handle controls
 # -----------------------------------------------------------------------------
 
 @app.callback(
@@ -236,21 +268,13 @@ app.layout = dbc.Container(
     ],
 )
 def update_seeds(y1, y2, resolution, colorByField, presetName):
-    point1[1] = y1
-    point2[1] = y2
-
-    lineSeed.SetPoint1(*point1)
-    lineSeed.SetPoint2(*point2)
-    lineSeed.SetResolution(resolution)
-
-    tube_state, colorRange = updateTubesGeometry(colorByField)
-
+    viz.updateSeedPoints(y1, y2, resolution)
     return [
-        {"point1": point1, "point2": point2, "resolution": resolution},
-        tube_state,
-        colorRange,
+        viz.getSeedState(),
+        viz.getTubesMesh(colorByField),
+        viz.getColorRange(),
         presetName,
-        random.random(),
+        random.random(), # trigger a render
     ]
 
 # -----------------------------------------------------------------------------

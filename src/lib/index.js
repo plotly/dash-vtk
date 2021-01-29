@@ -14,6 +14,7 @@ import Reader from './components/Reader.react';
 import ShareDataSet from './components/ShareDataSet.react';
 import SliceRepresentation from './components/SliceRepresentation.react';
 import View from './components/View.react';
+import Volume from './components/Volume.react';
 import VolumeController from './components/VolumeController.react';
 import VolumeDataRepresentation from './components/VolumeDataRepresentation.react';
 import VolumeRepresentation from './components/VolumeRepresentation.react';
@@ -34,6 +35,7 @@ export {
     ShareDataSet,
     SliceRepresentation,
     View,
+    Volume,
     VolumeController,
     VolumeDataRepresentation,
     VolumeRepresentation,
