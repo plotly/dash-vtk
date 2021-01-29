@@ -9,7 +9,7 @@ import vtk
 
 # Data file path
 demo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-head_vti = os.path.join(demo_dir, 'data', 'head.vti')
+head_vti = os.path.join(demo_dir, "data", "head.vti")
 
 # Load dataset from dist
 reader = vtk.vtkXMLImageDataReader()

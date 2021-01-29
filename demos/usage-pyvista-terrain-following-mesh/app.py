@@ -13,19 +13,22 @@ from vtk.util.numpy_support import vtk_to_numpy
 
 from dash_vtk.utils import presets
 
+
 def toDropOption(name):
-    return {'label': name, 'value': name}
+    return {"label": name, "value": name}
+
 
 # Get point cloud data from PyVista
 uniformGrid = examples.download_crater_topo()
 subset = uniformGrid.extract_subset((500, 900, 400, 800, 0, 0), (5, 5, 1))
+
 
 def updateWarp(factor=1):
     terrain = subset.warp_by_scalar(factor=factor)
     polydata = terrain.extract_geometry()
     points = polydata.points.ravel()
     polys = vtk_to_numpy(polydata.GetPolys().GetData())
-    elevation = polydata['scalar1of1']
+    elevation = polydata["scalar1of1"]
     min_elevation = np.amin(elevation)
     max_elevation = np.amax(elevation)
     return [points, polys, elevation, [min_elevation, max_elevation]]
@@ -48,24 +51,24 @@ vtk_view = dash_vtk.View(
                     points=points,
                     polys=polys,
                     children=[
-                        dash_vtk.PointData([
-                            dash_vtk.DataArray(
-                                id="vtk-array",
-                                registration="setScalars",
-                                name="elevation",
-                                values=elevation,
-                            )
-                        ])
-                    ]
+                        dash_vtk.PointData(
+                            [
+                                dash_vtk.DataArray(
+                                    id="vtk-array",
+                                    registration="setScalars",
+                                    name="elevation",
+                                    values=elevation,
+                                )
+                            ]
+                        )
+                    ],
                 )
             ],
             colorMapPreset="erdc_blue2green_muted",
             colorDataRange=color_range,
-            property={
-                'edgeVisibility': True,
-            },
+            property={"edgeVisibility": True,},
         )
-    ]
+    ],
 )
 
 app.layout = dbc.Container(
@@ -73,12 +76,7 @@ app.layout = dbc.Container(
     children=[
         dbc.Row(
             [
-                dbc.Col(
-                    width=6,
-                    children=[
-                        html.H1("Terrain deformation"),
-                    ]
-                ),
+                dbc.Col(width=6, children=[html.H1("Terrain deformation"),]),
                 dbc.Col(
                     width=3,
                     children=[
@@ -100,7 +98,7 @@ app.layout = dbc.Container(
                             options=list(map(toDropOption, presets)),
                             value="erdc_rainbow_bright",
                         ),
-                    ]
+                    ],
                 ),
             ]
         ),
@@ -123,17 +121,20 @@ app.layout = dbc.Container(
 
 
 @app.callback(
-    [Output("vtk-representation", "colorMapPreset"),
-     Output("vtk-representation", "colorDataRange"),
-     Output("vtk-polydata", 'points'),
-     Output("vtk-polydata", 'polys'),
-     Output("vtk-array", 'values'),
-     Output("vtk-view", "triggerResetCamera")],
-    [Input("dropdown-preset", "value"), Input("scale-factor", "value")]
+    [
+        Output("vtk-representation", "colorMapPreset"),
+        Output("vtk-representation", "colorDataRange"),
+        Output("vtk-polydata", "points"),
+        Output("vtk-polydata", "polys"),
+        Output("vtk-array", "values"),
+        Output("vtk-view", "triggerResetCamera"),
+    ],
+    [Input("dropdown-preset", "value"), Input("scale-factor", "value")],
 )
 def updatePresetName(name, scale_factor):
     points, polys, elevation, color_range = updateWarp(scale_factor)
     return [name, color_range, points, polys, elevation, random.random()]
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)

@@ -12,11 +12,11 @@ app.layout = html.Div(
     children=[
         dash_vtk.View(
             children=dash_vtk.VolumeDataRepresentation(
-                spacing=[1,1,1],
-                dimensions=[10,10,10],
-                origin=[0,0,0],
+                spacing=[1, 1, 1],
+                dimensions=[10, 10, 10],
+                origin=[0, 0, 0],
                 scalars=[random.random() for _ in range(1000)],
-                rescaleColorMap=False
+                rescaleColorMap=False,
             )
         )
     ],

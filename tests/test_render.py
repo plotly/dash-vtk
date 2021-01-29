@@ -17,7 +17,7 @@ def take_snapshot(dash_duo, name):
 
 
 names = [
-    "usage", 
+    "usage",
     "demos.usage-pyvista-terrain-following-mesh.app",
     "demos.slice-rendering.app",
     "demos.usage-pyvista-point-cloud.app",
