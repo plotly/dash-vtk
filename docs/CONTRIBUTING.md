@@ -115,30 +115,31 @@ python setup.py sdist
 ```
 6. Copy the tarball into a separate folder and try to install it and run the examples:
 ```
-cp dist/dash_vtk-x.x.x.tar.gz ../temp
-cp usage.py ../temp
-cd ../temp
-source venv/bin/activate
-pip install dash_vtk-x.x.x.tar.gz
+virtualenv venv-release
+source venv-release/bin/activate
+pip install dist/dash_vtk-x.x.x.tar.gz
 python usage.py
+rm -r venv-release/  # Clean up after you are done
 ```
 7. If the examples work, then publish:
 ```
+npm login  # only if you are not already logged in
 npm publish
 twine upload dist/dash_vtk-x.x.x.tar.gz
 ```
-8. Tag your release with git:
-```
-git tag -a 'vx.x.x' -m 'vx.x.x'
-git push origin master --follow-tags
-```
-9. Verify that the publish worked by installing it:
+
+8. Verify that the publish worked by installing it:
 ```
 cd ../temp
 pip install dash-vtk==x.x.x
 python usage.py
 ```
 
+9. Tag your release with git:
+```
+git tag -a 'vx.x.x' -m 'vx.x.x'
+git push origin master --follow-tags
+```
 
 Make a post in the [Dash Community Forum](https://community.plotly.com/c/dash)
 * Title it `":mega: Announcement! New <Your Feature> - Feedback Welcome"`
