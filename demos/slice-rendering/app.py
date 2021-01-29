@@ -12,6 +12,8 @@ from dash_vtk.utils import to_volume_state
 
 import vtk
 
+random.seed(42)
+
 # Data file path
 demo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 head_vti = os.path.join(demo_dir, "data", "head.vti")

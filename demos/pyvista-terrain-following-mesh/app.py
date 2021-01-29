@@ -13,6 +13,8 @@ from vtk.util.numpy_support import vtk_to_numpy
 
 from dash_vtk.utils import presets
 
+random.seed(42)
+
 
 def toDropOption(name):
     return {"label": name, "value": name}

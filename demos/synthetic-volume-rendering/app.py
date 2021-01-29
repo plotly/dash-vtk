@@ -4,6 +4,8 @@ import dash
 import dash_vtk
 import dash_html_components as html
 
+random.seed(42)
+
 app = dash.Dash(__name__)
 server = app.server
 
