@@ -1,6 +1,6 @@
 {
   "name": "dash_vtk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React based declarative usage of vtk.js for Dash",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "build": "npm run build:js && npm run build:py_and_r",
     "build:activated": "npm run build:js && npm run build:py_and_r-activated"
   },
-  "author": "Kitware Inc <sebastien.jourdain@kitware.com>",
+  "author": "Kitware Inc <sebastien.jourdain@kitware.com> and Plotly Technologies <xinghan@plot.ly>",
   "license": "MIT",
   "dependencies": {
     "ramda": "^0.26.1",
