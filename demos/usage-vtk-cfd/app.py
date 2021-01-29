@@ -1,17 +1,16 @@
+import os
+import random
+import vtk
+
 import dash
 import dash_vtk
+from dash_vtk.utils import to_mesh_state
+
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
+
 from dash.dependencies import Input, Output, State
-
-import vtk
-import pyvista as pv
-import numpy as np
-from vtk.util.numpy_support import vtk_to_numpy
-
-import os
-import random
 
 from color_maps import presets
 
@@ -62,31 +61,19 @@ streamTracer.SetTerminalSpeed(0.00000000001)
 tubeFilter = vtk.vtkTubeFilter()
 tubeFilter.SetInputConnection(streamTracer.GetOutputPort())
 tubeFilter.SetRadius(0.01)
-tubeFilter.SetNumberOfSides(6)
+tubeFilter.SetNumberOfSides(60)
 tubeFilter.CappingOn()
 tubeFilter.Update()
 
-streamsPolyData = pv.wrap(streamTracer.GetOutput())
-streamsPoints = streamsPolyData.points.ravel()
-streamsLines = vtk_to_numpy(streamsPolyData.GetLines().GetData())
-
 def updateTubesGeometry(field_name):
     tubeFilter.Update()
-    tubesPolyData = pv.wrap(tubeFilter.GetOutput())
-    tubesPoints = tubesPolyData.points.ravel()
-    tubesPolys = vtk_to_numpy(tubesPolyData.GetPolys().GetData())
-    tubesStrips = vtk_to_numpy(tubesPolyData.GetStrips().GetData())
-    colorByArray = tubesPolyData.GetPointData().GetArray(field_name)
-    colorRange = colorByArray.GetRange(-1)
-    nbComponents = colorByArray.GetNumberOfComponents()
+    streamlineState = to_mesh_state(tubeFilter.GetOutput(), field_name)
+    colorRange = streamlineState['field']['dataRange']
 
-    return [tubesPoints, tubesPolys, tubesStrips, vtk_to_numpy(colorByArray).ravel(), nbComponents, colorRange]
+    return [streamlineState, colorRange]
 
-tubesPoints, tubesPolys, tubesStrips, field, nb_components, color_range = updateTubesGeometry('p')
-
-bikePolyData = pv.wrap(bikeReader.GetOutput())
-bikePoints = bikePolyData.points.ravel()
-bikePolys = vtk_to_numpy(bikePolyData.GetPolys().GetData())
+streamline_mesh_state, color_range = updateTubesGeometry('p')
+bike_mesh_state = to_mesh_state(bikeReader.GetOutput())
 
 # -----------------------------------------------------------------------------
 # GUI setup
@@ -101,10 +88,9 @@ vtk_view = dash_vtk.View(
         dash_vtk.GeometryRepresentation(
             id="bike-rep",
             children=[
-                dash_vtk.PolyData(
-                    id="bike-polydata",
-                    points=bikePoints,
-                    polys=bikePolys,
+                dash_vtk.Mesh(
+                    id="bike",
+                    state=bike_mesh_state,
                 )
             ],
         ),
@@ -113,21 +99,9 @@ vtk_view = dash_vtk.View(
             colorMapPreset="erdc_rainbow_bright",
             colorDataRange=color_range,
             children=[
-                dash_vtk.PolyData(
-                    id="tubes-polydata",
-                    points=tubesPoints,
-                    polys=tubesPolys,
-                    strips=tubesStrips,
-                    children=[
-                        dash_vtk.PointData([
-                            dash_vtk.DataArray(
-                                id="data-array",
-                                registration="setScalars",
-                                values=field,
-                                numberOfComponents=nb_components,
-                            )
-                        ])
-                    ],
+                dash_vtk.Mesh(
+                    id="tubes-mesh",
+                    state=streamline_mesh_state,
                 )
             ],
         ),
@@ -247,20 +221,20 @@ app.layout = dbc.Container(
 # -----------------------------------------------------------------------------
 
 @app.callback(
-    [Output("seed-line", "state"),
-     Output("tubes-polydata", "points"),
-     Output("tubes-polydata", "polys"),
-     Output("tubes-polydata", "strips"),
-     Output("data-array", "values"),
-     Output("data-array", "numberOfComponents"),
-     Output("tubes-rep", "colorDataRange"),
-     Output("tubes-rep", "colorMapPreset"),
-     Output("vtk-view", "triggerRender")],
-    [Input("point-1", "value"),
-     Input("point-2", "value"),
-     Input("seed-resolution", "value"),
-     Input("color-by", "value"),
-     Input("preset", "value")],
+    [
+        Output("seed-line", "state"),
+        Output("tubes-mesh", "state"),
+        Output("tubes-rep", "colorDataRange"),
+        Output("tubes-rep", "colorMapPreset"),
+        Output("vtk-view", "triggerRender")
+    ],
+    [
+        Input("point-1", "value"),
+        Input("point-2", "value"),
+        Input("seed-resolution", "value"),
+        Input("color-by", "value"),
+        Input("preset", "value")
+    ],
 )
 def update_seeds(y1, y2, resolution, colorByField, presetName):
     point1[1] = y1
@@ -270,16 +244,11 @@ def update_seeds(y1, y2, resolution, colorByField, presetName):
     lineSeed.SetPoint2(*point2)
     lineSeed.SetResolution(resolution)
 
-    tubesPoints, tubesPolys, tubesStrips, field, nb_comps, colorRange = updateTubesGeometry(
-        colorByField)
+    tube_state, colorRange = updateTubesGeometry(colorByField)
 
     return [
         {"point1": point1, "point2": point2, "resolution": resolution},
-        tubesPoints,
-        tubesPolys,
-        tubesStrips,
-        field,
-        nb_comps,
+        tube_state,
         colorRange,
         presetName,
         random.random(),
