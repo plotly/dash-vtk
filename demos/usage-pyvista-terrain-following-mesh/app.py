@@ -11,7 +11,7 @@ import pyvista as pv
 from pyvista import examples
 from vtk.util.numpy_support import vtk_to_numpy
 
-from color_maps import presets
+from dash_vtk.utils import presets
 
 
 def toDropOption(name):

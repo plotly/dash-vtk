@@ -4,15 +4,13 @@ import vtk
 
 import dash
 import dash_vtk
-from dash_vtk.utils import to_mesh_state
+from dash_vtk.utils import to_mesh_state, presets
 
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 
 from dash.dependencies import Input, Output, State
-
-from color_maps import presets
 
 def toDropOption(name):
     return { 'label': name, 'value': name}
