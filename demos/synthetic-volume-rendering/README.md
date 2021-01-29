@@ -8,4 +8,4 @@ See instructions from [README.md](../../README.md) to create a virtual environme
 
 ## Goal
 
-This example aims to show how to use the <Algoritm> element to instanciate and control a vtk source.
+This example aims to show how do volume rendering of a synthetic image data by only providing the grid information and values.
