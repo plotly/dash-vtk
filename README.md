@@ -59,7 +59,9 @@ library(dash)
 library(dashVtk)
 library(dashHtmlComponents)
 
-layout <- htmlDiv(
+app <- Dash$new()
+
+app$layout(htmlDiv(
     style = list("width" = "100%", "height" = "calc(100vh - 16px)"),
     children = vtkView(list(
         vtkGeometryRepresentation(
@@ -69,11 +71,7 @@ layout <- htmlDiv(
             )
         )
     ))
-)
-
-app <- Dash$new()
-
-app$layout(layout)
+))
 
 app$run_server()
 ```
