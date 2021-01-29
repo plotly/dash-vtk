@@ -439,6 +439,42 @@
       }
     }
   },
+  "src/lib/components/Mesh.react.js": {
+    "description": "Mesh is exposing a vtkPolyData to a downstream filter\nIt takes the following set of properties:\n  - state: { mesh: { ...polydata-props }, field: { ...dataArray } }",
+    "displayName": "Mesh",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "port": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "downstream connection port",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "state": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "State of the mesh",
+        "defaultValue": {
+          "value": "{\n  mesh: { points: [] },\n}",
+          "computed": false
+        }
+      }
+    }
+  },
   "src/lib/components/PointCloudRepresentation.react.js": {
     "description": "PointCloudRepresentation expect the following set of properties\n  - xyz: [x0, y0, z0, x1, ..., zn]\n  - rgb: [...]\n  - rgba: [...]\n  - scalars: [...]",
     "displayName": "PointCloudRepresentation",

@@ -59,7 +59,7 @@ streamTracer.SetTerminalSpeed(0.00000000001)
 tubeFilter = vtk.vtkTubeFilter()
 tubeFilter.SetInputConnection(streamTracer.GetOutputPort())
 tubeFilter.SetRadius(0.01)
-tubeFilter.SetNumberOfSides(60)
+tubeFilter.SetNumberOfSides(6)
 tubeFilter.CappingOn()
 tubeFilter.Update()
 

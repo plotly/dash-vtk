@@ -5,6 +5,7 @@ from .DataArray import DataArray
 from .FieldData import FieldData
 from .GeometryRepresentation import GeometryRepresentation
 from .ImageData import ImageData
+from .Mesh import Mesh
 from .PointCloudRepresentation import PointCloudRepresentation
 from .PointData import PointData
 from .PolyData import PolyData
@@ -24,6 +25,7 @@ __all__ = [
     "FieldData",
     "GeometryRepresentation",
     "ImageData",
+    "Mesh",
     "PointCloudRepresentation",
     "PointData",
     "PolyData",
