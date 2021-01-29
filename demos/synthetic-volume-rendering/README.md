@@ -1,6 +1,6 @@
 # Demo of volume rendering
 
-![A demo of the usage-algorithm app](./demo.jpg)
+![A demo of the synthetic-volume-rendering app](./demo.jpg)
 
 ## Instructions
 

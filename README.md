@@ -167,4 +167,11 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 * [Code](./demos/usage-vtk-cfd)
 * Online Demo (coming soon)
 
-![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg
+![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg)
+
+### Synthetic Volume Rendering
+
+* [Code](./demos/synthetic-volume-rendering)
+* Online Demo (coming soon)
+
+![A demo of the synthetic-volume-rendering app](demos/synthetic-volume-rendering/demo.jpg)
