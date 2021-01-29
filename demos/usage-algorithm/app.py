@@ -11,7 +11,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 vtk_view = dash_vtk.View(
-    id='vtk-view',
+    id="vtk-view",
     children=[
         dash_vtk.GeometryRepresentation(
             [
@@ -22,7 +22,7 @@ vtk_view = dash_vtk.View(
                 )
             ]
         )
-    ]
+    ],
 )
 
 controls = dbc.Card(

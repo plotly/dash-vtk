@@ -14,7 +14,7 @@ import vtk
 
 # Data file path
 demo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-head_vti = os.path.join(demo_dir, 'data', 'head.vti')
+head_vti = os.path.join(demo_dir, "data", "head.vti")
 
 # Load dataset from dist
 reader = vtk.vtkXMLImageDataReader()
@@ -22,6 +22,7 @@ reader.SetFileName(head_vti)
 reader.Update()
 
 volume_state = to_volume_state(reader.GetOutput())
+
 
 def custom_card(children):
     return dbc.Card(
@@ -56,7 +57,7 @@ slice_view = dash_vtk.View(
     cameraPosition=[1, 0, 0],
     cameraViewUp=[0, 0, -1],
     cameraParallelProjection=False,
-    background=[.9, .9, 1],
+    background=[0.9, 0.9, 1],
     children=[
         dash_vtk.ShareDataSet(dash_vtk.Volume(state=volume_state)),
         dash_vtk.SliceRepresentation(
@@ -140,6 +141,7 @@ def update_slice_property(i, j, k, level, window):
     render_call = random.random()
     slice_prop = {"colorLevel": level, "colorWindow": window}
     return render_call, slice_prop, i, slice_prop, j, slice_prop, k
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)

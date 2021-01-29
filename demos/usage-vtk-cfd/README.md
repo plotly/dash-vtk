@@ -1,6 +1,6 @@
 # Demo of VTK for data processing and dash-vtk for rendering
 
-![A demo of the usage-pyvista-point-cloud app](./demo.jpg)
+![A demo of the pyvista-point-cloud app](./demo.jpg)
 
 ## Instructions
 

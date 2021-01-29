@@ -18,11 +18,12 @@ import vtk
 # VTK Pipeline
 # -----------------------------------------------------------------------------
 
-class Viz():
+
+class Viz:
     def __init__(self, data_directory):
         self.color_range = [0, 1]
-        bike_filename = os.path.join(data_directory, 'bike.vtp')
-        tunnel_filename = os.path.join(data_directory, 'tunnel.vtu')
+        bike_filename = os.path.join(data_directory, "bike.vtp")
+        tunnel_filename = os.path.join(data_directory, "tunnel.vtu")
 
         # Seeds settings
         self.resolution = 10
@@ -78,7 +79,7 @@ class Viz():
         self.tubeFilter.Update()
         ds = self.tubeFilter.GetOutput()
         mesh_state = to_mesh_state(ds, color_by_field_name)
-        self.color_range = mesh_state['field']['dataRange']
+        self.color_range = mesh_state["field"]["dataRange"]
         return mesh_state
 
     def getBikeMesh(self):
@@ -89,10 +90,11 @@ class Viz():
 
     def getSeedState(self):
         return {
-            'point1': self.point1,
-            'point2': self.point2,
-            'resolution': self.resolution,
+            "point1": self.point1,
+            "point2": self.point2,
+            "resolution": self.resolution,
         }
+
 
 # -----------------------------------------------------------------------------
 # GUI setup
@@ -100,7 +102,7 @@ class Viz():
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
-viz = Viz(os.path.join(os.path.dirname(__file__), 'data'))
+viz = Viz(os.path.join(os.path.dirname(__file__), "data"))
 
 # -----------------------------------------------------------------------------
 # 3D Viz
@@ -111,112 +113,98 @@ vtk_view = dash_vtk.View(
     children=[
         dash_vtk.GeometryRepresentation(
             id="bike-rep",
-            children=[
-                dash_vtk.Mesh(
-                    id="bike",
-                    state=viz.getBikeMesh(),
-                )
-            ],
+            children=[dash_vtk.Mesh(id="bike", state=viz.getBikeMesh(),)],
         ),
         dash_vtk.GeometryRepresentation(
             id="tubes-rep",
             colorMapPreset="erdc_rainbow_bright",
             colorDataRange=viz.getColorRange(),
-            children=[
-                dash_vtk.Mesh(
-                    id="tubes-mesh",
-                    state=viz.getTubesMesh('p'),
-                )
-            ],
+            children=[dash_vtk.Mesh(id="tubes-mesh", state=viz.getTubesMesh("p"),)],
         ),
         dash_vtk.GeometryRepresentation(
             id="seed-rep",
-            property={
-                'color': [0.8, 0, 0],
-                'representation': 0,
-                'pointSize': 8,
-            },
+            property={"color": [0.8, 0, 0], "representation": 0, "pointSize": 8,},
             children=[
                 dash_vtk.Algorithm(
-                    id="seed-line",
-                    vtkClass="vtkLineSource",
-                    state=viz.getSeedState(),
+                    id="seed-line", vtkClass="vtkLineSource", state=viz.getSeedState(),
                 )
             ],
-        )
-    ]
+        ),
+    ],
 )
 
 # -----------------------------------------------------------------------------
 # Control UI
 # -----------------------------------------------------------------------------
 
-controls = dbc.Col(children=[
-    dbc.Card(
-        [
-            dbc.CardHeader("Seeds"),
-            dbc.CardBody(
-                [
-                    html.P("Seed line:"),
-                    dcc.Slider(
-                        id="point-1",
-                        min=-1,
-                        max=1,
-                        step=0.01,
-                        value=0,
-                        marks={-1: "-1", 1: "+1"},
-                    ),
-                    dcc.Slider(
-                        id="point-2",
-                        min=-1,
-                        max=1,
-                        step=0.01,
-                        value=0,
-                        marks={-1: "-1", 1: "+1"},
-                    ),
-                    html.Br(),
-                    html.P("Line resolution:"),
-                    dcc.Slider(
-                        id="seed-resolution",
-                        min=5,
-                        max=50,
-                        step=1,
-                        value=10,
-                        marks={5: "5", 50: "50"},
-                    ),
-                ]
-            ),
-        ]
-    ),
-    dbc.Card(
-        [
-            dbc.CardHeader("Color By"),
-            dbc.CardBody(
-                [
-                    html.P("Field name"),
-                    dcc.Dropdown(
-                        id="color-by",
-                        options=[
-                            {'label': 'p', 'value': 'p'},
-                            {'label': 'Rotation', 'value': 'Rotation'},
-                            {'label': 'U', 'value': 'U'},
-                            {'label': 'Vorticity', 'value': 'Vorticity'},
-                            {'label': 'k', 'value': 'k'},
-                        ],
-                        value="p"
-                    ),
-                    html.Br(),
-                    html.P("Color Preset"),
-                    dcc.Dropdown(
-                        id="preset",
-                        options=preset_as_options,
-                        value="erdc_rainbow_bright",
-                    ),
-                ]
-            ),
-        ]
-    ),
-])
+controls = dbc.Col(
+    children=[
+        dbc.Card(
+            [
+                dbc.CardHeader("Seeds"),
+                dbc.CardBody(
+                    [
+                        html.P("Seed line:"),
+                        dcc.Slider(
+                            id="point-1",
+                            min=-1,
+                            max=1,
+                            step=0.01,
+                            value=0,
+                            marks={-1: "-1", 1: "+1"},
+                        ),
+                        dcc.Slider(
+                            id="point-2",
+                            min=-1,
+                            max=1,
+                            step=0.01,
+                            value=0,
+                            marks={-1: "-1", 1: "+1"},
+                        ),
+                        html.Br(),
+                        html.P("Line resolution:"),
+                        dcc.Slider(
+                            id="seed-resolution",
+                            min=5,
+                            max=50,
+                            step=1,
+                            value=10,
+                            marks={5: "5", 50: "50"},
+                        ),
+                    ]
+                ),
+            ]
+        ),
+        dbc.Card(
+            [
+                dbc.CardHeader("Color By"),
+                dbc.CardBody(
+                    [
+                        html.P("Field name"),
+                        dcc.Dropdown(
+                            id="color-by",
+                            options=[
+                                {"label": "p", "value": "p"},
+                                {"label": "Rotation", "value": "Rotation"},
+                                {"label": "U", "value": "U"},
+                                {"label": "Vorticity", "value": "Vorticity"},
+                                {"label": "k", "value": "k"},
+                            ],
+                            value="p",
+                        ),
+                        html.Br(),
+                        html.P("Color Preset"),
+                        dcc.Dropdown(
+                            id="preset",
+                            options=preset_as_options,
+                            value="erdc_rainbow_bright",
+                        ),
+                    ]
+                ),
+            ]
+        ),
+    ]
+)
 
 # -----------------------------------------------------------------------------
 # App UI
@@ -229,10 +217,7 @@ app.layout = dbc.Container(
         html.Hr(),
         dbc.Row(
             [
-                dbc.Col(
-                    width=4,
-                    children=[controls],
-                ),
+                dbc.Col(width=4, children=[controls],),
                 dbc.Col(
                     width=8,
                     children=[
@@ -251,20 +236,21 @@ app.layout = dbc.Container(
 # Handle controls
 # -----------------------------------------------------------------------------
 
+
 @app.callback(
     [
         Output("seed-line", "state"),
         Output("tubes-mesh", "state"),
         Output("tubes-rep", "colorDataRange"),
         Output("tubes-rep", "colorMapPreset"),
-        Output("vtk-view", "triggerRender")
+        Output("vtk-view", "triggerRender"),
     ],
     [
         Input("point-1", "value"),
         Input("point-2", "value"),
         Input("seed-resolution", "value"),
         Input("color-by", "value"),
-        Input("preset", "value")
+        Input("preset", "value"),
     ],
 )
 def update_seeds(y1, y2, resolution, colorByField, presetName):
@@ -274,8 +260,9 @@ def update_seeds(y1, y2, resolution, colorByField, presetName):
         viz.getTubesMesh(colorByField),
         viz.getColorRange(),
         presetName,
-        random.random(), # trigger a render
+        random.random(),  # trigger a render
     ]
+
 
 # -----------------------------------------------------------------------------
 

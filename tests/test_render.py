@@ -17,18 +17,18 @@ def take_snapshot(dash_duo, name):
 
 
 names = [
-    "usage", 
-    "demos.usage-pyvista-terrain-following-mesh.app",
+    "usage",
+    "demos.pyvista-terrain-following-mesh.app",
     "demos.slice-rendering.app",
-    "demos.usage-pyvista-point-cloud.app",
+    "demos.pyvista-point-cloud.app",
     "demos.volume-rendering.app",
     "demos.usage-vtk-cfd.app",
     "demos.usage-algorithm.app",
-    # "demos.synthetic-volume-rendering.app",
+    "demos.synthetic-volume-rendering.app",
 ]
 
 
-def build_test(name, sleep=5):
+def build_test(name, sleep=10):
     def test_fn(dash_duo):
         app = import_app(name)
         dash_duo.start_server(app)
@@ -41,5 +41,5 @@ def build_test(name, sleep=5):
 
 
 for n in names:
-    var_name = "test_" + n.replace("-", "_").replace("demos.", "")
+    var_name = "test_" + n.replace("-", "_").replace("demos.", "").replace(".app", "")
     locals()[var_name] = build_test(n)
