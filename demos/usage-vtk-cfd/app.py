@@ -13,7 +13,7 @@ from vtk.util.numpy_support import vtk_to_numpy
 import os
 import random
 
-from color_maps import presets
+from .color_maps import presets
 
 def toDropOption(name):
     return { 'label': name, 'value': name}
