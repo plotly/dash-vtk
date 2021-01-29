@@ -47,8 +47,34 @@ For a more detailed example, see `usage.py`.
 
 ### Quickstart (R)
 
-This section will be added soon.
+First, install the package from GitHub (the package is not yet available via CRAN):
+```
+remotes::install_github("plotly/dash-vtk")
+```
 
+then, create your component and add it to your layout:
+
+```r
+library(dash)
+library(dashVtk)
+library(dashHtmlComponents)
+
+app <- Dash$new()
+
+app$layout(htmlDiv(
+    style = list("width" = "100%", "height" = "calc(100vh - 16px)"),
+    children = vtkView(list(
+        vtkGeometryRepresentation(
+            vtkAlgorithm(
+                vtkClass = "vtkConeSource",
+                state = list("resolution" = 64, "capping" = FALSE),
+            )
+        )
+    ))
+))
+
+app$run_server()
+```
 ## Contributing
 
 See [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md) to learn about:
@@ -141,4 +167,4 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 * [Code](./demos/usage-vtk-cfd)
 * Online Demo (coming soon)
 
-![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg)
+![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg
