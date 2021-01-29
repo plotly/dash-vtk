@@ -16,7 +16,16 @@ def take_snapshot(dash_duo, name):
     dash_duo.driver.save_screenshot("{}/{}.png".format(target, name))
 
 
-names = ["usage", "demos.usage-algorithm.app"]
+names = [
+    "usage", 
+    "demos.usage-pyvista-terrain-following-mesh.app",
+    "demos.slice-rendering.app",
+    "demos.usage-pyvista-point-cloud.app",
+    "demos.volume-rendering.app",
+    "demos.usage-vtk-cfd.app",
+    "demos.usage-algorithm.app",
+    # "demos.synthetic-volume-rendering.app",
+]
 
 
 def build_test(name, sleep=5):

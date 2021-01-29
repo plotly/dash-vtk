@@ -138,3 +138,33 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 * Online Demo (coming soon)
 
 ![A demo of the usage-algorithm app](demos/usage-algorithm/demo.jpg)
+
+### Point Cloud with PyVista
+
+* [Code](./demos/usage-pyvista-point-cloud)
+* Online Demo (coming soon)
+
+![A demo of the usage-pyvista-point-cloud app](demos/usage-pyvista-point-cloud/demo.jpg)
+
+
+### Terrain deformation using PyVista and dash-vtk
+
+* [Code](./demos/usage-pyvista-terrain-following-mesh)
+* Online Demo (coming soon)
+
+![A demo of the usage-pyvista-terrain-following-mesh app](demos/usage-pyvista-terrain-following-mesh/demo.jpg)
+
+
+### Volume Rendering
+
+* [Code](./demos/volume-rendering)
+* Online Demo (coming soon)
+
+![A demo of the volume-rendering app](demos/volume-rendering/demo.jpg)
+
+### VTK for data processing and dash-vtk for rendering
+
+* [Code](./demos/usage-vtk-cfd)
+* Online Demo (coming soon)
+
+![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg

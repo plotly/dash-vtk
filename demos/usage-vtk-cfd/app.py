@@ -12,6 +12,7 @@ import dash_core_components as dcc
 
 from dash.dependencies import Input, Output, State
 
+
 def toDropOption(name):
     return { 'label': name, 'value': name}
 
