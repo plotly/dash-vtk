@@ -7,6 +7,7 @@
 - [FieldData](#FieldData)
 - [GeometryRepresentation](#GeometryRepresentation)
 - [ImageData](#ImageData)
+- [Mesh](#Mesh)
 - [PointCloudRepresentation](#PointCloudRepresentation)
 - [PointData](#PointData)
 - [PolyData](#PolyData)
@@ -14,6 +15,7 @@
 - [ShareDataSet](#ShareDataSet)
 - [SliceRepresentation](#SliceRepresentation)
 - [View](#View)
+- [Volume](#Volume)
 - [VolumeController](#VolumeController)
 - [VolumeDataRepresentation](#VolumeDataRepresentation)
 - [VolumeRepresentation](#VolumeRepresentation)
@@ -165,6 +167,27 @@ Keyword arguments:
 - dimensions (list of numbers; default [1, 1, 1]): Number of points along x, y, z
 - spacing (list of numbers; default [1, 1, 1]): Spacing along x, y, z between points in world coordinates
 - origin (list of numbers; default [0, 0, 0]): World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
+
+[Back to menu](#components-reference)
+
+
+## Mesh
+
+```python
+dash_vtk.Mesh(id, port, state, **kwargs)
+```
+
+A Mesh component.
+Mesh is exposing a vtkPolyData to a downstream filter
+It takes the following set of properties:
+  - state: { mesh: { ...polydata-props }, field: { ...dataArray } }
+
+Keyword arguments:
+- id (string; optional): The ID used to identify this component.
+- port (number; default 0): downstream connection port
+- state (dict; default {
+  mesh: { points: [] },
+}): State of the mesh
 
 [Back to menu](#components-reference)
 
@@ -321,7 +344,7 @@ Keyword arguments:
 ## View
 
 ```python
-dash_vtk.View(children, id, background, interactorSettings, cameraPosition, cameraViewUp, cameraParallelProjection, **kwargs)
+dash_vtk.View(children, id, background, interactorSettings, cameraPosition, cameraViewUp, cameraParallelProjection, triggerRender, triggerResetCamera, **kwargs)
 ```
 
 A View component.
@@ -376,6 +399,29 @@ between 0-1 of Red, Green, Blue component.
 - cameraPosition (list; default [0, 0, 1]): Initial camera position from an object in [0,0,0]
 - cameraViewUp (list; default [0, 1, 0]): Initial camera position from an object in [0,0,0]
 - cameraParallelProjection (boolean; default False): Use parallel projection (default: false)
+- triggerRender (number; default 0): Property use to trigger a render when changing.
+- triggerResetCamera (number; default 0): Property use to trigger a resetCamera when changing.
+
+[Back to menu](#components-reference)
+
+
+## Volume
+
+```python
+dash_vtk.Volume(id, port, state, **kwargs)
+```
+
+A Volume component.
+Volume is exposing a vtkImageData to a downstream filter
+It takes the following set of properties:
+  - state: { image: { ...imagedata-props }, field: { ...dataArray } }
+
+Keyword arguments:
+- id (string; optional): The ID used to identify this component.
+- port (number; default 0): downstream connection port
+- state (dict; default {
+  image: { dimension: [10, 10, 10] },
+}): State of the volume
 
 [Back to menu](#components-reference)
 
@@ -400,7 +446,7 @@ Keyword arguments:
 ## VolumeDataRepresentation
 
 ```python
-dash_vtk.VolumeDataRepresentation(dimensions, spacing, origin, rgb, rgba, scalars, scalarsType, mapper, volume, property, colorMapPreset, volumeController, controllerSize, rescaleColorMap, colorDataRange, **kwargs)
+dash_vtk.VolumeDataRepresentation(id, dimensions, spacing, origin, rgb, rgba, scalars, scalarsType, mapper, volume, property, colorMapPreset, volumeController, controllerSize, rescaleColorMap, colorDataRange, **kwargs)
 ```
 
 A VolumeDataRepresentation component.
@@ -414,6 +460,7 @@ VolumneDataRepresentation expect the following set of properties
   - scalarsType: Float32Array
 
 Keyword arguments:
+- id (string; optional): The ID used to identify this component.
 - dimensions (list of numbers; optional): Number of points along x, y, z
 - spacing (list of numbers; optional): Spacing along x, y, z between points in world coordinates
 - origin (list of numbers; optional): World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).

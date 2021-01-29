@@ -22,6 +22,7 @@ components = [
     dash_vtk.FieldData,
     dash_vtk.GeometryRepresentation,
     dash_vtk.ImageData,
+    dash_vtk.Mesh,
     dash_vtk.PointCloudRepresentation,
     dash_vtk.PointData,
     dash_vtk.PolyData,
@@ -29,6 +30,7 @@ components = [
     dash_vtk.ShareDataSet,
     dash_vtk.SliceRepresentation,
     dash_vtk.View,
+    dash_vtk.Volume,
     dash_vtk.VolumeController,
     dash_vtk.VolumeDataRepresentation,
     dash_vtk.VolumeRepresentation
