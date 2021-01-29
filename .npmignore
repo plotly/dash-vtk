@@ -23,3 +23,10 @@ config
 .travis.yml
 CHANGELOG.md
 README.md
+
+*venv
+*__pycache__
+.circleci
+.vscode
+.github
+dist
