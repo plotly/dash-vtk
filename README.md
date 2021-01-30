@@ -2,7 +2,7 @@
 
 Dash VTK lets you integrate the `vtk.js` visualization pipeline directly into your Dash app. It is powered by [`react-vtk-js`](https://github.com/Kitware/react-vtk-js/).
 
-![A demo of dash-vtk in action](./docs/images/vtk-demo.gif)
+![ ![A demo of dash-vtk in action](https://github.com/plotly/dash-vtk/blob/master/docs/images/vtk-demo.gif?raw=true) ](./docs/images/vtk-demo.gif)
 
 ## Getting started
 
@@ -70,8 +70,8 @@ app$layout(htmlDiv(
                 state = list("resolution" = 64, "capping" = FALSE),
             )
         )
-    ))
-))
+    )
+)
 
 app$run_server()
 ```
@@ -110,68 +110,68 @@ python app.py
 
 ## References
 
-You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFERENCES.md) for each of the following components:
-- [Algorithm](./docs/REFERENCES.md#Algorithm)
-- [Calculator](./docs/REFERENCES.md#Calculator)
-- [CellData](./docs/REFERENCES.md#CellData)
-- [DataArray](./docs/REFERENCES.md#DataArray)
-- [FieldData](./docs/REFERENCES.md#FieldData)
-- [GeometryRepresentation](./docs/REFERENCES.md#GeometryRepresentation)
-- [ImageData](./docs/REFERENCES.md#ImageData)
-- [PointCloudRepresentation](./docs/REFERENCES.md#PointCloudRepresentation)
-- [PointData](./docs/REFERENCES.md#PointData)
-- [PolyData](./docs/REFERENCES.md#PolyData)
-- [Reader](./docs/REFERENCES.md#Reader)
-- [ShareDataSet](./docs/REFERENCES.md#ShareDataSet)
-- [SliceRepresentation](./docs/REFERENCES.md#SliceRepresentation)
-- [View](./docs/REFERENCES.md#View)
-- [VolumeController](./docs/REFERENCES.md#VolumeController)
-- [VolumeDataRepresentation](./docs/REFERENCES.md#VolumeDataRepresentation)
-- [VolumeRepresentation](./docs/REFERENCES.md#VolumeRepresentation)
+You can find the complete API reference in [`docs/REFERENCES.md`](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md) for each of the following components:
+- [Algorithm](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#Algorithm)
+- [Calculator](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#Calculator)
+- [CellData](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#CellData)
+- [DataArray](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#DataArray)
+- [FieldData](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#FieldData)
+- [GeometryRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#GeometryRepresentation)
+- [ImageData](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#ImageData)
+- [PointCloudRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#PointCloudRepresentation)
+- [PointData](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#PointData)
+- [PolyData](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#PolyData)
+- [Reader](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#Reader)
+- [ShareDataSet](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#ShareDataSet)
+- [SliceRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#SliceRepresentation)
+- [View](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#View)
+- [VolumeController](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#VolumeController)
+- [VolumeDataRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#VolumeDataRepresentation)
+- [VolumeRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#VolumeRepresentation)
 
 
 ## Demos
 
 ### Usage for `dash_vtk.Algorithm`
 
-* [Code](./demos/usage-algorithm)
+* [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-algorithm)
 * Online Demo (coming soon)
 
-![A demo of the usage-algorithm app](demos/usage-algorithm/demo.jpg)
+![A demo of the usage-algorithm app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-algorithm/demo.jpg?raw=true)
 
 ### Point Cloud with PyVista
 
-* [Code](./demos/pyvista-point-cloud)
+* [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-point-cloud)
 * Online Demo (coming soon)
 
-![A demo of the pyvista-point-cloud app](demos/pyvista-point-cloud/demo.jpg)
+![A demo of the pyvista-point-cloud app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/demo.jpg?raw=true)
 
 
 ### Terrain deformation using PyVista and dash-vtk
 
-* [Code](./demos/pyvista-terrain-following-mesh)
+* [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-terrain-following-mesh)
 * Online Demo (coming soon)
 
-![A demo of the pyvista-terrain-following-mesh app](demos/pyvista-terrain-following-mesh/demo.jpg)
+![A demo of the pyvista-terrain-following-mesh app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/demo.jpg?raw=true)
 
 
 ### Volume Rendering
 
-* [Code](./demos/volume-rendering)
+* [Code](https://github.com/plotly/dash-vtk/tree/master/demos/volume-rendering)
 * Online Demo (coming soon)
 
-![A demo of the volume-rendering app](demos/volume-rendering/demo.jpg)
+![A demo of the volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/demo.jpg?raw=true)
 
 ### VTK for data processing and dash-vtk for rendering
 
-* [Code](./demos/usage-vtk-cfd)
+* [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-vtk-cfd)
 * Online Demo (coming soon)
 
-![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg)
+![A demo of the usage-vtk-cfd app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/demo.jpg?raw=true)
 
 ### Synthetic Volume Rendering
 
-* [Code](./demos/synthetic-volume-rendering)
+* [Code](https://github.com/plotly/dash-vtk/tree/master/demos/synthetic-volume-rendering)
 * Online Demo (coming soon)
 
-![A demo of the synthetic-volume-rendering app](demos/synthetic-volume-rendering/demo.jpg)
+![A demo of the synthetic-volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/demo.jpg?raw=true)

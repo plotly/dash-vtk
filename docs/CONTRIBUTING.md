@@ -70,13 +70,14 @@ source venv/bin/activate
 
 If needed, install the requirements:
 ```commandline
-pip install -r demos/requirements.txt
+pip install -r requirements.txt
 pip install -r tests/requirements.txt
 ```
 
 Run the following tests:
 ```commandline
-pytest tests
+pytest tests/test_render.py
+pytest tests/test_percy.py
 ```
 
 ### Mapbox in CircleCI
@@ -111,7 +112,7 @@ npm run build
 ```
 5. Create distribution tarball
 ```
-python setup.py sdist
+python setup.py sdist bdist_wheel
 ```
 6. Copy the tarball into a separate folder and try to install it and run the examples:
 ```
@@ -125,12 +126,12 @@ rm -r venv-release/  # Clean up after you are done
 ```
 npm login  # only if you are not already logged in
 npm publish
-twine upload dist/dash_vtk-x.x.x.tar.gz
+twine upload dist/*
+rm -r dist/
 ```
 
 8. Verify that the publish worked by installing it:
 ```
-cd ../temp
 pip install dash-vtk==x.x.x
 python usage.py
 ```
