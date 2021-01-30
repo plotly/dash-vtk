@@ -137,14 +137,14 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 * [Code](./demos/usage-algorithm)
 * Online Demo (coming soon)
 
-![A demo of the usage-algorithm app](demos/usage-algorithm/demo.jpg)
+![A demo of the usage-algorithm app](./demos/usage-algorithm/demo.jpg)
 
 ### Point Cloud with PyVista
 
 * [Code](./demos/pyvista-point-cloud)
 * Online Demo (coming soon)
 
-![A demo of the pyvista-point-cloud app](demos/pyvista-point-cloud/demo.jpg)
+![A demo of the pyvista-point-cloud app](./demos/pyvista-point-cloud/demo.jpg)
 
 
 ### Terrain deformation using PyVista and dash-vtk
@@ -152,7 +152,7 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 * [Code](./demos/pyvista-terrain-following-mesh)
 * Online Demo (coming soon)
 
-![A demo of the pyvista-terrain-following-mesh app](demos/pyvista-terrain-following-mesh/demo.jpg)
+![A demo of the pyvista-terrain-following-mesh app](./demos/pyvista-terrain-following-mesh/demo.jpg)
 
 
 ### Volume Rendering
@@ -160,18 +160,18 @@ You can find the complete API reference in [`docs/REFERENCES.md`](./docs/REFEREN
 * [Code](./demos/volume-rendering)
 * Online Demo (coming soon)
 
-![A demo of the volume-rendering app](demos/volume-rendering/demo.jpg)
+![A demo of the volume-rendering app](./demos/volume-rendering/demo.jpg)
 
 ### VTK for data processing and dash-vtk for rendering
 
 * [Code](./demos/usage-vtk-cfd)
 * Online Demo (coming soon)
 
-![A demo of the usage-vtk-cfd app](demos/usage-vtk-cfd/demo.jpg)
+![A demo of the usage-vtk-cfd app](./demos/usage-vtk-cfd/demo.jpg)
 
 ### Synthetic Volume Rendering
 
 * [Code](./demos/synthetic-volume-rendering)
 * Online Demo (coming soon)
 
-![A demo of the synthetic-volume-rendering app](demos/synthetic-volume-rendering/demo.jpg)
+![A demo of the synthetic-volume-rendering app](./demos/synthetic-volume-rendering/demo.jpg)
