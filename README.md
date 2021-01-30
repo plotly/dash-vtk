@@ -137,14 +137,14 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-algorithm)
 * Online Demo (coming soon)
 
-![ ![A demo of the usage-algorithm app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-algorithm/demo.jpg?raw=true) ](./demos/usage-algorithm/demo.jpg)
+![A demo of the usage-algorithm app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-algorithm/demo.jpg?raw=true)
 
 ### Point Cloud with PyVista
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-point-cloud)
 * Online Demo (coming soon)
 
-![ ![A demo of the pyvista-point-cloud app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/demo.jpg?raw=true) ](./demos/pyvista-point-cloud/demo.jpg)
+![A demo of the pyvista-point-cloud app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/demo.jpg?raw=true)
 
 
 ### Terrain deformation using PyVista and dash-vtk
@@ -152,7 +152,7 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-terrain-following-mesh)
 * Online Demo (coming soon)
 
-![ ![A demo of the pyvista-terrain-following-mesh app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/demo.jpg?raw=true) ](./demos/pyvista-terrain-following-mesh/demo.jpg)
+![A demo of the pyvista-terrain-following-mesh app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/demo.jpg?raw=true)
 
 
 ### Volume Rendering
@@ -160,18 +160,18 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/volume-rendering)
 * Online Demo (coming soon)
 
-![ ![A demo of the volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/demo.jpg?raw=true) ](./demos/volume-rendering/demo.jpg)
+![A demo of the volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/demo.jpg?raw=true)
 
 ### VTK for data processing and dash-vtk for rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-vtk-cfd)
 * Online Demo (coming soon)
 
-![ ![A demo of the usage-vtk-cfd app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/demo.jpg?raw=true) ](./demos/usage-vtk-cfd/demo.jpg)
+![A demo of the usage-vtk-cfd app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/demo.jpg?raw=true)
 
 ### Synthetic Volume Rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/synthetic-volume-rendering)
 * Online Demo (coming soon)
 
-![ ![A demo of the synthetic-volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/demo.jpg?raw=true) ](./demos/synthetic-volume-rendering/demo.jpg)
+![A demo of the synthetic-volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/demo.jpg?raw=true)
