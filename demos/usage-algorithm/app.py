@@ -13,7 +13,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 vtk_view = dash_vtk.View(
-    id="vtk-view",
+    id="geometry-view",
     children=[
         dash_vtk.GeometryRepresentation(
             [
@@ -77,7 +77,7 @@ app.layout = dbc.Container(
 
 
 @app.callback(
-    [Output("vtk-algorithm", "state"), Output("vtk-view", "triggerResetCamera")],
+    [Output("vtk-algorithm", "state"), Output("geometry-view", "triggerResetCamera")],
     [Input("slider-resolution", "value"), Input("capping-checklist", "value")],
 )
 def update_cone(slider_val, checked_values):
