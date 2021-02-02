@@ -145,7 +145,7 @@ controls = [
             dbc.CardHeader("Seeds"),
             dbc.CardBody(
                 [
-                    html.P("Seed line:"),
+                    html.P("Line starting position (from bottom):"),
                     dcc.Slider(
                         id="point-1",
                         min=-1,
@@ -154,6 +154,8 @@ controls = [
                         value=0,
                         marks={-1: "-1", 1: "+1"},
                     ),
+                    html.Br(),
+                    html.P("Line starting position (from top):"),
                     dcc.Slider(
                         id="point-2",
                         min=-1,
@@ -244,6 +246,8 @@ app.layout = dbc.Container(
         Output("vtk-view", "triggerRender"),
     ],
     [
+        Input("point-1", "drag_value"),
+        Input("point-2", "drag_value"),
         Input("point-1", "value"),
         Input("point-2", "value"),
         Input("seed-resolution", "value"),
@@ -251,7 +255,19 @@ app.layout = dbc.Container(
         Input("preset", "value"),
     ],
 )
-def update_seeds(y1, y2, resolution, colorByField, presetName):
+def update_seeds(y1_drag, y2_drag, y1, y2, resolution, colorByField, presetName):
+    triggered = dash.callback_context.triggered
+
+    if triggered and "drag_value" in triggered[0]["prop_id"]:
+        viz.updateSeedPoints(y1_drag, y2_drag, resolution)
+        return [
+            viz.getSeedState(),
+            dash.no_update,
+            dash.no_update,
+            dash.no_update,
+            random.random(),  # trigger a render
+        ]
+
     viz.updateSeedPoints(y1, y2, resolution)
     return [
         viz.getSeedState(),
