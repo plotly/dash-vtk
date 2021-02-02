@@ -1,6 +1,6 @@
 import os
 import random
-
+import time
 
 import dash
 import dash_bootstrap_components as dbc
@@ -14,18 +14,34 @@ from dash_vtk.utils import to_mesh_state, preset_as_options
 
 import vtk
 
-random.seed(42)
-
 # -----------------------------------------------------------------------------
 # VTK Pipeline
 # -----------------------------------------------------------------------------
 
 
+def load_tunnel_reader(data_directory):
+    tunnel_filename = os.path.join(data_directory, "tunnel.vtu")
+    tunnelReader = vtk.vtkXMLUnstructuredGridReader()
+    tunnelReader.SetFileName(tunnel_filename)
+    tunnelReader.Update()
+
+    return tunnelReader
+
+
+def load_bike_mesh(data_directory):
+    bike_filename = os.path.join(data_directory, "bike.vtp")
+    bikeReader = vtk.vtkXMLPolyDataReader()
+    bikeReader.SetFileName(bike_filename)
+    bikeReader.Update()
+    bike_mesh = to_mesh_state(bikeReader.GetOutput())
+
+    return bike_mesh
+
+
 class Viz:
-    def __init__(self, data_directory):
+    def __init__(self, tunnelReader, bike_mesh):
+        t1 = time.time()
         self.color_range = [0, 1]
-        bike_filename = os.path.join(data_directory, "bike.vtp")
-        tunnel_filename = os.path.join(data_directory, "tunnel.vtu")
 
         # Seeds settings
         self.resolution = 10
@@ -33,14 +49,7 @@ class Viz:
         self.point2 = [-0.4, 0, 1.5]
 
         # VTK Pipeline setup
-        bikeReader = vtk.vtkXMLPolyDataReader()
-        bikeReader.SetFileName(bike_filename)
-        bikeReader.Update()
-        self.bike_mesh = to_mesh_state(bikeReader.GetOutput())
-
-        tunnelReader = vtk.vtkXMLUnstructuredGridReader()
-        tunnelReader.SetFileName(tunnel_filename)
-        tunnelReader.Update()
+        self.bike_mesh = bike_mesh
 
         self.lineSeed = vtk.vtkLineSource()
         self.lineSeed.SetPoint1(*self.point1)
@@ -67,6 +76,9 @@ class Viz:
         self.tubeFilter.SetNumberOfSides(6)
         self.tubeFilter.CappingOn()
         self.tubeFilter.Update()
+
+        t2 = time.time()
+        print(f"Created Viz object in {t2-t1:.4f}s.")
 
     def updateSeedPoints(self, p1_y, p2_y, resolution):
         self.point1[1] = p1_y
@@ -98,13 +110,18 @@ class Viz:
         }
 
 
+
 # -----------------------------------------------------------------------------
 # GUI setup
 # -----------------------------------------------------------------------------
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
-viz = Viz(os.path.join(os.path.dirname(__file__), "data"))
+
+data_dir = os.path.join(os.path.dirname(__file__), "data")
+tunnelReader = load_tunnel_reader(data_dir)
+bike_mesh = load_bike_mesh(data_dir)
+viz = Viz(tunnelReader, bike_mesh)
 
 # -----------------------------------------------------------------------------
 # 3D Viz
@@ -145,17 +162,19 @@ controls = [
             dbc.CardHeader("Seeds"),
             dbc.CardBody(
                 [
-                    html.P("Seed line:"),
+                    html.P("Top starting position:"),
                     dcc.Slider(
-                        id="point-1",
+                        id="point-2",
                         min=-1,
                         max=1,
                         step=0.01,
                         value=0,
                         marks={-1: "-1", 1: "+1"},
                     ),
+                    html.Br(),
+                    html.P("Bottom starting position:"),
                     dcc.Slider(
-                        id="point-2",
+                        id="point-1",
                         min=-1,
                         max=1,
                         step=0.01,
@@ -193,6 +212,7 @@ controls = [
                             {"label": "k", "value": "k"},
                         ],
                         value="p",
+                        clearable=False,
                     ),
                     html.Br(),
                     html.P("Color Preset"),
@@ -200,6 +220,7 @@ controls = [
                         id="preset",
                         options=preset_as_options,
                         value="erdc_rainbow_bright",
+                        clearable=False,
                     ),
                 ]
             ),
@@ -252,7 +273,9 @@ app.layout = dbc.Container(
     ],
 )
 def update_seeds(y1, y2, resolution, colorByField, presetName):
+    viz = Viz(tunnelReader, bike_mesh)
     viz.updateSeedPoints(y1, y2, resolution)
+
     return [
         viz.getSeedState(),
         viz.getTubesMesh(colorByField),
