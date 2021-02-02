@@ -139,30 +139,33 @@ vtk_view = dash_vtk.View(
 # Control UI
 # -----------------------------------------------------------------------------
 
+high = 0.6
+low = -0.55
+
 controls = [
     dbc.Card(
         [
             dbc.CardHeader("Seeds"),
             dbc.CardBody(
                 [
-                    html.P("Line starting position (from bottom):"),
+                    html.P("Line seed position (from bottom):"),
                     dcc.Slider(
                         id="point-1",
-                        min=-1,
-                        max=1,
-                        step=0.01,
+                        min=low,
+                        max=high,
+                        step=0.05,
                         value=0,
-                        marks={-1: "-1", 1: "+1"},
+                        marks={low: str(low), high: str(high)},
                     ),
                     html.Br(),
-                    html.P("Line starting position (from top):"),
+                    html.P("Line seed position (from top):"),
                     dcc.Slider(
                         id="point-2",
-                        min=-1,
-                        max=1,
-                        step=0.01,
+                        min=low,
+                        max=high,
+                        step=0.05,
                         value=0,
-                        marks={-1: "-1", 1: "+1"},
+                        marks={low: str(low), high: str(high)},
                     ),
                     html.Br(),
                     html.P("Line resolution:"),
