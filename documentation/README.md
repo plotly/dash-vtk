@@ -12,12 +12,12 @@ Dash-vtk do not require VTK but can seamlessly leverage it for looking at point 
 ## 3D Visualization explained
 
 In VTK, we have 3 main types of objects that are key for understanding its visualization principals.
-First we have the _View_ which is just a container for any _Representation_ of _DataSource_ that you want to see.
+First we have the __View__ which is just a container for any __Representation__ of __DataSource__ that you want to see.
 
 ### View
 
 The view is a 3D View that can do Geometry rendering for meshes or Volume rendering for 3D images.
-The view can be configured to act as a 2D one when using parallel projection and preventing rotation when interacting with it. The _View_ component can be configured with the following set of properties.
+The view can be configured to act as a 2D one when using parallel projection and preventing rotation when interacting with it. The __View__ component can be configured with the following set of properties.
 
 ```python
 dash_vtk.View(
@@ -32,7 +32,7 @@ dash_vtk.View(
 )
 ```
 
-For the `interactorSettings` we expect a list of mouse event type linked to an action. The example below is what is used as default:
+For the __interactorSettings__ we expect a list of mouse event type linked to an action. The example below is what is used as default:
 
 ```js
 interactorSettings=[
@@ -68,42 +68,42 @@ interactorSettings=[
 ```
 
 A mouse event can be identified with the following set of properties:
- - button: 1/2/3       # Which button should be down
- - shift: True/False   # Is the `Shift` key down
- - alt: True/False     # Is the `Alt` key down
- - control: True/False # Is the `Ctrl` key down
- - scrollEnabled: True/False # Some action could also be trigger by scroll
- - dragEnabled: True/False   # Mostly used to disable default drag behavior
+ - __button__: 1/2/3       # Which button should be down
+ - __shift__: True/False   # Is the `Shift` key down
+ - __alt__: True/False     # Is the `Alt` key down
+ - __control__: True/False # Is the `Ctrl` key down
+ - __scrollEnabled__: True/False # Some action could also be trigger by scroll
+ - __dragEnabled__: True/False   # Mostly used to disable default drag behavior
 
 And the `action` could be one of the following:
- - Pan: Will pan the object on the plan normal to the camera
- - Zoom: Will zoom closer or further from the object based on the drag direction
- - Roll: Will rotate the object around the view direction
- - ZoomToMouse: Will zoom while keeping the location that was initialy under the mouse at the same spot
+ - __Pan__: Will pan the object on the plan normal to the camera
+ - __Zoom__: Will zoom closer or further from the object based on the drag direction
+ - __Roll__: Will rotate the object around the view direction
+ - __ZoomToMouse__: Will zoom while keeping the location that was initialy under the mouse at the same spot
 
 ### Representation
 
-A representation is responsible to convert a _DataSource_ into something visual that will be available inside the _View_.
+A representation is responsible to convert a __DataSource__ into something visual that will be available inside the __View__.
 
-So far we are exposing to `dash_vtk` 3 core types of _Representation_:
- - `GeometryRepresentation`: The geometry representation will expect a mesh and will render it as geometry rendering (think triangle sets).
- - `VolumeRepresentation`: The volume representation will expect a 3D image and will render it using a Volume Rendering technique that will let you see through (foggy object).
- - `SliceRepresentation`: The slice representation will expect a 3D image and will slice it along a given axis.
+So far we are exposing to `dash_vtk` 3 core types of __Representation__:
+ - __GeometryRepresentation__: The geometry representation will expect a mesh and will render it as geometry rendering (think triangle sets).
+ - __VolumeRepresentation__: The volume representation will expect a 3D image and will render it using a Volume Rendering technique that will let you see through (foggy object).
+ - __SliceRepresentation__: The slice representation will expect a 3D image and will slice it along a given axis.
 
-Representations should be put inside the children of a _View_.
+Representations should be put inside the children of a __View__.
 
 ### DataSource
 
-A _DataSource_ can be many things but it is mostly something that can produce data. In other words it could be a `dataset` or a `filter` that consume some data and generate new ones or even a `reader` that will read somekind of input (file, url...) and produce some data. Any _DataSource_ can be placed inside the children of another _DataSource_ that will act as a filter or simply passed to a _Representation_.
+A __DataSource__ can be many things but it is mostly something that can produce data. In other words it could be a `dataset` or a `filter` that consume some data and generate new ones or even a `reader` that will read somekind of input (file, url...) and produce some data. Any __DataSource__ can be placed inside the children of another __DataSource__ that will act as a filter or simply passed to a __Representation__.
 
 In `dash_vtk` we have several objects that falls into that category. The list below gives you an overview of those but more details information can be found later.
- - `Algorithm`: It allow you to instanciate a vtk.js algorithm that could either be a filter (vtkWarpScalar) or a source (vtkLineSource, vtkConeSource, vtkPlaneSource, vtkSphereSource, vtkCylinderSource).
- - `ImageData`: An ImageData is what I've been calling a 3D image so far. This element will let you define each piece that compose a 3D image.
- - `PolyData`: A PolyData is a surface mesh (points, triangles...). This element will let you define the various piece of a mesh.
- - `Reader`: A reader is similar to an _Algorithm_ except that readers have a common set of API and this element let you leverage those.
- - `ShareDataSet`: This element allow you to capture any _DataSource_ and make it available into another processing pipeline or representation without duplicating the data that get sent from the server to the client.
- - `Mesh`: This element is similar to `PolyData` except that it has a Python helper function that goes with it which will help you map a `vtkDataSet` into a single property of the `Mesh`.
- - `Volume`: This element is similar to `ImageData` except that it has a Python helper function that goes with it which will help you map a `vtkImageData` into a single property of the `Volume`.
+ - __Algorithm__: It allow you to instanciate a vtk.js algorithm that could either be a filter (vtkWarpScalar) or a source (vtkLineSource, vtkConeSource, vtkPlaneSource, vtkSphereSource, vtkCylinderSource).
+ - __ImageData__: An ImageData is what I've been calling a 3D image so far. This element will let you define each piece that compose a 3D image.
+ - __PolyData__: A PolyData is a surface mesh (points, triangles...). This element will let you define the various piece of a mesh.
+ - __Reader__: A reader is similar to an __Algorithm__ except that readers have a common set of API and this element let you leverage those.
+ - __ShareDataSet__: This element allow you to capture any __DataSource__ and make it available into another processing pipeline or representation without duplicating the data that get sent from the server to the client.
+ - __Mesh__: This element is similar to __PolyData__ except that it has a Python helper function that goes with it which will help you map a __vtkDataSet__ into a single property of the __Mesh__.
+ - __Volume__: This element is similar to __ImageData__ except that it has a Python helper function that goes with it which will help you map a __vtkImageData__ into a single property of the __Volume__.
 
 ## Geometry Rendering
 
@@ -191,9 +191,9 @@ An Image data is an implicit grid that is axis aligned like shown in the picture
 ![ImageData](./imagedata.jpg)
 
 The set of properties that can be given to `ImageData` are as follow:
-- origin: location of the bottom left corner of the grid in the 3D world
-- dimensions: how many points we have along each axis
-- spacing: what is the uniform spacing along each axis between the points
+- __origin__: location of the bottom left corner of the grid in the 3D world
+- __dimensions__: how many points we have along each axis
+- __spacing__: what is the uniform spacing along each axis between the points
 
 A concreate example would be a grid of 5 points or 4 cells along each axis which will go from `[-2, 2]` along each axis.
 
@@ -208,10 +208,10 @@ dash_vtk.ImageData(
 ### PolyData
 
 A Poly data is a surface mesh that is composed of `points` and `cells`. A polydata can be composed of various types of cells listed below:
-- `verts`: Vertex or point that we want to see as a tiny square on the screen
-- `lines`: Lines that connect points into a one segment or multi segment line
-- `polys`: Polygones which are convex surface such as a triangle, rectangle, circle...
-- `strips`: Triangle strips is a way to combine efficiently triangles together with no repetition in points connectivity
+- __verts__: Vertex or point that we want to see as a tiny square on the screen
+- __lines__: Lines that connect points into a one segment or multi segment line
+- __polys__: Polygones which are convex surface such as a triangle, rectangle, circle...
+- __strips__: Triangle strips is a way to combine efficiently triangles together with no repetition in points connectivity
 
 The way cells are defined is via an index based array that map to a given point index. For example let's pretend you want to create a line that has 2 segments, you will need at least 3 points defined in the `points` array. If those points are defined first in your `points` array, then the `lines` array should be filled as follow:
 
@@ -238,7 +238,7 @@ You can see a concreate example in the image below
 
 Having a grid is a good start, but most likely you would want to attach a field to a given mesh so you can start looking at it in a 3D context.
 
-Fields are arrays that map to either `Points` or `Cells`. They could be scalars or vectors of different size.
+Fields are arrays that map to either __Points__ or __Cells__. They could be scalars or vectors of different size.
 
 The diagram below try to explain the difference between fields located on points vs cells in term of rendering but it also trully has a different meaning based on the type of data that you have.
 
