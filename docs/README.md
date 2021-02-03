@@ -649,7 +649,7 @@ if __name__ == "__main__":
 
 ### Reader
 
-This element is similar to the __Algoritm__ one except that it focus on vtk.js readers by allowing to leverage their custom API.
+This element is similar to the __Algorithm__ one except that it focus on vtk.js readers by allowing to leverage their custom API.
 A reader expect like an __Algorithm__ a __vtkClass__ among the one [listed below](https://github.com/Kitware/react-vtk-js/blob/master/src/AvailableClasses.js#L17-L24):
 
 - __vtkClass__
