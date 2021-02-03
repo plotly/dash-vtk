@@ -442,25 +442,28 @@ Then we have the standard representation set or properties with their defaults:
 
 The __PointCloudRepresentation__ is just a helper using the following structure to streamline rendering a point cloud dataset.
 
-```html
-<GeometryRepresentation
-  colorMapPreset={props.colorMapPreset}
-  colorDataRange={props.colorDataRange}
-  property={props.property}
->
-  <PolyData points={props.xyz} connectivity='points'>
-    {nbComponents && (
-      <PointData>
-        <DataArray
-          registration='setScalars'
-          numberOfComponents={nbComponents}
-          values={values}
-          type={type}
-        />
-      </PointData>
-    )}
-  </PolyData>
-</GeometryRepresentation>
+```python
+def PointCloudRepresentation(**kwargs):
+  return dash_vtk.GeometryRepresentation(
+    id=kwargs.get('id'),
+    colorMapPreset=kwargs.get('colorMapPreset'),
+    colorDataRange=kwargs.get('colorDataRange'),
+    property=kwargs.get('property'),
+    children=[
+      dash_vtk.PolyData(
+        points=kwargs.get('xyz'),
+        connectivity='points',
+        children=[
+          dash_vtk.PointData([
+            dash_vtk.DataArray(
+              registration='setScalars',
+              values={kwargs.get('scalars')}
+            )
+          ])
+        ],
+      )
+    ],
+  )
 ```
 
 The set of convinient properties are as follow:
@@ -468,7 +471,7 @@ The set of convinient properties are as follow:
 - __colorMapPreset__ = color preset name to use
 - __colorDataRange__ = rescale color map to provided that range
 - __property__ = {} # Same as GeometryRepresentation/property
-- __rgb__ / __rgba__ / __scalars__ = [...] let you define the field you want to color your point cloud with.
+- __rgb__ / __rgba__ / __scalars__ = [...] let you define the field you want to color your point cloud with. The rgb(a) expect numbers up to 255 for each component of Red Green Blue Alpha.
 
 ### VolumeDataRepresentation
 
@@ -781,3 +784,45 @@ app.layout = html.Div(
 if __name__ == "__main__":
     app.run_server(debug=True)
 ```
+
+## More advanced demos
+
+__dash_vtk__ provides several advanced examples that should re-enforce what has been described so far.
+
+We've converted several examples from [PyVista](https://docs.pyvista.org/) to show you how to enable rendering on the client side using __dash_vtk__.
+
+Then we made several example using plain VTK for both a CFD example and some medical ones.
+
+### Point Cloud creation
+
+[dash_vtk](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/app.py) | [PyVista](https://docs.pyvista.org/examples/00-load/create-point-cloud.html)
+
+![Preview](../../demos/pyvista-point-cloud/demo.jpg)
+
+### Terrain following mesh
+
+[dash_vtk](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/app.py) | [PyVista](https://docs.pyvista.org/examples/00-load/terrain-mesh.html)
+![Preview](../../demos/pyvista-terrain-following-mesh/demo.jpg)
+
+### VTK dynamic streamlines Example
+
+This example leverage plain VTK on the server side while providing UI controls in __dash__ and leverage __dash_vtk__ to enable local rendering of dynamically computed streamlines inside a wind-tunnel.
+
+[dash_vtk](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/app.py)
+
+![CFD Preview](../../demos/usage-vtk-cfd/demo.jpg)
+
+### Medical examples
+
+[Real medical image](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/app.py)
+
+![Real medical image](../../demos/volume-rendering/demo.jpg)
+
+
+[Randomly generated volume](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/app.py)
+
+![Randomly generated volume](../../demos/synthetic-volume-rendering/demo.jpg)
+
+[Multi-View with slicing](https://github.com/plotly/dash-vtk/blob/master/demos/slice-rendering/app.py)
+
+![Multi-View with slicing](../../demos/slice-rendering/demo.jpg)
