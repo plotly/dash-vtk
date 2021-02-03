@@ -520,14 +520,9 @@ The set of convinient properties are as follow:
 This element is a helper on top of __PolyData__ which has a Python helper function that goes with it which will help you map a __vtkDataSet__ into a single property of the __Mesh__ element.
 
 ```html
-<PolyData
-  {...props.state.mesh}
->
+<PolyData {...props.state.mesh}>
   <{props.state.field.location}>
-    <DataArray
-      registration="setScalars"
-      {...props.state.field}
-    />
+    <DataArray {...props.state.field} />
   </{props.state.field.location}>
 </PolyData>
 ```
@@ -554,14 +549,9 @@ The __Mesh__ element expect a single __state__ property that is internaly split 
 This element is a helper on top of __ImageData__ which has a Python helper function that goes with it which will help you map a __vtkImageData__ into a single property of the __Volume__ element.
 
 ```html
-<ImageData
-  {...props.state.image}
->
+<ImageData {...props.state.image}>
   <PointData>
-    <DataArray
-      registration="setScalars"
-      {...props.state.field}
-    />
+    <DataArray {...props.state.field} />
   </PointData>
 </ImageData>
 ```
@@ -598,6 +588,57 @@ The current [list of classes](https://github.com/Kitware/react-vtk-js/blob/maste
   - [vtkWarpScalar](https://kitware.github.io/vtk-js/api/Filters_General_WarpScalar.html)
 - __state__: You will have to look on which property is available for your selected vtkClass.
 
+The following example use a vtk source in vtk.js to generate a mesh
+
+```py
+import os
+import dash
+import dash_html_components as html
+
+import dash_vtk
+
+content = dash_vtk.View([
+    dash_vtk.GeometryRepresentation(
+        mapper={
+            'colorByArrayName': 'layer',
+            'scalarMode': 4,
+            'interpolateScalarsBeforeMapping': False,
+        },
+        colorMapPreset="jet",
+        colorDataRange=[0.2, 0.9],
+        children=[
+          dash_vtk.Algorithm(
+              vtkClass="vtkConcentricCylinderSource",
+              state={
+                  'height': 0.25,
+                  'radius': [0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 1],
+                  'cellFields': [0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9, 1],
+                  'mask': [1, 0, 1, 0, 1, 0, 1, 1],
+                  'resolution': 60,
+                  'skipInnerFaces': True,
+                  'startTheta': 45,
+                  'endTheta': 315,
+                  'center': [0, 0, 0.5],
+              },
+          ),
+        ]
+    ),
+])
+
+# Dash setup
+app = dash.Dash(__name__)
+server = app.server
+
+app.layout = html.Div(
+    style={"width": "100%", "height": "calc(100vh - 15px)"},
+    children=[content],
+)
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
+```
+
+
 ### Reader
 
 This element is similar to the __Algoritm__ one except that it focus on vtk.js readers by allowing to leverage their custom API.
@@ -622,5 +663,111 @@ Since the data loading is going to be asynchronous we've enabled some automatic 
 - __resetCameraOnUpdate__: True (default)
 
 
+```py
+import os
+import base64
+import dash
+import dash_html_components as html
+
+import dash_vtk
+
+# Data file path
+files = ['cow-nonormals.obj', 'pumpkin_tall_10k.obj', 'teapot.obj', 'teddy.obj']
+root_repo_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+obj_file = os.path.join(root_repo_path, "demos", "data", files[0])
+
+txt_content = None
+with open(obj_file, 'r') as file:
+  txt_content = file.read()
+
+content = dash_vtk.View([
+    dash_vtk.GeometryRepresentation([
+        dash_vtk.Reader(
+            vtkClass="vtkOBJReader",
+            parseAsText=txt_content,
+        ),
+    ]),
+])
+
+# Dash setup
+app = dash.Dash(__name__)
+server = app.server
+
+app.layout = html.Div(
+    style={"width": "100%", "height": "calc(100vh - 15px)"},
+    children=[content],
+)
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
+
+```
+
+
 ### ShareDataSet
 
+This element does not affect the dataset or else, but it allow the JavaScript side to reuse an existing __vtkDataSet__ for another __Representation__ or __filter__.
+
+The only property expected in a __ShareDataSet__ is a name to properly reference it accross various location. By default a __name__ is provided so, in the case of only one _dataset_, you would not even need to specify such property.
+
+The following example show how you can create a view with 1 __Volume__ and 4 representation of it.
+
+```py
+import dash
+import dash_html_components as html
+
+import dash_vtk
+from dash_vtk.utils import to_volume_state
+
+import vtk
+
+# Use VTK to get some data
+data_source = vtk.vtkRTAnalyticSource()
+data_source.Update()  # <= Execute source to produce an output
+dataset = data_source.GetOutput()
+
+# Use helper to get a volume structure that can be passed as-is to a Volume
+volume_state = to_volume_state(dataset)  # No need to select field
+
+content = dash_vtk.View([
+    dash_vtk.VolumeRepresentation([
+        # GUI to control Volume Rendering
+        # + Setup good default at startup
+        dash_vtk.VolumeController(),
+        # Actual volume
+        dash_vtk.ShareDataSet([
+            dash_vtk.Volume(state=volume_state),
+        ]),
+    ]),
+    dash_vtk.SliceRepresentation(
+        iSlice=10,
+        children=[
+            dash_vtk.ShareDataSet(),
+        ]
+    ),
+    dash_vtk.SliceRepresentation(
+        jSlice=10,
+        children=[
+            dash_vtk.ShareDataSet(),
+        ]
+    ),
+    dash_vtk.SliceRepresentation(
+        kSlice=10,
+        children=[
+            dash_vtk.ShareDataSet(),
+        ]
+    ),
+])
+
+# Dash setup
+app = dash.Dash(__name__)
+server = app.server
+
+app.layout = html.Div(
+    style={"width": "100%", "height": "calc(100vh - 15px)"},
+    children=[content],
+)
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
+```
