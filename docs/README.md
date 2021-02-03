@@ -584,14 +584,14 @@ This element allow you to create and configure a vtk.js class. This element expe
 The current [list of classes](https://github.com/Kitware/react-vtk-js/blob/master/src/AvailableClasses.js#L4-L15) that could be instantiate are as follow:
 
 - __vtkClass__:
-  - vtkConcentricCylinderSource: [state](https://kitware.github.io/vtk-js/api/ Filters_Sources_ConcentricCylinderSource.html)
-  - vtkConeSource: [state](https://kitware.github.io/vtk-js/api/ Filters_Sources_ConeSource.html)
-  - vtkCubeSource: [state](https://kitware.github.io/vtk-js/api/ Filters_Sources_CubeSource.html)
-  - vtkCylinderSource: [state](https://kitware.github.io/vtk-js/api/ Filters_Sources_CylinderSource.html)
-  - vtkLineSource: [state](https://kitware.github.io/vtk-js/api/ Filters_Sources_LineSource.html)
-  - vtkPlaneSource: [state](https://kitware.github.io/vtk-js/api/  Filters_Sources_PlaneSource.html)
-  - vtkPointSource: [state](https://kitware.github.io/vtk-js/api/  Filters_Sources_PointSource.html)
-  - vtkSphereSource: [state](https://kitware.github.io/vtk-js/api/ Filters_Sources_SphereSource.html)
+  - vtkConcentricCylinderSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_ConcentricCylinderSource.html)
+  - vtkConeSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_ConeSource.html)
+  - vtkCubeSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_CubeSource.html)
+  - vtkCylinderSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_CylinderSource.html)
+  - vtkLineSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_LineSource.html)
+  - vtkPlaneSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_PlaneSource.html)
+  - vtkPointSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_PointSource.html)
+  - vtkSphereSource: [state](https://kitware.github.io/vtk-js/api/Filters_Sources_SphereSource.html)
   - vtkWarpScalar: [state](https://kitware.github.io/vtk-js/api/Filters_General_WarpScalar.html)
 - __state__: You will have to look on which property is available for your selected vtkClass.
 
