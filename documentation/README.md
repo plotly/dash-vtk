@@ -111,7 +111,6 @@ Now that we have those core concepts down we can show you some code on how to re
 
 ```py
 # Use helper to get a mesh structure that can be passed as-is to a Mesh
-# RTData is the name of the field
 mesh_state = to_mesh_state(dataset)
 
 content = dash_vtk.View([
@@ -250,13 +249,13 @@ Caution: By convention, we always attach data to points in an ImageData for doin
 
 ```py
 dash_vtk.ImageData(
-  dimension=[5,5,5],
+  dimensions=[5,5,5],
   origin=[-2,-2,-2],
   spacing=[1,1,1],
   children=[
     dash_vtk.PointData([
       dash_vtk.DataArray(
-        register="setScalars",
+        registration="setScalars",
         values=range(5*5*5),
       )
     ])
@@ -278,7 +277,7 @@ dash_vtk.PolyData(
         name='onPoints',
         values=[0, 0.33, 0.66, 1],
       )
-    ])
+    ]),
     dash_vtk.CellData([
       dash_vtk.DataArray(
         name='onCells',
@@ -288,3 +287,340 @@ dash_vtk.PolyData(
   ],
 )
 ```
+
+## Usage of elements
+
+### GeometryRepresentation
+
+The properties available on the __GeometryRepresentation__ let you tune the way you want to render your geometry.
+
+In VTK a representation is composed of an [__Actor__](https://kitware.github.io/vtk-js/api/Rendering_Core_Actor.html), a [__Mapper__](https://kitware.github.io/vtk-js/api/Rendering_Core_Mapper.html) and a [__Property__](https://kitware.github.io/vtk-js/api/Rendering_Core_Property.html). Each of those object can be configured using the __actor__, __mapper__ and __property__ arguments of the __GeometryRepresentation__.
+
+The list below show you the default values used for each argument:
+
+  - actor:
+    - origin = (0,0,0)
+    - position = (0,0,0)
+    - scale = (1,1,1)
+    - visibility = 1
+    - pickable = 1
+    - dragable = 1
+    - orientation = (0,0,0)
+  - property:
+    - lighting = true
+    - interpolation = [Interpolation.GOURAUD](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Property/Constants.js#L1-L5)
+    - ambient = 0
+    - diffuse = 1
+    - specular = 0
+    - specularPower = 1
+    - opacity = 1
+    - edgeVisibility = false
+    - lineWidth = 1
+    - pointSize = 1
+    - backfaceCulling = false
+    - frontfaceCulling = false
+    - representation = [Representation.SURFACE](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Property/Constants.js#L7-L11)
+    - color = (1,1,1)          # White
+    - ambientColor = (1,1,1)
+    - specularColor = (1,1,1)
+    - diffuseColor = (1,1,1)
+    - edgeColor = (0,0,0)      # Black
+  - mapper:
+    - static = false
+    - scalarVisibility = true
+    - scalarRange = [0, 1]
+    - useLookupTableScalarRange = false
+    - colorMode = 0 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Mapper/Constants.js#L1-L5))
+    - scalarMode = 0 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Mapper/Constants.js#L7-L14))
+    - arrayAccessMode = 1 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Mapper/Constants.js#L16-L19))
+    - colorByArrayName = ''
+    - interpolateScalarsBeforeMapping = false
+    - useInvertibleColors = false
+    - fieldDataTupleId = -1
+    - viewSpecificProperties = None
+    - customShaderAttributes = []
+
+On top of those previous settings we provide additional properties to configure a lookup table using one of our available [__colorMapPreset__](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ColorTransferFunction/ColorMaps.json) and a convinient __colorDataRange__ to rescale to color map to your area of focus.
+
+### VolumeRepresentation
+
+The properties available on the __VolumeRepresentation__ let you tune the way you want to render your volume.
+
+In VTK a representation is composed of an [__Volume__](https://kitware.github.io/vtk-js/api/Rendering_Core_Volume.html), a [__Mapper__](https://kitware.github.io/vtk-js/api/Rendering_Core_VolumeMapper.html) and a [__Property__](https://kitware.github.io/vtk-js/api/Rendering_Core_VolumeProperty.html). Each of those object can be configured using the __actor__, __mapper__ and __property__ arguments of the __GeometryRepresentation__.
+
+
+The list below show you the default values used for each argument:
+
+  - volume:
+    - origin = (0,0,0)
+    - position = (0,0,0)
+    - scale = (1,1,1)
+    - visibility = 1
+    - pickable = 1
+    - dragable = 1
+    - orientation = (0,0,0)
+  - property:
+    - independentComponents = true
+    - interpolationType = [InterpolationType.FAST_LINEAR](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/VolumeProperty/Constants.js#L1-L5)
+    - shade = 0
+    - ambient = 0.1
+    - diffuse = 0.7
+    - specular = 0.2
+    - specularPower = 10.0
+    - useLabelOutline = false
+    - labelOutlineThickness = 1
+    - useGradientOpacity = [idx, value]
+    - scalarOpacityUnitDistance = [idx, value]
+    - gradientOpacityMinimumValue = [idx, value]
+    - gradientOpacityMinimumOpacity = [idx, value]
+    - gradientOpacityMaximumValue = [idx, value]
+    - gradientOpacityMaximumOpacity = [idx, value]
+    - opacityMode = [idx, [value](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/VolumeProperty/Constants.js#L7-L10)]
+  - mapper:
+    - sampleDistance = 1.0
+    - imageSampleDistance = 1.0
+    - maximumSamplesPerRay = 1000
+    - autoAdjustSampleDistances = true
+    - blendMode = [BlendMode.COMPOSITE_BLEND](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/VolumeMapper/Constants.js#L1-L6)
+    - averageIPScalarRange = [-1000000.0, 1000000.0]
+
+On top of those previous settings we provide additional properties to configure a lookup table using one of our available [__colorMapPreset__](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ColorTransferFunction/ColorMaps.json) and a convinient __colorDataRange__ to rescale to color map to your area of focus.
+
+Because it can be combersome and difficult to properly configure your volume rendering properties, it is convinient to add as first child to that representation a __VolumeController__ which will give you a UI to drive some of those parameters while also providing better defaults for your ImageData.
+
+#### VolumeController
+
+The __VolumeController__ provide a convinient UI element to control your Volume Rendering settings and can be tuned with the following set of properties:
+
+- size: [width, height] in pixel for the controller UI
+- rescaleColorMap: true/false to use the opacity piecewise function to dynamically rescale the color map or keep the full data range as color range.
+
+### SliceRepresentation
+
+The __SliceRepresentation__ let you see a slice within a 3D image. That slice can be along i,j,k or x,y,z if your volume contains an orientation matrix.
+
+The following set of properties let you pick which slice you want to see. Only 1 of those property can be used at a time.
+
+- iSlice, jSlice, kSlice: Index based slicing
+- xSlice, ySlice, zSlice: World coordinate slicing
+
+Then we have the standard representation set or properties with their defaults:
+
+  - [actor](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageSlice.html):
+    - origin = (0,0,0)
+    - position = (0,0,0)
+    - scale = (1,1,1)
+    - visibility = 1
+    - pickable = 1
+    - dragable = 1
+    - orientation = (0,0,0)
+  - [property](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageProperty.html):
+    - independentComponents = false
+    - interpolationType = [InterpolationType.LINEAR](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ImageProperty/Constants.js#L1-L4)
+    - colorWindow = 255
+    - colorLevel = 127.5
+    - ambient = 1.0
+    - diffuse = 0.0
+    - opacity = 1.0
+  - [mapper](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageMapper.html):
+    - customDisplayExtent: [0, 0, 0, 0]
+    - useCustomExtents: false
+    - slice: 0
+    - slicingMode: [SlicingMode.NONE](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ImageMapper/Constants.js#L1-L9)
+    - closestIJKAxis: { ijkMode: [SlicingMode.NONE](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ImageMapper/Constants.js#L1-L9), flip: false }
+    - renderToRectangle: false
+    - sliceAtFocalPoint: false
+
+### PointCloudRepresentation
+
+The __PointCloudRepresentation__ is just a helper using the following structure to streamline rendering a point cloud dataset.
+
+```html
+<GeometryRepresentation
+  colorMapPreset={props.colorMapPreset}
+  colorDataRange={props.colorDataRange}
+  property={props.property}
+>
+  <PolyData points={props.xyz} connectivity='points'>
+    {nbComponents && (
+      <PointData>
+        <DataArray
+          registration='setScalars'
+          numberOfComponents={nbComponents}
+          values={values}
+          type={type}
+        />
+      </PointData>
+    )}
+  </PolyData>
+</GeometryRepresentation>
+```
+
+The set of convinient properties are as follow:
+- xyz = list of xyz of each point inside a flat array
+- colorMapPreset = color preset name to use
+- colorDataRange = rescale color map to provided that range
+- property = {} # Same as GeometryRepresentation/property
+- rgb / rgba / scalars = [...] let you define the field you want to color your point cloud with.
+
+### VolumeDataRepresentation
+
+The __VolumeDataRepresentation__ is just a helper using the following structure to streamline rendering a volume.
+
+```html
+<VolumeRepresentation
+  id={props.id}
+  colorMapPreset={props.colorMapPreset}
+  colorDataRange={props.colorDataRange}
+  property={props.property}
+  mapper={props.mapper}
+  volume={props.volume}
+>
+  {props.volumeController && (
+    <VolumeController
+      rescaleColorMap={props.rescaleColorMap}
+      size={props.controllerSize}
+    />
+  )}
+  <ImageData
+    dimensions={props.dimensions}
+    origin={props.origin}
+    spacing={props.spacing}
+  >
+    <PointData>
+      <DataArray
+        registration='setScalars'
+        numberOfComponents={nbComponents}
+        values={values}
+        type={type}
+      />
+    </PointData>
+  </ImageData>
+</VolumeRepresentation>
+```
+
+The set of convinient properties are as follow:
+- dimensions: Number of points along x, y, z
+- spacing: Spacing along x, y, z between points in world
+- origin: World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
+- rgb: Use RGB values to attach to the points/vertex
+- rgba: Use RGBA values to attach to the points/vertex
+- scalars: Field values to attach to the points
+- scalarsType: Types of numbers provided in scalars (i.e. Float32Array, Uint8Array, ...)
+- mapper: Properties to set to the mapper
+- volume: Properties to set to the volume
+- property: Properties to set to the volume.property
+- colorMapPreset: Preset name for the lookup table color map
+- volumeController: Show volumeController
+- controllerSize: Controller size in pixels
+- rescaleColorMap: Use opacity range to rescale color map
+
+### Mesh
+
+This element is a helper on top of __PolyData__ which has a Python helper function that goes with it which will help you map a __vtkDataSet__ into a single property of the __Mesh__ element.
+
+```html
+<PolyData
+  {...props.state.mesh}
+>
+  <{props.state.field.location}>
+    <DataArray
+      registration="setScalars"
+      {...props.state.field}
+    />
+  </{props.state.field.location}>
+</PolyData>
+```
+
+The __Mesh__ element expect a single __state__ property that is internaly split into 2 elements to represent the geometry and the field that you want to optionally attach to your mesh. The structure could be defined as follow:
+
+- state
+  - mesh: (Contains the properties of __PolyData__)
+    - points = []
+    - verts = []
+    - lines = []
+    - polys = []
+    - strips = []
+    - connectivity = 'manual' # [manual, points, triangles, strips]
+  - field: (Contains the properties of __DataArray__)
+    - location: 'PointData' / 'CellData'
+    - name: Name of the field (optional)
+    - values: Array of values for the field
+    - numberOfComponents: Number of components per point/cell
+    - type: Name of TypedArray to use (Uint8Array, Int8Array, Float32Array, Float64Array...)
+
+### Volume
+
+This element is a helper on top of __ImageData__ which has a Python helper function that goes with it which will help you map a __vtkImageData__ into a single property of the __Volume__ element.
+
+```html
+<ImageData
+  {...props.state.image}
+>
+  <PointData>
+    <DataArray
+      registration="setScalars"
+      {...props.state.field}
+    />
+  </PointData>
+</ImageData>
+```
+
+The __Volume__ element expect a single __state__ property that is internaly split into 2 elements to represent the geometry and the field that you want to optionally attach to your mesh. The structure could be defined as follow:
+
+- state
+  - image: (Contains the properties of __ImageData__)
+    - dimensions
+    - spacing
+    - origin
+  - field: (Contains the properties of __DataArray__)
+    - values: Array of values for the field
+    - numberOfComponents: Number of components per point/cell
+    - type: Name of TypedArray to use (Uint8Array, Int8Array, Float32Array, Float64Array...)
+
+### Algorithm
+
+This element allow you to create and configure a vtk.js class. This element expect only 2 properties:
+- vtkClass: The name of the vtkClass to instantiate.
+- state: The set of properties to apply on the given vtkClass.
+
+The current [list of classes](https://github.com/Kitware/react-vtk-js/blob/master/src/AvailableClasses.js#L4-L15) that could be instantiate are as follow:
+
+- __vtkClass__:
+  - [vtkConcentricCylinderSource](https://kitware.github.io/vtk-js/api/ Filters_Sources_ConcentricCylinderSource.html)
+  - [vtkConeSource](https://kitware.github.io/vtk-js/api/ Filters_Sources_ConeSource.html)
+  - [vtkCubeSource](https://kitware.github.io/vtk-js/api/ Filters_Sources_CubeSource.html)
+  - [vtkCylinderSource](https://kitware.github.io/vtk-js/api/ Filters_Sources_CylinderSource.html)
+  - [vtkLineSource](https://kitware.github.io/vtk-js/api/ Filters_Sources_LineSource.html)
+  - [vtkPlaneSource](https://kitware.github.io/vtk-js/api/  Filters_Sources_PlaneSource.html)
+  - [vtkPointSource](https://kitware.github.io/vtk-js/api/  Filters_Sources_PointSource.html)
+  - [vtkSphereSource](https://kitware.github.io/vtk-js/api/ Filters_Sources_SphereSource.html)
+  - [vtkWarpScalar](https://kitware.github.io/vtk-js/api/Filters_General_WarpScalar.html)
+- __state__: You will have to look on which property is available for your selected vtkClass.
+
+### Reader
+
+This element is similar to the __Algoritm__ one except that it focus on vtk.js readers by allowing to leverage their custom API.
+A reader expect like an __Algorithm__ a __vtkClass__ among the one [listed below](https://github.com/Kitware/react-vtk-js/blob/master/src/AvailableClasses.js#L17-L24):
+
+- __vtkClass__
+  - vtkPLYReader
+  - vtkSTLReader
+  - vtkElevationReader
+  - vtkOBJReader
+  - vtkPDBReader
+  - vtkXMLImageDataReader
+  - vtkXMLPolyDataReader
+
+Then you should use one of the property below to feed the reader with some data:
+- __url__: set of url to fetch data from (on the JS side)
+- __parseAsText__: set the text content to process
+- __parseAsArrayBuffer__: set binary data to process from base64 string
+
+Since the data loading is going to be asynchronous we've enabled some automatic callback to either trigger a _render_ or a _resetCamera_ once the data became available. To enable those callback, just set the following set of properties to your licking:
+- __renderOnUpdate__: True (default)
+- __resetCameraOnUpdate__: True (default)
+
+
+### ShareDataSet
+

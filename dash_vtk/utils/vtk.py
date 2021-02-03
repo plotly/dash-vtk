@@ -33,6 +33,9 @@ def to_mesh_state(dataset, field_to_keep=None):
     extractSkinFilter.Update()
     polydata = extractSkinFilter.GetOutput()
 
+  if polydata.GetPoints() is None:
+    return None
+
   # Extract mesh
   points = vtk_to_numpy(polydata.GetPoints().GetData()).ravel()
   verts = vtk_to_numpy(polydata.GetVerts().GetData()
