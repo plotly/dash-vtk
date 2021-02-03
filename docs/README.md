@@ -109,6 +109,7 @@ In `dash_vtk` we have several objects that falls into that category. The list be
 
 Now that we have those core concepts down we can show you some code on how to render a mesh using `dash-vtk`.
 
+[code](./tutorials/00_geometry_rendering.py)
 ```py
 # Use helper to get a mesh structure that can be passed as-is to a Mesh
 mesh_state = to_mesh_state(dataset)
@@ -137,6 +138,7 @@ if __name__ == "__main__":
 
 The previous example was using a 3D image and extracting its mesh to render. Let's keep the same data but show it as Volume Rendering.
 
+[code](./tutorials/01_volume_rendering.py)
 ```py
 import dash
 import dash_html_components as html
@@ -196,6 +198,7 @@ The set of properties that can be given to `ImageData` are as follow:
 
 A concreate example would be a grid of 5 points or 4 cells along each axis which will go from `[-2, 2]` along each axis.
 
+[code](./tutorials/02_imagedata.py)
 ```py
 dash_vtk.ImageData(
   dimension=[5,5,5],
@@ -231,7 +234,10 @@ lines = [
 
 You can see a concreate example in the image below
 
+[code](./tutorials/03_polydata.py)
 ![PolyData](./images/polydata.jpg)
+
+The `dash_vtk.PolyData` element has an additional property to automatically generate cells based on some assumption of the order of the points defined in the `points` array. That property is named __connectivity__ which default to `manual` meaning no automatic action is taken. But that property can be set to `points` to automatically set the vertex to actually see the points provided or `triangles` which assume to use 3 concecutive points to create a triangle and finally `strips` which then assume it is a single triangle strip consuming all the points.
 
 ### Fields
 
@@ -247,6 +253,7 @@ The example below show you how you can attach fields to a dataset (PolyData and/
 
 Caution: By convention, we always attach data to points in an ImageData for doing VolumeRendering and the array must be registered as scalars.
 
+[ImageData code](./tutorials/02_imagedata.py) | [PolyData code](./tutorials/03_polydata.py)
 ```py
 dash_vtk.ImageData(
   dimensions=[5,5,5],
@@ -298,7 +305,7 @@ In VTK a representation is composed of an [__Actor__](https://kitware.github.io/
 
 The list below show you the default values used for each argument:
 
-  - actor:
+  - __actor__:
     - origin = (0,0,0)
     - position = (0,0,0)
     - scale = (1,1,1)
@@ -306,7 +313,7 @@ The list below show you the default values used for each argument:
     - pickable = 1
     - dragable = 1
     - orientation = (0,0,0)
-  - property:
+  - __property__:
     - lighting = true
     - interpolation = [Interpolation.GOURAUD](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Property/Constants.js#L1-L5)
     - ambient = 0
@@ -325,7 +332,7 @@ The list below show you the default values used for each argument:
     - specularColor = (1,1,1)
     - diffuseColor = (1,1,1)
     - edgeColor = (0,0,0)      # Black
-  - mapper:
+  - __mapper__:
     - static = false
     - scalarVisibility = true
     - scalarRange = [0, 1]
@@ -351,7 +358,7 @@ In VTK a representation is composed of an [__Volume__](https://kitware.github.io
 
 The list below show you the default values used for each argument:
 
-  - volume:
+  - __volume__:
     - origin = (0,0,0)
     - position = (0,0,0)
     - scale = (1,1,1)
@@ -359,7 +366,7 @@ The list below show you the default values used for each argument:
     - pickable = 1
     - dragable = 1
     - orientation = (0,0,0)
-  - property:
+  - __property__:
     - independentComponents = true
     - interpolationType = [InterpolationType.FAST_LINEAR](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/VolumeProperty/Constants.js#L1-L5)
     - shade = 0
@@ -376,7 +383,7 @@ The list below show you the default values used for each argument:
     - gradientOpacityMaximumValue = [idx, value]
     - gradientOpacityMaximumOpacity = [idx, value]
     - opacityMode = [idx, [value](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/VolumeProperty/Constants.js#L7-L10)]
-  - mapper:
+  - __mapper__:
     - sampleDistance = 1.0
     - imageSampleDistance = 1.0
     - maximumSamplesPerRay = 1000
@@ -392,8 +399,8 @@ Because it can be combersome and difficult to properly configure your volume ren
 
 The __VolumeController__ provide a convinient UI element to control your Volume Rendering settings and can be tuned with the following set of properties:
 
-- size: [width, height] in pixel for the controller UI
-- rescaleColorMap: true/false to use the opacity piecewise function to dynamically rescale the color map or keep the full data range as color range.
+- __size__: [width, height] in pixel for the controller UI
+- __rescaleColorMap__: true/false to use the opacity piecewise function to dynamically rescale the color map or keep the full data range as color range.
 
 ### SliceRepresentation
 
@@ -401,12 +408,12 @@ The __SliceRepresentation__ let you see a slice within a 3D image. That slice ca
 
 The following set of properties let you pick which slice you want to see. Only 1 of those property can be used at a time.
 
-- iSlice, jSlice, kSlice: Index based slicing
-- xSlice, ySlice, zSlice: World coordinate slicing
+- __iSlice__, __jSlice__, __kSlice__: Index based slicing
+- __xSlice__, __ySlice__, __zSlice__: World coordinate slicing
 
 Then we have the standard representation set or properties with their defaults:
 
-  - [actor](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageSlice.html):
+  - [__actor__](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageSlice.html):
     - origin = (0,0,0)
     - position = (0,0,0)
     - scale = (1,1,1)
@@ -414,7 +421,7 @@ Then we have the standard representation set or properties with their defaults:
     - pickable = 1
     - dragable = 1
     - orientation = (0,0,0)
-  - [property](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageProperty.html):
+  - [__property__](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageProperty.html):
     - independentComponents = false
     - interpolationType = [InterpolationType.LINEAR](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ImageProperty/Constants.js#L1-L4)
     - colorWindow = 255
@@ -422,7 +429,7 @@ Then we have the standard representation set or properties with their defaults:
     - ambient = 1.0
     - diffuse = 0.0
     - opacity = 1.0
-  - [mapper](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageMapper.html):
+  - [__mapper__](https://kitware.github.io/vtk-js/api/Rendering_Core_ImageMapper.html):
     - customDisplayExtent: [0, 0, 0, 0]
     - useCustomExtents: false
     - slice: 0
@@ -457,11 +464,11 @@ The __PointCloudRepresentation__ is just a helper using the following structure 
 ```
 
 The set of convinient properties are as follow:
-- xyz = list of xyz of each point inside a flat array
-- colorMapPreset = color preset name to use
-- colorDataRange = rescale color map to provided that range
-- property = {} # Same as GeometryRepresentation/property
-- rgb / rgba / scalars = [...] let you define the field you want to color your point cloud with.
+- __xyz__ = list of xyz of each point inside a flat array
+- __colorMapPreset__ = color preset name to use
+- __colorDataRange__ = rescale color map to provided that range
+- __property__ = {} # Same as GeometryRepresentation/property
+- __rgb__ / __rgba__ / __scalars__ = [...] let you define the field you want to color your point cloud with.
 
 ### VolumeDataRepresentation
 
@@ -500,20 +507,20 @@ The __VolumeDataRepresentation__ is just a helper using the following structure 
 ```
 
 The set of convinient properties are as follow:
-- dimensions: Number of points along x, y, z
-- spacing: Spacing along x, y, z between points in world
-- origin: World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
-- rgb: Use RGB values to attach to the points/vertex
-- rgba: Use RGBA values to attach to the points/vertex
-- scalars: Field values to attach to the points
-- scalarsType: Types of numbers provided in scalars (i.e. Float32Array, Uint8Array, ...)
-- mapper: Properties to set to the mapper
-- volume: Properties to set to the volume
-- property: Properties to set to the volume.property
-- colorMapPreset: Preset name for the lookup table color map
-- volumeController: Show volumeController
-- controllerSize: Controller size in pixels
-- rescaleColorMap: Use opacity range to rescale color map
+- __dimensions__: Number of points along x, y, z
+- __spacing__: Spacing along x, y, z between points in world
+- __origin__: World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
+- __rgb__: Use RGB values to attach to the points/vertex
+- __rgba__: Use RGBA values to attach to the points/vertex
+- __scalars__: Field values to attach to the points
+- __scalarsType__: Types of numbers provided in scalars (i.e. Float32Array, Uint8Array, ...)
+- __mapper__: Properties to set to the mapper
+- __volume__: Properties to set to the volume
+- __property__: Properties to set to the volume.property
+- __colorMapPreset__: Preset name for the lookup table color map
+- __volumeController__: Show volumeController
+- __controllerSize__: Controller size in pixels
+- __rescaleColorMap__: Use opacity range to rescale color map
 
 ### Mesh
 
@@ -529,7 +536,7 @@ This element is a helper on top of __PolyData__ which has a Python helper functi
 
 The __Mesh__ element expect a single __state__ property that is internaly split into 2 elements to represent the geometry and the field that you want to optionally attach to your mesh. The structure could be defined as follow:
 
-- state
+- __state__
   - mesh: (Contains the properties of __PolyData__)
     - points = []
     - verts = []
@@ -558,7 +565,7 @@ This element is a helper on top of __ImageData__ which has a Python helper funct
 
 The __Volume__ element expect a single __state__ property that is internaly split into 2 elements to represent the geometry and the field that you want to optionally attach to your mesh. The structure could be defined as follow:
 
-- state
+- __state__
   - image: (Contains the properties of __ImageData__)
     - dimensions
     - spacing
@@ -571,8 +578,8 @@ The __Volume__ element expect a single __state__ property that is internaly spli
 ### Algorithm
 
 This element allow you to create and configure a vtk.js class. This element expect only 2 properties:
-- vtkClass: The name of the vtkClass to instantiate.
-- state: The set of properties to apply on the given vtkClass.
+- __vtkClass__: The name of the vtkClass to instantiate.
+- __state__: The set of properties to apply on the given vtkClass.
 
 The current [list of classes](https://github.com/Kitware/react-vtk-js/blob/master/src/AvailableClasses.js#L4-L15) that could be instantiate are as follow:
 
@@ -590,6 +597,7 @@ The current [list of classes](https://github.com/Kitware/react-vtk-js/blob/maste
 
 The following example use a vtk source in vtk.js to generate a mesh
 
+[code](./tutorials/04_algorithm.py)
 ```py
 import os
 import dash
@@ -663,6 +671,7 @@ Since the data loading is going to be asynchronous we've enabled some automatic 
 - __resetCameraOnUpdate__: True (default)
 
 
+[code](./tutorials/05_reader.py)
 ```py
 import os
 import base64
@@ -712,6 +721,7 @@ The only property expected in a __ShareDataSet__ is a name to properly reference
 
 The following example show how you can create a view with 1 __Volume__ and 4 representation of it.
 
+[code](./tutorials/06_shared_dataset.py)
 ```py
 import dash
 import dash_html_components as html
