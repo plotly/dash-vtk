@@ -187,7 +187,7 @@ But in our usecase here we are going to explain some of the fondation of those d
 
 An Image data is an implicit grid that is axis aligned like shown in the picture below.
 
-![ImageData](./imagedata.jpg)
+![ImageData](./images/imagedata.jpg)
 
 The set of properties that can be given to `ImageData` are as follow:
 - __origin__: location of the bottom left corner of the grid in the 3D world
@@ -231,7 +231,7 @@ lines = [
 
 You can see a concreate example in the image below
 
-![PolyData](./polydata.jpg)
+![PolyData](./images/polydata.jpg)
 
 ### Fields
 
@@ -241,7 +241,7 @@ Fields are arrays that map to either __Points__ or __Cells__. They could be scal
 
 The diagram below try to explain the difference between fields located on points vs cells in term of rendering but it also trully has a different meaning based on the type of data that you have.
 
-![Fields](./fields.jpg)
+![Fields](./images/fields.jpg)
 
 The example below show you how you can attach fields to a dataset (PolyData and/or ImageData).
 
