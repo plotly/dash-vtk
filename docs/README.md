@@ -440,7 +440,7 @@ Then we have the standard representation set or properties with their defaults:
 
 ### PointCloudRepresentation
 
-The __PointCloudRepresentation__ is just a helper using the following structure to streamline rendering a point cloud dataset.
+The __PointCloudRepresentation__ is just a helper using the following structure to streamline rendering a point cloud dataset. The code snippet below is not fully accurate but it should provide you with some understanding of the kind of simplification that is happening under the hood.
 
 ```python
 def PointCloudRepresentation(**kwargs):
@@ -475,38 +475,39 @@ The set of convinient properties are as follow:
 
 ### VolumeDataRepresentation
 
-The __VolumeDataRepresentation__ is just a helper using the following structure to streamline rendering a volume.
+The __VolumeDataRepresentation__ is just a helper using the following structure to streamline rendering a volume. The code snippet below is not fully accurate but it should provide you with some understanding of the kind of simplification that is happening under the hood.
 
-```html
-<VolumeRepresentation
-  id={props.id}
-  colorMapPreset={props.colorMapPreset}
-  colorDataRange={props.colorDataRange}
-  property={props.property}
-  mapper={props.mapper}
-  volume={props.volume}
->
-  {props.volumeController && (
-    <VolumeController
-      rescaleColorMap={props.rescaleColorMap}
-      size={props.controllerSize}
-    />
-  )}
-  <ImageData
-    dimensions={props.dimensions}
-    origin={props.origin}
-    spacing={props.spacing}
-  >
-    <PointData>
-      <DataArray
-        registration='setScalars'
-        numberOfComponents={nbComponents}
-        values={values}
-        type={type}
-      />
-    </PointData>
-  </ImageData>
-</VolumeRepresentation>
+```python
+def VolumeDataRepresentation(**kwargs):
+  return dash_vtk.VolumeRepresentation(
+      id=kwargs.get('id'),
+      colorMapPreset=kwargs.get('colorMapPreset'),
+      colorDataRange=kwargs.get('colorDataRange'),
+      property=kwargs.get('property'),
+      mapper=kwargs.get('mapper'),
+      volume=kwargs.get('volume'),
+      children=[
+          dash_vtk.VolumeController(
+              rescaleColorMap=kwargs.get('rescaleColorMap'),
+              size=kwargs.get('size'),
+          ),
+          dash_vtk.ImageData(
+              dimensions=kwargs.get('dimensions'),
+              origin=kwargs.get('origin'),
+              spacing=kwargs.get('spacing'),
+              children=[
+                  dash_vtk.PointData([
+                      dash_vtk.DataArray(
+                        registration='setScalars',
+                        values=kwargs.get('scalars'),
+                      )
+                  ])
+              ],
+          ),
+        ],
+      )
+    ],
+  )
 ```
 
 The set of convinient properties are as follow:
@@ -529,12 +530,18 @@ The set of convinient properties are as follow:
 
 This element is a helper on top of __PolyData__ which has a Python helper function that goes with it which will help you map a __vtkDataSet__ into a single property of the __Mesh__ element.
 
-```html
-<PolyData {...props.state.mesh}>
-  <{props.state.field.location}>
-    <DataArray {...props.state.field} />
-  </{props.state.field.location}>
-</PolyData>
+```py
+def Mesh(**kwargs):
+    return dash_vtk.PolyData(
+        **kwargs.get('state').get('mesh'),
+        children=[
+            dash_vtk.[kwargs.get('state').get('field').get('location')]([
+                dash_vtk.DataArray(
+                  **kwargs.get('state').get('field'),
+                )
+            ])
+        ]
+    )
 ```
 
 The __Mesh__ element expect a single __state__ property that is internaly split into 2 elements to represent the geometry and the field that you want to optionally attach to your mesh. The structure could be defined as follow:
@@ -558,12 +565,18 @@ The __Mesh__ element expect a single __state__ property that is internaly split 
 
 This element is a helper on top of __ImageData__ which has a Python helper function that goes with it which will help you map a __vtkImageData__ into a single property of the __Volume__ element.
 
-```html
-<ImageData {...props.state.image}>
-  <PointData>
-    <DataArray {...props.state.field} />
-  </PointData>
-</ImageData>
+```py
+def Volume(**kwargs):
+    return dash_vtk.ImageData(
+        **kwargs.get('state').get('image'),
+        children=[
+            dash_vtk.PointData([
+                dash_vtk.DataArray(
+                  **kwargs.get('state').get('field'),
+                )
+            ])
+        ]
+    )
 ```
 
 The __Volume__ element expect a single __state__ property that is internaly split into 2 elements to represent the geometry and the field that you want to optionally attach to your mesh. The structure could be defined as follow:
@@ -797,12 +810,12 @@ Then we made several example using plain VTK for both a CFD example and some med
 
 [dash_vtk](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/app.py) | [PyVista](https://docs.pyvista.org/examples/00-load/create-point-cloud.html)
 
-![Preview](../../demos/pyvista-point-cloud/demo.jpg)
+![Preview](../demos/pyvista-point-cloud/demo.jpg)
 
 ### Terrain following mesh
 
 [dash_vtk](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/app.py) | [PyVista](https://docs.pyvista.org/examples/00-load/terrain-mesh.html)
-![Preview](../../demos/pyvista-terrain-following-mesh/demo.jpg)
+![Preview](../demos/pyvista-terrain-following-mesh/demo.jpg)
 
 ### VTK dynamic streamlines Example
 
@@ -810,19 +823,19 @@ This example leverage plain VTK on the server side while providing UI controls i
 
 [dash_vtk](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/app.py)
 
-![CFD Preview](../../demos/usage-vtk-cfd/demo.jpg)
+![CFD Preview](../demos/usage-vtk-cfd/demo.jpg)
 
 ### Medical examples
 
 [Real medical image](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/app.py)
 
-![Real medical image](../../demos/volume-rendering/demo.jpg)
+![Real medical image](../demos/volume-rendering/demo.jpg)
 
 
 [Randomly generated volume](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/app.py)
 
-![Randomly generated volume](../../demos/synthetic-volume-rendering/demo.jpg)
+![Randomly generated volume](../demos/synthetic-volume-rendering/demo.jpg)
 
 [Multi-View with slicing](https://github.com/plotly/dash-vtk/blob/master/demos/slice-rendering/app.py)
 
-![Multi-View with slicing](../../demos/slice-rendering/demo.jpg)
+![Multi-View with slicing](../demos/slice-rendering/demo.jpg)
