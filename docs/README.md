@@ -109,7 +109,7 @@ In `dash_vtk` we have several objects that falls into that category. The list be
 
 Now that we have those core concepts down we can show you some code on how to render a mesh using `dash-vtk`.
 
-[code](./tutorials/00_geometry_rendering.py)
+[code](./tutorials/t00_geometry_rendering.py)
 ```py
 # Use helper to get a mesh structure that can be passed as-is to a Mesh
 mesh_state = to_mesh_state(dataset)
@@ -138,7 +138,7 @@ if __name__ == "__main__":
 
 The previous example was using a 3D image and extracting its mesh to render. Let's keep the same data but show it as Volume Rendering.
 
-[code](./tutorials/01_volume_rendering.py)
+[code](./tutorials/t01_volume_rendering.py)
 ```py
 import dash
 import dash_html_components as html
@@ -198,7 +198,7 @@ The set of properties that can be given to `ImageData` are as follow:
 
 A concreate example would be a grid of 5 points or 4 cells along each axis which will go from `[-2, 2]` along each axis.
 
-[code](./tutorials/02_imagedata.py)
+[code](./tutorials/t02_imagedata.py)
 ```py
 dash_vtk.ImageData(
   dimension=[5,5,5],
@@ -234,7 +234,7 @@ lines = [
 
 You can see a concreate example in the image below
 
-[code](./tutorials/03_polydata.py)
+[code](./tutorials/t03_polydata.py)
 ![PolyData](./images/polydata.jpg)
 
 The `dash_vtk.PolyData` element has an additional property to automatically generate cells based on some assumption of the order of the points defined in the `points` array. That property is named __connectivity__ which default to `manual` meaning no automatic action is taken. But that property can be set to `points` to automatically set the vertex to actually see the points provided or `triangles` which assume to use 3 concecutive points to create a triangle and finally `strips` which then assume it is a single triangle strip consuming all the points.
@@ -253,7 +253,7 @@ The example below show you how you can attach fields to a dataset (PolyData and/
 
 Caution: By convention, we always attach data to points in an ImageData for doing VolumeRendering and the array must be registered as scalars.
 
-[ImageData code](./tutorials/02_imagedata.py) | [PolyData code](./tutorials/03_polydata.py)
+[ImageData code](./tutorials/t02_imagedata.py) | [PolyData code](./tutorials/t03_polydata.py)
 ```py
 dash_vtk.ImageData(
   dimensions=[5,5,5],
@@ -597,7 +597,7 @@ The current [list of classes](https://github.com/Kitware/react-vtk-js/blob/maste
 
 The following example use a vtk source in vtk.js to generate a mesh
 
-[code](./tutorials/04_algorithm.py)
+[code](./tutorials/t04_algorithm.py)
 ```py
 import os
 import dash
@@ -671,7 +671,7 @@ Since the data loading is going to be asynchronous we've enabled some automatic 
 - __resetCameraOnUpdate__: True (default)
 
 
-[code](./tutorials/05_reader.py)
+[code](./tutorials/t05_reader.py)
 ```py
 import os
 import base64
@@ -721,7 +721,7 @@ The only property expected in a __ShareDataSet__ is a name to properly reference
 
 The following example show how you can create a view with 1 __Volume__ and 4 representation of it.
 
-[code](./tutorials/06_shared_dataset.py)
+[code](./tutorials/t06_shared_dataset.py)
 ```py
 import dash
 import dash_html_components as html
