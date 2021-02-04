@@ -1,7 +1,7 @@
 import dash_vtk
 
-import vtk
 from vtk.util.numpy_support import vtk_to_numpy
+from vtk.vtkFiltersGeometry import vtkGeometryFilter
 
 # Numpy to JS TypedArray
 to_js_type = {
@@ -28,7 +28,7 @@ def to_mesh_state(dataset, field_to_keep=None):
   if dataset.IsA('vtkPolyData'):
     polydata = dataset
   else:
-    extractSkinFilter = vtk.vtkGeometryFilter()
+    extractSkinFilter = vtkGeometryFilter()
     extractSkinFilter.SetInputData(dataset)
     extractSkinFilter.Update()
     polydata = extractSkinFilter.GetOutput()
