@@ -1,7 +1,7 @@
 import dash_vtk
 
 from vtkmodules.util.numpy_support import vtk_to_numpy
-from vtk.vtkFiltersGeometry import vtkGeometryFilter
+from vtkmodules.vtkFiltersGeometry import vtkGeometryFilter
 
 # Numpy to JS TypedArray
 to_js_type = {
