@@ -2,4 +2,4 @@
 dash-vtk
 pyvista
 numpy
-vtk==8.*
+vtk>=8.2.*
