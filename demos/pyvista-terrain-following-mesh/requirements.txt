@@ -3,4 +3,4 @@ dash-vtk
 dash-bootstrap-components
 pyvista
 numpy
-vtk
+vtk==8.*
