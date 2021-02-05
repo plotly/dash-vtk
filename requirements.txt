@@ -1,3 +1,4 @@
 # dash is required to call `build:py`
 dash[dev]>=1.15.0
 -e .
+vtk>=8.2.*
