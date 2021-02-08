@@ -12,7 +12,7 @@ jobs:
             - checkout
 
             - restore_cache:
-                key: deps1-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}-{{ checksum "demos/requirements.txt" }}
 
             - run:
                 name: Create virtualenv
@@ -23,6 +23,7 @@ jobs:
                 name: Install requirements
                 command: |
                     . venv/bin/activate
+                    pip install --upgrade pip
                     pip install -r requirements.txt --quiet
                     pip install -r tests/requirements.txt --quiet
 
@@ -33,7 +34,7 @@ jobs:
                     npm i
 
             - save_cache:
-                key: deps1-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}-{{ checksum "demos/requirements.txt" }}
                 paths:
                     - node_modules
 
@@ -57,7 +58,7 @@ jobs:
             - checkout
 
             - restore_cache:
-                key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}-{{ checksum "demos/requirements.txt" }}
 
             - run:
                 name: Create virtualenv
@@ -68,11 +69,12 @@ jobs:
                 name: Install requirements
                 command: |
                     . venv/bin/activate
+                    pip install --upgrade pip
                     pip install -r requirements.txt --quiet
                     pip install -r tests/requirements.txt --quiet
 
             - save_cache:
-                key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "requirements.txt" }}-{{ checksum "demos/requirements.txt" }}
                 paths:
                     - "venv"
 
