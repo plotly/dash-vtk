@@ -108,6 +108,14 @@ Run the demo:
 python app.py
 ```
 
+### Python environments
+
+Depending on your Python environment, you may run into deployment issue related to the vtk version that get pulled in.
+
+Ideally we want a version of vtk equal or newer than 9. When using such version of VTK, dash-vtk won't even try to load the rendering module of VTK and if OpenGL is not available on your system everything will still be fine.
+
+On the other hand, if you are running Python 3.6 or less and you don't upgrade your pip version you will get vtk 8. With vtk 8, there is no way to prevent the loading of the GL library which means that you will have to install libGL on your system. The way [Heroku](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt) and [dash-enterprise](https://github.com/plotly/dash-sample-apps/blob/master/apps/dash-vtk-explorer/apt-packages) handle it is slightly different but technically you will have to install `libgl1-mesa-glx` via some `apt` infrastructure.
+
 ## References
 
 You can find the complete API reference in [`docs/REFERENCES.md`](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md) for each of the following components:
