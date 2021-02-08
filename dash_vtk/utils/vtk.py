@@ -5,6 +5,7 @@ try:
     from vtkmodules.vtkFiltersGeometry import vtkGeometryFilter
 except:
     # v8.1.2 and below
+    print("Can't import vtkmodules. Falling back to importing vtk.")
     from vtk.util.numpy_support import vtk_to_numpy
     from vtk.vtkFiltersGeometry import vtkGeometryFilter
 
