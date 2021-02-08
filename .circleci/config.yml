@@ -23,6 +23,7 @@ jobs:
                 name: Install requirements
                 command: |
                     . venv/bin/activate
+                    pip install --upgrade pip
                     pip install -r requirements.txt --quiet
                     pip install -r tests/requirements.txt --quiet
 
@@ -68,6 +69,7 @@ jobs:
                 name: Install requirements
                 command: |
                     . venv/bin/activate
+                    pip install --upgrade pip
                     pip install -r requirements.txt --quiet
                     pip install -r tests/requirements.txt --quiet
 
