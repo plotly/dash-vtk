@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4] - 2021-02-08
+
+### Changed
+* Added section about deployment in `README.md`
+* `dash_vtk.utils`: Will try to import `vtkmodules` (`>=9.0.1`) before falling back to `vtk` (`<=8.1.2`) to avoid requiring `libGL`.
+
 ## [0.0.3] - 2021-02-04
 
 ### Changed
