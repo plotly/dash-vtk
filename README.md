@@ -112,9 +112,27 @@ python app.py
 
 Depending on your Python environment, you may run into deployment issue related to the vtk version that get pulled in.
 
-Ideally we want a version of vtk equal or newer than 9. When using such version of VTK, dash-vtk won't even try to load the rendering module of VTK and if OpenGL is not available on your system everything will still be fine.
+Ideally we want a version of vtk equal or newer than 9. When using such version of VTK, `dash-vtk` won't even try to load the rendering module of VTK and if OpenGL is not available on your system everything will still be fine.
 
-On the other hand, if you are running Python 3.6 or less and you don't upgrade your pip version you will get vtk 8. With vtk 8, there is no way to prevent the loading of the GL library which means that you will have to install libGL on your system. The way [Heroku](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt) and [dash-enterprise](https://github.com/plotly/dash-sample-apps/blob/master/apps/dash-vtk-explorer/apt-packages) handle it is slightly different but technically you will have to install `libgl1-mesa-glx` via some `apt` infrastructure.
+On the other hand, if you are running python-3.6 and/or pip-18 or less and you don't upgrade your pip version, you will only be able to use `vtk<=8.1.2`. With vtk 8, there is no way to prevent the loading of the GL library which means that you will have to install libGL on your system, or you will run into errors like this:
+
+```
+  File ".../python/lib/python3.6/site-packages/vtkmodules/all.py", line 29, in <module>
+    from .vtkRenderingOpenGL2 import *
+ImportError: libGL.so.1: cannot open shared object file: No such file or directory
+[2021-02-08 18:36:15 +0000] [10] [INFO] Worker exiting (pid: 10)
+```
+
+or this:
+```
+  File ".../python3.7/site-packages/vtk/__init__.py", line 12, in <module>
+    from .vtkOpenGLKit import *
+  File ".../python3.7/site-packages/vtk/vtkOpenGLKit.py", line 9, in <module>
+    from vtkOpenGLKitPython import *
+ModuleNotFoundError: No module named 'vtkOpenGLKitPython'
+```
+
+Heroku and Dash Enterprise handle it is slightly different because you will have to install `libgl1-mesa-glx` via some `apt` files. In the case of Heroku, you will have to use a [buildpack](https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-apt) and add `libgl1-mesa-glx` to a `Aptfile` located in the root of your project. In the case of Dash Enterprise, you do not need to change the buildpack (it is handled automatically) but you will need to add `libgl1-mesa-glx` to a `apt-packages` file instead of `Aptfile`; see [this app](https://github.com/plotly/dash-sample-apps/blob/master/apps/dash-vtk-explorer/apt-packages) as an example.
 
 ## References
 
