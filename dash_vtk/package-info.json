@@ -1,6 +1,6 @@
 {
   "name": "dash_vtk",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React based declarative usage of vtk.js for Dash",
   "repository": {
     "type": "git",
