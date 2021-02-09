@@ -2,7 +2,7 @@
 
 Dash VTK lets you integrate the `vtk.js` visualization pipeline directly into your Dash app. It is powered by [`react-vtk-js`](https://github.com/Kitware/react-vtk-js/).
 
-![ ![A demo of dash-vtk in action](https://github.com/plotly/dash-vtk/blob/master/docs/images/vtk-demo.gif?raw=true) ](./docs/images/vtk-demo.gif)
+![A demo of dash-vtk in action](https://github.com/plotly/dash-vtk/blob/master/docs/images/vtk-demo.gif?raw=true)
 
 ## Getting started
 
