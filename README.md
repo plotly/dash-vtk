@@ -1,8 +1,13 @@
 # Dash VTK
 
-Dash VTK lets you integrate the `vtk.js` visualization pipeline directly into your Dash app. It is powered by [`react-vtk-js`](https://github.com/Kitware/react-vtk-js/).
+*Dash VTK lets you integrate the `vtk.js` visualization pipeline directly into your Dash app. It is powered by [`react-vtk-js`](https://github.com/Kitware/react-vtk-js/).*
 
 ![A demo of dash-vtk in action](https://github.com/plotly/dash-vtk/blob/master/docs/images/vtk-demo.gif?raw=true)
+
+* [Docs](https://dash.plotly.com/vtk)
+* [Demo Explorer](https://dash-gallery.plotly.host/dash-vtk-explorer/)
+* [Repository](https://github.com/plotly/dash-vtk)
+* [Webinar](https://go.plotly.com/dash-vtk)
 
 ## Getting started
 
@@ -161,14 +166,14 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 ### Usage for `dash_vtk.Algorithm`
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-algorithm)
-* Online Demo (coming soon)
+* [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/usage-algorithm)
 
 ![A demo of the usage-algorithm app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-algorithm/demo.jpg?raw=true)
 
 ### Point Cloud with PyVista
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-point-cloud)
-* Online Demo (coming soon)
+* [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/pyvista-point-cloud)
 
 ![A demo of the pyvista-point-cloud app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/demo.jpg?raw=true)
 
@@ -176,7 +181,7 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 ### Terrain deformation using PyVista and dash-vtk
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-terrain-following-mesh)
-* Online Demo (coming soon)
+* [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/pyvista-terrain-following-mesh)
 
 ![A demo of the pyvista-terrain-following-mesh app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/demo.jpg?raw=true)
 
@@ -184,20 +189,20 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 ### Volume Rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/volume-rendering)
-* Online Demo (coming soon)
+* [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/volume-rendering)
 
 ![A demo of the volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/demo.jpg?raw=true)
 
 ### VTK for data processing and dash-vtk for rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-vtk-cfd)
-* Online Demo (coming soon)
+* [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/usage-vtk-cfd)
 
 ![A demo of the usage-vtk-cfd app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/demo.jpg?raw=true)
 
 ### Synthetic Volume Rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/synthetic-volume-rendering)
-* Online Demo (coming soon)
+* [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/synthetic-volume-rendering)
 
 ![A demo of the synthetic-volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/demo.jpg?raw=true)
