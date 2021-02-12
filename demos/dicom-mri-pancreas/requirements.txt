@@ -1,0 +1,7 @@
+# If you skipped `pip install -e ../../`, the package below will be retrieved from pypi:
+dash-vtk
+dash-bootstrap-components
+vtk
+numpy
+itk
+--pre itk
