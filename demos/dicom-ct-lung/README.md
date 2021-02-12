@@ -1,4 +1,4 @@
-# Visualizing CT Scans as volume from dicom files
+# Visualizing MRi volumes from dicom files
 
 ![Image demo](./demo.jpg)
 
