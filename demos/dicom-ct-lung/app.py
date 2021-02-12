@@ -16,10 +16,12 @@ vtk_image = itk.vtk_image_from_image(itk_image)
 volume_state = to_volume_state(vtk_image)
 
 
-
 vtk_view = dash_vtk.View(
     dash_vtk.VolumeRepresentation(
-        children=[dash_vtk.VolumeController(), dash_vtk.Volume(state=volume_state),]
+        children=[
+            dash_vtk.VolumeController(),
+            dash_vtk.Volume(state=volume_state),
+        ]
     )
 )
 
