@@ -3,5 +3,4 @@ dash-vtk
 dash-bootstrap-components
 vtk
 numpy
-itk
---pre itk
+itk==5.2rc1
