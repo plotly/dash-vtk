@@ -19,8 +19,11 @@ def take_snapshot(dash_duo, name):
 names = [
     "usage",
     "demos.pyvista-terrain-following-mesh.app",
-    "demos.slice-rendering.app",
     "demos.pyvista-point-cloud.app",
+    "demos.dicom-ct-lung.app",
+    "demos.dicom-mri-brain.app",
+    "demos.dicom-mri-pancreas.app",
+    "demos.slice-rendering.app",
     "demos.volume-rendering.app",
     "demos.usage-vtk-cfd.app",
     "demos.usage-algorithm.app",
