@@ -24,6 +24,7 @@ jobs:
                 command: |
                     . venv/bin/activate
                     pip install --upgrade pip
+                    pip install black==20.8b1
                     pip install -r requirements.txt --quiet
                     pip install -r tests/requirements.txt --quiet
 
