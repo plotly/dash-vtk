@@ -20,7 +20,7 @@ setup(
     long_description=io.open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/plotly/dash-vtk',
-    install_requires=['dash'],
+    install_requires=['dash', 'vtk'],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
