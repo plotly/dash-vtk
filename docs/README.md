@@ -26,7 +26,7 @@ dash_vtk.View(
   interactorSettings=[...],       # Binding of mouse events to camera action (Rotate, Pan, Zoom...)
   cameraPosition=[x,y,z],         # Where the camera should be initially placed in 3D world
   cameraViewUp=[dx, dy, dz],      # Vector to use as your view up for your initial camera
-  cameraParallelProjection=False, # Should we see our 3D work with perspective or flat with no depth perception
+  cameraParallelProjection=False, # Perspective or flat
   triggerRender=0,                # Timestamp meant to trigger a render when different
   triggerResetCamera=0,           # Timestamp meant to trigger a reset camera when different
 )
@@ -349,6 +349,97 @@ The list below show you the default values used for each argument:
 
 On top of those previous settings we provide additional properties to configure a lookup table using one of our available [__colorMapPreset__](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ColorTransferFunction/ColorMaps.json) and a convinient __colorDataRange__ to rescale to color map to your area of focus.
 
+### GlyphRepresentation
+
+GlyphRepresentation let you use a source as a Glyph which will then be cloned and position at every points of another source. The properties available on the __GlyphRepresentation__ let you tune the way you want to render your geometry.
+
+In VTK a representation is composed of an [__Actor__](https://kitware.github.io/vtk-js/api/Rendering_Core_Actor.html), a [__Mapper__](https://kitware.github.io/vtk-js/api/Rendering_Core_Glyph3DMapper.html) and a [__Property__](https://kitware.github.io/vtk-js/api/Rendering_Core_Property.html). Each of those object can be configured using the __actor__, __mapper__ and __property__ arguments of the __GlyphRepresentation__.
+
+The list below show you the default values used for each argument:
+
+  - __actor__:
+    - origin = (0,0,0)
+    - position = (0,0,0)
+    - scale = (1,1,1)
+    - visibility = 1
+    - pickable = 1
+    - dragable = 1
+    - orientation = (0,0,0)
+  - __property__:
+    - lighting = true
+    - interpolation = [Interpolation.GOURAUD](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Property/Constants.js#L1-L5)
+    - ambient = 0
+    - diffuse = 1
+    - specular = 0
+    - specularPower = 1
+    - opacity = 1
+    - edgeVisibility = false
+    - lineWidth = 1
+    - pointSize = 1
+    - backfaceCulling = false
+    - frontfaceCulling = false
+    - representation = [Representation.SURFACE](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Property/Constants.js#L7-L11)
+    - color = (1,1,1)          # White
+    - ambientColor = (1,1,1)
+    - specularColor = (1,1,1)
+    - diffuseColor = (1,1,1)
+    - edgeColor = (0,0,0)      # Black
+  - __mapper__:
+    - orient = true
+    - orientationMode = 0 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Glyph3DMapper/Constants.js#L1-L5))
+    - orientationArray = null
+    - scaling = true
+    - scaleFactor = 1.0
+    - scaleMode = 1 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Glyph3DMapper/Constants.js#L7-L11))
+    - scaleArray = null
+    - static = false
+    - scalarVisibility = true
+    - scalarRange = [0, 1]
+    - useLookupTableScalarRange = false
+    - colorMode = 0 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Mapper/Constants.js#L1-L5))
+    - scalarMode = 0 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Mapper/Constants.js#L7-L14))
+    - arrayAccessMode = 1 ([Available values](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/Mapper/Constants.js#L16-L19))
+    - colorByArrayName = ''
+    - interpolateScalarsBeforeMapping = false
+    - useInvertibleColors = false
+    - fieldDataTupleId = -1
+    - viewSpecificProperties = None
+    - customShaderAttributes = []
+
+On top of those previous settings we provide additional properties to configure a lookup table using one of our available [__colorMapPreset__](https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ColorTransferFunction/ColorMaps.json) and a convinient __colorDataRange__ to rescale to color map to your area of focus.
+
+An example of the __GlyphRepresentation__ could be for creating a spicky sphere by positioning cones normal to the sphere.
+
+```python
+def Example():
+    return dash_vtk.View(
+      children=[
+        dash_vtk.GlyphRepresentation(
+            mapper={'orientationArray': 'Normals'}
+            children=[
+                dash_vtk.Algorithm(
+                    port=0,
+                    vtkClass='vtkSphereSource',
+                    state={
+                        'phiResolution': 10,
+                        'thetaResolution': 20,
+                    },
+                ),
+                dash_vtk.Algorithm(
+                    port=1,
+                    vtkClass='vtkConeSource'
+                    state={
+                        'resolution': 30,
+                        'height': 0.25,
+                        'radius': 0.08,
+                    },
+                ),
+            ]
+        )
+      ]
+    )
+```
+
 ### VolumeRepresentation
 
 The properties available on the __VolumeRepresentation__ let you tune the way you want to render your volume.
@@ -586,6 +677,7 @@ The __Volume__ element expect a single __state__ property that is internaly spli
     - dimensions
     - spacing
     - origin
+    - direction
   - field: (Contains the properties of __DataArray__)
     - values: Array of values for the field
     - numberOfComponents: Number of components per point/cell
