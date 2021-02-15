@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.5] - 2021-02-15
+
+### Added
+* 3 new demos using dicom (#24)
+* GlyphRepresentation
+
+### Changed
+* Added `vtk` to `setup.py`'s install requires.
+
+### Fixed
+* VolumeDataRepresentation typo
+* GIF URL in README.md
+
+
 ## [0.0.4] - 2021-02-08
 
 ### Changed
