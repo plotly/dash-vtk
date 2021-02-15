@@ -118,6 +118,17 @@ def to_volume_state(dataset):
             'origin': dataset.GetOrigin(),
         },
     }
+
+    # Capture image orientation if any
+    if hasattr(dataset, 'GetDirectionMatrix'):
+      matrix = dataset.GetDirectionMatrix()
+      js_mat = []
+      for j in range(3):
+        for i in range(3):
+          js_mat.append(matrix.GetElement(i, j))
+
+      state['image']['direction'] = js_mat
+
     scalars = dataset.GetPointData().GetScalars()
 
     if scalars is not None:

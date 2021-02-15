@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GeometryRepresentation as VtkItem } from 'react-vtk-js';
+import { GlyphRepresentation as VtkItem } from 'react-vtk-js';
 
 /**
- * GeometryRepresentation is responsible to convert a vtkPolyData into rendering
+ * GlyphRepresentation using a source on port=1 as Glyph and the points of the source on port=0 to position the given glyphs
  * It takes the following set of properties:
- *   - actor: Properties to assign to the vtkActor
- *   - mapper: Properties to assign to the vtkMapper
- *   - property: Properties to assign to the vtkProperty (actor.getProperty())
- *   - colorMapPreset: Name of the preset to use for controlling the color mapping
- *   - colorDataRange: Range to use for the color scale
+ * - actor: Properties to assign to the vtkActor
+ * - mapper: Properties to assign to the vtkGlyph3DMapper
+ * - property: Properties to assign to the vtkProperty (actor.getProperty())
+ * - colorMapPreset: Name of the preset to use for controlling the color mapping
+ * - colorDataRange: Range to use for the color scale
  */
 export default function GeometryRepresentation(props) {
   return <VtkItem {...props} />;
@@ -33,7 +33,7 @@ GeometryRepresentation.propTypes = {
   actor: PropTypes.object,
 
   /**
-   * Properties to set to the actor
+   * Properties to set to the vtkGlyph3DMapper
    */
   mapper: PropTypes.object,
 
