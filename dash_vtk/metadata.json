@@ -277,7 +277,7 @@
     }
   },
   "src/lib/components/GeometryRepresentation.react.js": {
-    "description": "GeometryRepresentation is responsible to convert a vtkPolyData into rendering\nIt takes the following set of properties:\n  - colorBy: ['POINTS', ''],\n  - pointSize: 1,\n  - color: [1,1,1],",
+    "description": "GeometryRepresentation is responsible to convert a vtkPolyData into rendering\nIt takes the following set of properties:\n  - actor: Properties to assign to the vtkActor\n  - mapper: Properties to assign to the vtkMapper\n  - property: Properties to assign to the vtkProperty (actor.getProperty())\n  - colorMapPreset: Name of the preset to use for controlling the color mapping\n  - colorDataRange: Range to use for the color scale",
     "displayName": "GeometryRepresentation",
     "methods": [],
     "props": {
@@ -354,8 +354,86 @@
       }
     }
   },
+  "src/lib/components/GlyphRepresentation.react.js": {
+    "description": "GlyphRepresentation using a source on port=1 as Glyph and the points of the source on port=0 to position the given glyphs\nIt takes the following set of properties:\n- actor: Properties to assign to the vtkActor\n- mapper: Properties to assign to the vtkGlyph3DMapper\n- property: Properties to assign to the vtkProperty (actor.getProperty())\n- colorMapPreset: Name of the preset to use for controlling the color mapping\n- colorDataRange: Range to use for the color scale",
+    "displayName": "GeometryRepresentation",
+    "methods": [],
+    "props": {
+      "id": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The ID used to identify this component."
+      },
+      "actor": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the actor"
+      },
+      "mapper": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the vtkGlyph3DMapper"
+      },
+      "property": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Properties to set to the actor.property"
+      },
+      "colorMapPreset": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Preset name for the lookup table color map",
+        "defaultValue": {
+          "value": "'erdc_rainbow_bright'",
+          "computed": false
+        }
+      },
+      "colorDataRange": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "Data range use for the colorMap",
+        "defaultValue": {
+          "value": "[0, 1]",
+          "computed": false
+        }
+      },
+      "children": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "arrayOf",
+              "value": {
+                "name": "node"
+              }
+            },
+            {
+              "name": "node"
+            }
+          ]
+        },
+        "required": false,
+        "description": ""
+      }
+    }
+  },
   "src/lib/components/ImageData.react.js": {
-    "description": "ImageData is exposing a vtkImageData to a downstream filter\nIt takes the following set of properties:\n  - dimensions: [nx, ny, nz],\n  - origin: [0, 0, 0]\n  - spacing: [1, 1, 1]",
+    "description": "ImageData is exposing a vtkImageData to a downstream filter\nIt takes the following set of properties:\n  - dimensions: [nx, ny, nz],\n  - origin: [0, 0, 0]\n  - spacing: [1, 1, 1]\n  - direction: [\n      1, 0, 0,\n      0, 1, 0,\n      0, 0, 1\n    ]",
     "displayName": "ImageData",
     "methods": [],
     "props": {
@@ -416,6 +494,20 @@
         "description": "World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).",
         "defaultValue": {
           "value": "[0, 0, 0]",
+          "computed": false
+        }
+      },
+      "direction": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "number"
+          }
+        },
+        "required": false,
+        "description": "3x3 matrix use to orient the image data",
+        "defaultValue": {
+          "value": "[\n  1, 0, 0,\n  0, 1, 0,\n  0, 0, 1,\n]",
           "computed": false
         }
       },
@@ -1155,8 +1247,8 @@
     }
   },
   "src/lib/components/VolumeDataRepresentation.react.js": {
-    "description": "VolumneDataRepresentation expect the following set of properties\n  - dimensions: [10, 20, 5]\n  - spacing: [1, 1, 1]\n  - origin: [0, 0, 0]\n  - rgb: [...]\n  - rgba: [...]\n  - scalars: [...]\n  - scalarsType: Float32Array",
-    "displayName": "VolumneDataRepresentation",
+    "description": "VolumeDataRepresentation expect the following set of properties\n  - dimensions: [10, 20, 5]\n  - spacing: [1, 1, 1]\n  - origin: [0, 0, 0]\n  - rgb: [...]\n  - rgba: [...]\n  - scalars: [...]\n  - scalarsType: Float32Array",
+    "displayName": "VolumeDataRepresentation",
     "methods": [],
     "props": {
       "id": {

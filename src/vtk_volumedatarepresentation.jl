@@ -6,7 +6,7 @@ export vtk_volumedatarepresentation
     vtk_volumedatarepresentation(;kwargs...)
 
 A VolumeDataRepresentation component.
-VolumneDataRepresentation expect the following set of properties
+VolumeDataRepresentation expect the following set of properties
   - dimensions: [10, 20, 5]
   - spacing: [1, 1, 1]
   - origin: [0, 0, 0]

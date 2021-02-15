@@ -1,16 +1,16 @@
 % Auto-generated: do not edit by hand
-\name{vtkGeometryRepresentation}
+\name{vtkGlyphRepresentation}
 
-\alias{vtkGeometryRepresentation}
+\alias{vtkGlyphRepresentation}
 
-\title{GeometryRepresentation component}
+\title{GlyphRepresentation component}
 
 \description{
-GeometryRepresentation is responsible to convert a vtkPolyData into rendering It takes the following set of properties:   - actor: Properties to assign to the vtkActor   - mapper: Properties to assign to the vtkMapper   - property: Properties to assign to the vtkProperty (actor.getProperty())   - colorMapPreset: Name of the preset to use for controlling the color mapping   - colorDataRange: Range to use for the color scale
+GlyphRepresentation using a source on port=1 as Glyph and the points of the source on port=0 to position the given glyphs It takes the following set of properties: - actor: Properties to assign to the vtkActor - mapper: Properties to assign to the vtkGlyph3DMapper - property: Properties to assign to the vtkProperty (actor.getProperty()) - colorMapPreset: Name of the preset to use for controlling the color mapping - colorDataRange: Range to use for the color scale
 }
 
 \usage{
-vtkGeometryRepresentation(children=NULL, id=NULL, actor=NULL, mapper=NULL,
+vtkGlyphRepresentation(children=NULL, id=NULL, actor=NULL, mapper=NULL,
 property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
 }
 
@@ -21,7 +21,7 @@ property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
 
 \item{actor}{Named list. Properties to set to the actor}
 
-\item{mapper}{Named list. Properties to set to the actor}
+\item{mapper}{Named list. Properties to set to the vtkGlyph3DMapper}
 
 \item{property}{Named list. Properties to set to the actor.property}
 

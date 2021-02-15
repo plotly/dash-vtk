@@ -6,12 +6,12 @@
 \title{ImageData component}
 
 \description{
-ImageData is exposing a vtkImageData to a downstream filter It takes the following set of properties:   - dimensions: [nx, ny, nz],   - origin: [0, 0, 0]   - spacing: [1, 1, 1]
+ImageData is exposing a vtkImageData to a downstream filter It takes the following set of properties:   - dimensions: [nx, ny, nz],   - origin: [0, 0, 0]   - spacing: [1, 1, 1]   - direction: [       1, 0, 0,       0, 1, 0,       0, 0, 1     ]
 }
 
 \usage{
 vtkImageData(children=NULL, id=NULL, port=NULL, dimensions=NULL,
-spacing=NULL, origin=NULL)
+spacing=NULL, origin=NULL, direction=NULL)
 }
 
 \arguments{
@@ -26,6 +26,8 @@ spacing=NULL, origin=NULL)
 \item{spacing}{List of numerics. Spacing along x, y, z between points in world coordinates}
 
 \item{origin}{List of numerics. World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).}
+
+\item{direction}{List of numerics. 3x3 matrix use to orient the image data}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

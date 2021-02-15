@@ -6,7 +6,7 @@
 \title{VolumeDataRepresentation component}
 
 \description{
-VolumneDataRepresentation expect the following set of properties   - dimensions: [10, 20, 5]   - spacing: [1, 1, 1]   - origin: [0, 0, 0]   - rgb: [...]   - rgba: [...]   - scalars: [...]   - scalarsType: Float32Array
+VolumeDataRepresentation expect the following set of properties   - dimensions: [10, 20, 5]   - spacing: [1, 1, 1]   - origin: [0, 0, 0]   - rgb: [...]   - rgba: [...]   - scalars: [...]   - scalarsType: Float32Array
 }
 
 \usage{

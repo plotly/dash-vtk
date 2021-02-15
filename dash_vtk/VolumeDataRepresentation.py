@@ -5,7 +5,7 @@ from dash.development.base_component import Component, _explicitize_args
 
 class VolumeDataRepresentation(Component):
     """A VolumeDataRepresentation component.
-VolumneDataRepresentation expect the following set of properties
+VolumeDataRepresentation expect the following set of properties
   - dimensions: [10, 20, 5]
   - spacing: [1, 1, 1]
   - origin: [0, 0, 0]
