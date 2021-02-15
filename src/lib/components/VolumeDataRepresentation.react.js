@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { VolumeDataRepresentation as VtkItem } from 'react-vtk-js';
 
 /**
- * VolumneDataRepresentation expect the following set of properties
+ * VolumeDataRepresentation expect the following set of properties
  *   - dimensions: [10, 20, 5]
  *   - spacing: [1, 1, 1]
  *   - origin: [0, 0, 0]
@@ -14,11 +14,11 @@ import { VolumeDataRepresentation as VtkItem } from 'react-vtk-js';
  *   - scalars: [...]
  *   - scalarsType: Float32Array
  */
-export default function VolumneDataRepresentation(props) {
+export default function VolumeDataRepresentation(props) {
   return <VtkItem {...props} />;
 };
 
-VolumneDataRepresentation.defaultProps = {
+VolumeDataRepresentation.defaultProps = {
   scalarsType: 'Float32Array',
   colorMapPreset: 'erdc_rainbow_bright',
   colorDataRange: 'auto',
@@ -27,7 +27,7 @@ VolumneDataRepresentation.defaultProps = {
   controllerSize: [400, 150],
 };
 
-VolumneDataRepresentation.propTypes = {
+VolumeDataRepresentation.propTypes = {
   /**
    * The ID used to identify this component.
    */
