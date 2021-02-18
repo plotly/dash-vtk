@@ -1074,6 +1074,24 @@
         "required": false,
         "description": "The ID used to identify this component."
       },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Allow user to override the default View style { width: '100%', height: '100%' }",
+        "defaultValue": {
+          "value": "{\n  width: '100%',\n  height: '100%',\n}",
+          "computed": false
+        }
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Allow user to provide custom className associated to root element"
+      },
       "background": {
         "type": {
           "name": "array"

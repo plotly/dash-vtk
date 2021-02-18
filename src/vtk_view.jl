@@ -18,6 +18,8 @@ It takes the following set of properties:
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional): List of representation to show
 - `id` (String; optional): The ID used to identify this component.
+- `style` (Dict; optional): Allow user to override the default View style { width: '100%', height: '100%' }
+- `className` (String; optional): Allow user to provide custom className associated to root element
 - `background` (Array; optional): The color of the view background using 3 floating numbers
 between 0-1 of Red, Green, Blue component.
 - `interactorSettings` (Array; optional): Configure the interactions
@@ -28,7 +30,7 @@ between 0-1 of Red, Green, Blue component.
 - `triggerResetCamera` (Real; optional): Property use to trigger a resetCamera when changing.
 """
 function vtk_view(; kwargs...)
-        available_props = Symbol[:children, :id, :background, :interactorSettings, :cameraPosition, :cameraViewUp, :cameraParallelProjection, :triggerRender, :triggerResetCamera]
+        available_props = Symbol[:children, :id, :style, :className, :background, :interactorSettings, :cameraPosition, :cameraViewUp, :cameraParallelProjection, :triggerRender, :triggerResetCamera]
         wild_props = Symbol[]
         return Component("vtk_view", "View", "dash_vtk", available_props, wild_props; kwargs...)
 end
