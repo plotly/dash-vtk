@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { View as VtkItem } from 'react-vtk-js';
+import VtkItem from 'react-vtk-js/dist/esm/core/View';
 
 /**
  * View is responsible to render vtk.js data.
