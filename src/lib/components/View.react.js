@@ -17,6 +17,10 @@ export default function View(props) {
 };
 
 View.defaultProps = {
+  style: {
+    width: '100%',
+    height: '100%',
+  },
   triggerRender: 0,
   triggerResetCamera: 0,
   background: [0.2, 0.3, 0.4],
@@ -66,6 +70,16 @@ View.propTypes = {
    * The ID used to identify this component.
    */
   id: PropTypes.string,
+
+  /**
+   * Allow user to override the default View style { width: '100%', height: '100%' }
+   */
+  style: PropTypes.object,
+
+  /**
+   * Allow user to provide custom className associated to root element
+   */
+  className: PropTypes.string,
 
   /**
    * The color of the view background using 3 floating numbers
