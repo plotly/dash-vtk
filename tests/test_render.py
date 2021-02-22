@@ -35,7 +35,7 @@ def build_test(name, sleep=10):
     def test_fn(dash_duo):
         app = import_app(name)
         dash_duo.start_server(app)
-        dash_duo.wait_for_element("canvas")
+        dash_duo.wait_for_element("canvas", timeout=30)
         time.sleep(sleep)
         take_snapshot(dash_duo, name.replace("demos.", ""))
         dash_duo.percy_snapshot(name)
