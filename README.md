@@ -4,7 +4,7 @@
 
 ![A demo of dash-vtk in action](https://github.com/plotly/dash-vtk/blob/master/docs/images/vtk-demo.gif?raw=true)
 
-* [Docs](https://dash.plotly.com/vtk)
+* [Docs](https://github.com/plotly/dash-vtk/tree/master/docs)
 * [Demo Explorer](https://dash-gallery.plotly.host/dash-vtk-explorer/)
 * [Repository](https://github.com/plotly/dash-vtk)
 * [Webinar](https://go.plotly.com/dash-vtk)
