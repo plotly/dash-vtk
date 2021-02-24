@@ -2,7 +2,10 @@
 
 *Dash VTK lets you integrate the `vtk.js` visualization pipeline directly into your Dash app. It is powered by [`react-vtk-js`](https://github.com/Kitware/react-vtk-js/).*
 
-![A demo of dash-vtk in action](https://github.com/plotly/dash-vtk/blob/master/docs/images/vtk-demo.gif?raw=true)
+
+| ![][usage-algorithm] | ![][pyvista-point-cloud] | ![][terrain-deformation] |
+| --- | --- | --- |
+| ![][volume-rendering] | ![][vtk-cfd] | ![][synthetic-volume] |
 
 * [Docs](https://github.com/plotly/dash-vtk/tree/master/docs)
 * [Demo Explorer](https://dash-gallery.plotly.host/dash-vtk-explorer/)
@@ -160,7 +163,6 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 - [VolumeDataRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#VolumeDataRepresentation)
 - [VolumeRepresentation](https://github.com/plotly/dash-vtk/blob/master/docs/REFERENCES.md#VolumeRepresentation)
 
-
 ## Demos
 
 ### Usage for `dash_vtk.Algorithm`
@@ -168,22 +170,21 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-algorithm)
 * [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/usage-algorithm)
 
-![A demo of the usage-algorithm app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-algorithm/demo.jpg?raw=true)
+![][usage-algorithm]
 
 ### Point Cloud with PyVista
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-point-cloud)
 * [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/pyvista-point-cloud)
 
-![A demo of the pyvista-point-cloud app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/demo.jpg?raw=true)
-
+![][pyvista-point-cloud]
 
 ### Terrain deformation using PyVista and dash-vtk
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/pyvista-terrain-following-mesh)
 * [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/pyvista-terrain-following-mesh)
 
-![A demo of the pyvista-terrain-following-mesh app](https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/demo.jpg?raw=true)
+![][terrain-deformation]
 
 
 ### Volume Rendering
@@ -191,18 +192,28 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/volume-rendering)
 * [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/volume-rendering)
 
-![A demo of the volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/demo.jpg?raw=true)
+![A demo of the volume-rendering app][volume-rendering]
 
 ### VTK for data processing and dash-vtk for rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/usage-vtk-cfd)
 * [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/usage-vtk-cfd)
 
-![A demo of the usage-vtk-cfd app](https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/demo.jpg?raw=true)
+![A demo of the usage-vtk-cfd app][vtk-cfd]
 
 ### Synthetic Volume Rendering
 
 * [Code](https://github.com/plotly/dash-vtk/tree/master/demos/synthetic-volume-rendering)
 * [Online Demo](https://dash-gallery.plotly.host/dash-vtk-explorer/synthetic-volume-rendering)
 
-![A demo of the synthetic-volume-rendering app](https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/demo.jpg?raw=true)
+![A demo of the synthetic-volume-rendering app][synthetic-volume]
+
+[pyvista-point-cloud]: https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-point-cloud/demo.jpg?raw=true
+[usage-algorithm]: https://github.com/plotly/dash-vtk/blob/master/demos/usage-algorithm/demo.jpg?raw=true
+[terrain-deformation]: https://github.com/plotly/dash-vtk/blob/master/demos/pyvista-terrain-following-mesh/demo.jpg?raw=true
+[volume-rendering]: https://github.com/plotly/dash-vtk/blob/master/demos/volume-rendering/demo.jpg?raw=true
+[vtk-cfd]: https://github.com/plotly/dash-vtk/blob/master/demos/usage-vtk-cfd/demo.jpg?raw=true
+[synthetic-volume]: https://github.com/plotly/dash-vtk/blob/master/demos/synthetic-volume-rendering/demo.jpg?raw=true
+[dicom-ct-lung]: https://github.com/plotly/dash-vtk/blob/master/demos/dicom-ct-lung/demo.jpg?raw=true
+[dicom-mri-brain]: https://github.com/plotly/dash-vtk/blob/master/demos/dicom-mri-brain/demo.jpg?raw=true
+[dicom-mri-pancreas]: https://github.com/plotly/dash-vtk/blob/master/demos/dicom-mri-pancreas/demo.jpg?raw=true
