@@ -66,7 +66,7 @@ def to_mesh_state(dataset, field_to_keep=None):
     if c_array:
       dataRange = c_array.GetRange(-1)
       nb_comp = c_array.GetNumberOfComponents()
-      values = vtk_to_numpy(p_array).ravel()
+      values = vtk_to_numpy(c_array).ravel()
       js_types = to_js_type[str(values.dtype)]
       location = 'CellData'
 
