@@ -45,7 +45,7 @@ server = app.server
 
 vtk_view = dash_vtk.View(
     id="vtk-view",
-    pickingModes=['hover'],
+    pickingModes=["hover"],
     children=[
         dash_vtk.GeometryRepresentation(
             id="vtk-representation",
@@ -72,16 +72,14 @@ vtk_view = dash_vtk.View(
             colorDataRange=color_range,
             property={"edgeVisibility": True},
             showCubeAxes=True,
-            cubeAxesStyle={ "axisLabels": ['', '', 'Altitude'] },
+            cubeAxesStyle={"axisLabels": ["", "", "Altitude"]},
         ),
         dash_vtk.GeometryRepresentation(
             id="pick-rep",
-            actor={ "visibility": False },
+            actor={"visibility": False},
             children=[
                 dash_vtk.Algorithm(
-                    id="pick-sphere",
-                    vtkClass="vtkSphereSource",
-                    state={ "radius": 100 },
+                    id="pick-sphere", vtkClass="vtkSphereSource", state={"radius": 100},
                 )
             ],
         ),
@@ -114,11 +112,9 @@ app.layout = dbc.Container(
                 dbc.Col(
                     children=dcc.Checklist(
                         id="toggle-cube-axes",
-                        options=[
-                            {'label': ' Show axis grid', 'value': 'grid'},
-                        ],
+                        options=[{"label": " Show axis grid", "value": "grid"},],
                         value=[],
-                        labelStyle={'display': 'inline-block'}
+                        labelStyle={"display": "inline-block"},
                     ),
                 ),
             ],
@@ -130,7 +126,13 @@ app.layout = dbc.Container(
         ),
         html.Pre(
             id="tooltip",
-            style={"position": "absolute", "bottom": "25px", "left": "25px", "zIndex": 1, "color": "white"}
+            style={
+                "position": "absolute",
+                "bottom": "25px",
+                "left": "25px",
+                "zIndex": 1,
+                "color": "white",
+            },
         ),
     ],
 )
@@ -154,7 +156,15 @@ app.layout = dbc.Container(
 )
 def updatePresetName(name, scale_factor, cubeAxes):
     points, polys, elevation, color_range = updateWarp(scale_factor)
-    return ['grid' in cubeAxes, name, color_range, points, polys, elevation, random.random()]
+    return [
+        "grid" in cubeAxes,
+        name,
+        color_range,
+        points,
+        polys,
+        elevation,
+        random.random(),
+    ]
 
 
 @app.callback(
@@ -163,18 +173,23 @@ def updatePresetName(name, scale_factor, cubeAxes):
         Output("pick-sphere", "state"),
         Output("pick-rep", "actor"),
     ],
-    [
-        Input("vtk-view", "clickInfo"),
-        Input("vtk-view", "hoverInfo"),
-    ],
+    [Input("vtk-view", "clickInfo"), Input("vtk-view", "hoverInfo"),],
 )
 def onInfo(clickData, hoverData):
     info = hoverData if hoverData else clickData
     if info:
-        if 'representationId' in info and info['representationId'] == "vtk-representation":
-            return [json.dumps(info, indent=2)], { "center": info['worldPosition'] }, { "visibility": True }
+        if (
+            "representationId" in info
+            and info["representationId"] == "vtk-representation"
+        ):
+            return (
+                [json.dumps(info, indent=2)],
+                {"center": info["worldPosition"]},
+                {"visibility": True},
+            )
         return dash.no_update, dash.no_update, dash.no_update
-    return [''], {}, { "visibility": False }
+    return [""], {}, {"visibility": False}
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
