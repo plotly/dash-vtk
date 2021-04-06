@@ -11,7 +11,8 @@ GeometryRepresentation is responsible to convert a vtkPolyData into rendering It
 
 \usage{
 vtkGeometryRepresentation(children=NULL, id=NULL, actor=NULL, mapper=NULL,
-property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
+property=NULL, colorMapPreset=NULL, colorDataRange=NULL,
+showCubeAxes=NULL, cubeAxesStyle=NULL)
 }
 
 \arguments{
@@ -28,6 +29,11 @@ property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
 \item{colorMapPreset}{Character. Preset name for the lookup table color map}
 
 \item{colorDataRange}{List of numerics. Data range use for the colorMap}
+
+\item{showCubeAxes}{Logical. Show/Hide Cube Axes for the given representation}
+
+\item{cubeAxesStyle}{Named list. Configure cube Axes style by overriding the set of properties defined
+https://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor/index.js#L703-L719}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

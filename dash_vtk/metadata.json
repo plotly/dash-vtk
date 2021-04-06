@@ -334,6 +334,20 @@
           "computed": false
         }
       },
+      "showCubeAxes": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Show/Hide Cube Axes for the given representation"
+      },
+      "cubeAxesStyle": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Configure cube Axes style by overriding the set of properties defined\nhttps://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor/index.js#L703-L719"
+      },
       "children": {
         "type": {
           "name": "union",
@@ -1168,6 +1182,30 @@
           "value": "0",
           "computed": false
         }
+      },
+      "pickingModes": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "List of picking listeners to bind. The supported values are `click` and `hover`. By default it is disabled (empty array)."
+      },
+      "clickInfo": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Read-only prop. To use this, make sure that `pickingModes` contains `click`.\nThis prop is updated when an element in the map is clicked. This contains\nthe picking info describing the object being clicked on."
+      },
+      "hoverInfo": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Read-only prop. To use this, make sure that `pickingModes` contains `hover`.\nThis prop is updated when an element in the map is hovered. This contains\nthe picking info describing the object being hovered."
       },
       "children": {
         "type": {

@@ -28,9 +28,16 @@ between 0-1 of Red, Green, Blue component.
 - `cameraParallelProjection` (Bool; optional): Use parallel projection (default: false)
 - `triggerRender` (Real; optional): Property use to trigger a render when changing.
 - `triggerResetCamera` (Real; optional): Property use to trigger a resetCamera when changing.
+- `pickingModes` (Array of Strings; optional): List of picking listeners to bind. The supported values are `click` and `hover`. By default it is disabled (empty array).
+- `clickInfo` (Dict; optional): Read-only prop. To use this, make sure that `pickingModes` contains `click`.
+This prop is updated when an element in the map is clicked. This contains
+the picking info describing the object being clicked on.
+- `hoverInfo` (Dict; optional): Read-only prop. To use this, make sure that `pickingModes` contains `hover`.
+This prop is updated when an element in the map is hovered. This contains
+the picking info describing the object being hovered.
 """
 function vtk_view(; kwargs...)
-        available_props = Symbol[:children, :id, :style, :className, :background, :interactorSettings, :cameraPosition, :cameraViewUp, :cameraParallelProjection, :triggerRender, :triggerResetCamera]
+        available_props = Symbol[:children, :id, :style, :className, :background, :interactorSettings, :cameraPosition, :cameraViewUp, :cameraParallelProjection, :triggerRender, :triggerResetCamera, :pickingModes, :clickInfo, :hoverInfo]
         wild_props = Symbol[]
         return Component("vtk_view", "View", "dash_vtk", available_props, wild_props; kwargs...)
 end

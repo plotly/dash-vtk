@@ -24,9 +24,12 @@ Keyword arguments:
 - `property` (Dict; optional): Properties to set to the actor.property
 - `colorMapPreset` (String; optional): Preset name for the lookup table color map
 - `colorDataRange` (Array of Reals; optional): Data range use for the colorMap
+- `showCubeAxes` (Bool; optional): Show/Hide Cube Axes for the given representation
+- `cubeAxesStyle` (Dict; optional): Configure cube Axes style by overriding the set of properties defined
+https://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor/index.js#L703-L719
 """
 function vtk_geometryrepresentation(; kwargs...)
-        available_props = Symbol[:children, :id, :actor, :mapper, :property, :colorMapPreset, :colorDataRange]
+        available_props = Symbol[:children, :id, :actor, :mapper, :property, :colorMapPreset, :colorDataRange, :showCubeAxes, :cubeAxesStyle]
         wild_props = Symbol[]
         return Component("vtk_geometryrepresentation", "GeometryRepresentation", "dash_vtk", available_props, wild_props; kwargs...)
 end
