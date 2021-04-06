@@ -45,7 +45,7 @@ server = app.server
 
 vtk_view = dash_vtk.View(
     id="vtk-view",
-    pickingModes=['click', 'hover'],
+    pickingModes=['hover'],
     children=[
         dash_vtk.GeometryRepresentation(
             id="vtk-representation",
@@ -170,8 +170,10 @@ def updatePresetName(name, scale_factor, cubeAxes):
 )
 def onInfo(clickData, hoverData):
     info = hoverData if hoverData else clickData
-    if info and info['representationId'] == "vtk-representation":
-        return [json.dumps(info, indent=2)], { "center": info['worldPosition'] }, { "visibility": True }
+    if info:
+        if 'representationId' in info and info['representationId'] == "vtk-representation":
+            return [json.dumps(info, indent=2)], { "center": info['worldPosition'] }, { "visibility": True }
+        return dash.no_update, dash.no_update, dash.no_update
     return [''], {}, { "visibility": False }
 
 if __name__ == "__main__":
