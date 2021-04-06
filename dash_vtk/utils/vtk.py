@@ -24,10 +24,15 @@ to_js_type = {
 }
 
 
-def to_mesh_state(dataset, field_to_keep=None, point_arrays=[], cell_arrays=[]):
+def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=None):
   '''Expect any dataset and extract its surface into a dash_vtk.Mesh state property'''
   if dataset is None:
     return None
+
+  if point_arrays is None:
+    point_arrays = []
+  if cell_arrays is None:
+    cell_arrays = []
 
   # Make sure we have a polydata to export
   polydata = None
