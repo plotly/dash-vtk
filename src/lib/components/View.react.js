@@ -1,7 +1,10 @@
 /* eslint-disable no-magic-numbers */
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
-import {View as VtkItem} from '../LazyComponents';
+// import {View as VtkItem} from 'react-vtk-js';
+import view from '../utils/view';
+
+const VtkItem = lazy(view);
 
 
 /**
@@ -12,9 +15,18 @@ import {View as VtkItem} from '../LazyComponents';
  *   - `cameraViewUp`: [0, 1, 0]
  *   - `cameraParallelProjection`: false
  */
-export default function View(props) {
-  return <Suspense fallback={null}><VtkItem {...props} /></Suspense>;
-};
+export default class View extends React.Component {
+  render() {
+    return (
+      <Suspense fallback={null}>
+        <VtkItem {...this.props} />
+      </Suspense>
+    )
+  }
+}
+// export default function View(props) {
+//   return <Suspense fallback={null}><VtkItem {...props} /></Suspense>;
+// };
 
 View.defaultProps = {
   style: {
@@ -144,3 +156,6 @@ View.propTypes = {
     PropTypes.node,
   ]),
 };
+
+export const propTypes = View.propTypes;
+export const defaultProps = View.defaultProps;
