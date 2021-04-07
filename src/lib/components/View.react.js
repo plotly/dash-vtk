@@ -156,6 +156,3 @@ View.propTypes = {
     PropTypes.node,
   ]),
 };
-
-export const propTypes = View.propTypes;
-export const defaultProps = View.defaultProps;
