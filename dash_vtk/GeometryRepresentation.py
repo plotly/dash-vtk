@@ -20,14 +20,17 @@ Keyword arguments:
 - mapper (dict; optional): Properties to set to the actor
 - property (dict; optional): Properties to set to the actor.property
 - colorMapPreset (string; default 'erdc_rainbow_bright'): Preset name for the lookup table color map
-- colorDataRange (list of numbers; default [0, 1]): Data range use for the colorMap"""
+- colorDataRange (list of numbers; default [0, 1]): Data range use for the colorMap
+- showCubeAxes (boolean; optional): Show/Hide Cube Axes for the given representation
+- cubeAxesStyle (dict; optional): Configure cube Axes style by overriding the set of properties defined
+https://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor/index.js#L703-L719"""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, actor=Component.UNDEFINED, mapper=Component.UNDEFINED, property=Component.UNDEFINED, colorMapPreset=Component.UNDEFINED, colorDataRange=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'actor', 'mapper', 'property', 'colorMapPreset', 'colorDataRange']
+    def __init__(self, children=None, id=Component.UNDEFINED, actor=Component.UNDEFINED, mapper=Component.UNDEFINED, property=Component.UNDEFINED, colorMapPreset=Component.UNDEFINED, colorDataRange=Component.UNDEFINED, showCubeAxes=Component.UNDEFINED, cubeAxesStyle=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'actor', 'mapper', 'property', 'colorMapPreset', 'colorDataRange', 'showCubeAxes', 'cubeAxesStyle']
         self._type = 'GeometryRepresentation'
         self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'actor', 'mapper', 'property', 'colorMapPreset', 'colorDataRange']
+        self.available_properties = ['children', 'id', 'actor', 'mapper', 'property', 'colorMapPreset', 'colorDataRange', 'showCubeAxes', 'cubeAxesStyle']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

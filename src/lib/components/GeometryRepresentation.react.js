@@ -52,6 +52,17 @@ GeometryRepresentation.propTypes = {
    */
   colorDataRange: PropTypes.arrayOf(PropTypes.number),
 
+  /**
+   * Show/Hide Cube Axes for the given representation
+   */
+  showCubeAxes: PropTypes.bool,
+
+  /**
+   * Configure cube Axes style by overriding the set of properties defined
+   * https://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor/index.js#L703-L719
+   */
+  cubeAxesStyle: PropTypes.object,
+
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

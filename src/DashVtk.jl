@@ -3,7 +3,7 @@ module DashVtk
 using Dash
 
 const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
-const version = "0.0.6"
+const version = "0.0.7"
 
 include("vtk_algorithm.jl")
 include("vtk_calculator.jl")
@@ -35,14 +35,14 @@ function __init__()
             [
                 DashBase.Resource(
     relative_package_path = "dash_vtk.min.js",
-    external_url = "https://unpkg.com/dash_vtk@0.0.6/dash_vtk/dash_vtk.min.js",
+    external_url = "https://unpkg.com/dash_vtk@0.0.7/dash_vtk/dash_vtk.min.js",
     dynamic = nothing,
     async = nothing,
     type = :js
 ),
 DashBase.Resource(
     relative_package_path = "dash_vtk.min.js.map",
-    external_url = "https://unpkg.com/dash_vtk@0.0.6/dash_vtk/dash_vtk.min.js.map",
+    external_url = "https://unpkg.com/dash_vtk@0.0.7/dash_vtk/dash_vtk.min.js.map",
     dynamic = true,
     async = nothing,
     type = :js

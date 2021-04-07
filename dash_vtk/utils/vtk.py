@@ -24,10 +24,15 @@ to_js_type = {
 }
 
 
-def to_mesh_state(dataset, field_to_keep=None):
+def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=None):
   '''Expect any dataset and extract its surface into a dash_vtk.Mesh state property'''
   if dataset is None:
     return None
+
+  if point_arrays is None:
+    point_arrays = []
+  if cell_arrays is None:
+    cell_arrays = []
 
   # Make sure we have a polydata to export
   polydata = None
@@ -77,6 +82,42 @@ def to_mesh_state(dataset, field_to_keep=None):
       js_types = to_js_type[str(values.dtype)]
       location = 'PointData'
 
+  # other arrays (points)
+  point_data = []
+  for name in point_arrays:
+    array = polydata.GetPointData().GetArray(name)
+    if array:
+      dataRange = array.GetRange(-1)
+      nb_comp = array.GetNumberOfComponents()
+      values = vtk_to_numpy(array).ravel()
+      js_types = to_js_type[str(values.dtype)]
+      point_data.append({
+        'name': name,
+        'values': values,
+        'numberOfComponents': nb_comp,
+        'type': js_types,
+        'location': 'PointData',
+        'dataRange': dataRange,
+      })
+
+  # other arrays (cells)
+  cell_data = []
+  for name in point_arrays:
+    array = polydata.GetCellData().GetArray(name)
+    if array:
+      dataRange = array.GetRange(-1)
+      nb_comp = array.GetNumberOfComponents()
+      values = vtk_to_numpy(array).ravel()
+      js_types = to_js_type[str(values.dtype)]
+      cell_data.append({
+        'name': name,
+        'values': values,
+        'numberOfComponents': nb_comp,
+        'type': js_types,
+        'location': 'CellData',
+        'dataRange': dataRange,
+      })
+
   state = {
       'mesh': {
           'points': points,
@@ -102,6 +143,11 @@ def to_mesh_state(dataset, field_to_keep=None):
           'dataRange': dataRange,
       },
     })
+
+  if len(point_data):
+    state.update({ 'pointArrays': point_data })
+  if len(cell_data):
+    state.update({ 'cellArrays': cell_data })
 
   return state
 

@@ -14,7 +14,8 @@ vtkView(children=NULL, id=NULL, style=NULL, className=NULL,
 background=NULL, interactorSettings=NULL,
 cameraPosition=NULL, cameraViewUp=NULL,
 cameraParallelProjection=NULL, triggerRender=NULL,
-triggerResetCamera=NULL)
+triggerResetCamera=NULL, pickingModes=NULL, clickInfo=NULL,
+hoverInfo=NULL)
 }
 
 \arguments{
@@ -40,6 +41,16 @@ between 0-1 of Red, Green, Blue component.}
 \item{triggerRender}{Numeric. Property use to trigger a render when changing.}
 
 \item{triggerResetCamera}{Numeric. Property use to trigger a resetCamera when changing.}
+
+\item{pickingModes}{List of characters. List of picking listeners to bind. The supported values are `click` and `hover`. By default it is disabled (empty array).}
+
+\item{clickInfo}{Named list. Read-only prop. To use this, make sure that `pickingModes` contains `click`.
+This prop is updated when an element in the map is clicked. This contains
+the picking info describing the object being clicked on.}
+
+\item{hoverInfo}{Named list. Read-only prop. To use this, make sure that `pickingModes` contains `hover`.
+This prop is updated when an element in the map is hovered. This contains
+the picking info describing the object being hovered.}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

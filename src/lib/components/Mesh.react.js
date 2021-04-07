@@ -15,22 +15,24 @@ export default function Mesh(props) {
       port={props.port}
       {...props.state.mesh}
     >
-      {props.state.field && props.state.field.location === 'PointData' &&
         <PointData>
+        {props.state.field && props.state.field.location === 'PointData' &&
           <DataArray
             registration="setScalars"
             {...props.state.field}
           />
+        }
+        {props.state.pointArrays && props.state.pointArrays.map((array) => (<DataArray key={array.name} {...array} />))}
         </PointData>
-      }
-      {props.state.field && props.state.field.location === 'CellData' &&
         <CellData>
+        {props.state.field && props.state.field.location === 'CellData' &&
           <DataArray
             registration="setScalars"
             {...props.state.field}
           />
+        }
+        {props.state.cellArrays && props.state.cellArrays.map((array) => (<DataArray key={array.name} {...array} />))}
         </CellData>
-      }
     </PolyData>
   );
 };

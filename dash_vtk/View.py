@@ -62,14 +62,21 @@ between 0-1 of Red, Green, Blue component.
 - cameraViewUp (list; default [0, 1, 0]): Initial camera position from an object in [0,0,0]
 - cameraParallelProjection (boolean; default False): Use parallel projection (default: false)
 - triggerRender (number; default 0): Property use to trigger a render when changing.
-- triggerResetCamera (number; default 0): Property use to trigger a resetCamera when changing."""
+- triggerResetCamera (number; default 0): Property use to trigger a resetCamera when changing.
+- pickingModes (list of strings; optional): List of picking listeners to bind. The supported values are `click` and `hover`. By default it is disabled (empty array).
+- clickInfo (dict; optional): Read-only prop. To use this, make sure that `pickingModes` contains `click`.
+This prop is updated when an element in the map is clicked. This contains
+the picking info describing the object being clicked on.
+- hoverInfo (dict; optional): Read-only prop. To use this, make sure that `pickingModes` contains `hover`.
+This prop is updated when an element in the map is hovered. This contains
+the picking info describing the object being hovered."""
     @_explicitize_args
-    def __init__(self, children=None, id=Component.UNDEFINED, style=Component.UNDEFINED, className=Component.UNDEFINED, background=Component.UNDEFINED, interactorSettings=Component.UNDEFINED, cameraPosition=Component.UNDEFINED, cameraViewUp=Component.UNDEFINED, cameraParallelProjection=Component.UNDEFINED, triggerRender=Component.UNDEFINED, triggerResetCamera=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['children', 'id', 'style', 'className', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection', 'triggerRender', 'triggerResetCamera']
+    def __init__(self, children=None, id=Component.UNDEFINED, style=Component.UNDEFINED, className=Component.UNDEFINED, background=Component.UNDEFINED, interactorSettings=Component.UNDEFINED, cameraPosition=Component.UNDEFINED, cameraViewUp=Component.UNDEFINED, cameraParallelProjection=Component.UNDEFINED, triggerRender=Component.UNDEFINED, triggerResetCamera=Component.UNDEFINED, pickingModes=Component.UNDEFINED, clickInfo=Component.UNDEFINED, hoverInfo=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['children', 'id', 'style', 'className', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection', 'triggerRender', 'triggerResetCamera', 'pickingModes', 'clickInfo', 'hoverInfo']
         self._type = 'View'
         self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['children', 'id', 'style', 'className', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection', 'triggerRender', 'triggerResetCamera']
+        self.available_properties = ['children', 'id', 'style', 'className', 'background', 'interactorSettings', 'cameraPosition', 'cameraViewUp', 'cameraParallelProjection', 'triggerRender', 'triggerResetCamera', 'pickingModes', 'clickInfo', 'hoverInfo']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

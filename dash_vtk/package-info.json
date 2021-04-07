@@ -1,6 +1,6 @@
 {
   "name": "dash_vtk",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React based declarative usage of vtk.js for Dash",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "ramda": "^0.26.1",
-    "react-vtk-js": "1.1.4"
+    "react-vtk-js": "1.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
