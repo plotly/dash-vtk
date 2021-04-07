@@ -1,4 +1,8 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
+const WebpackDashDynamicImport = require('@plotly/webpack-dash-dynamic-import');
+
 const packagejson = require('./package.json');
 
 const dashLibraryName = packagejson.name.replace(/-/g, '_');
@@ -25,7 +29,7 @@ module.exports = (env, argv) => {
     }
 
     let filename = (overrides.output || {}).filename;
-    if(!filename) {
+    if (!filename) {
         const modeSuffix = mode === 'development' ? 'dev' : 'min';
         filename = `${dashLibraryName}.${modeSuffix}.js`;
     }
@@ -46,6 +50,7 @@ module.exports = (env, argv) => {
         entry,
         output: {
             path: path.resolve(__dirname, dashLibraryName),
+            chunkFilename: '[name].js',
             filename,
             library: dashLibraryName,
             libraryTarget: 'window',
@@ -53,14 +58,30 @@ module.exports = (env, argv) => {
         devtool,
         externals,
         module: {
+            // noParse: /node_modules[\\\/]plotly.js/,
             rules: [
                 {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     use: {
+                        loader: 'babel-loader'
+                    }
+                },
+                {
+                    test: /\.jsx?$/,
+                    include: /node_modules[\\\/](react-jsx-parser|highlight[.]js)[\\\/]/,
+                    use: {
                         loader: 'babel-loader',
+                        options: {
+                            babelrc: false,
+                            configFile: false,
+                            presets: [
+                                '@babel/preset-env'
+                            ]
+                        }
                     },
                 },
+
                 {
                     test: /\.css$/,
                     use: [
@@ -77,5 +98,43 @@ module.exports = (env, argv) => {
                 },
             ],
         },
+        optimization: {
+            minimizer: [
+                new TerserPlugin({
+                    sourceMap: true,
+                    parallel: true,
+                    cache: './.build_cache/terser',
+                    terserOptions: {
+                        warnings: false,
+                        ie8: false
+                    }
+                })
+            ],
+            splitChunks: {
+                name: true,
+                cacheGroups: {
+                    async: {
+                        chunks: 'async',
+                        minSize: 0,
+                        name(module, chunks, cacheGroupKey) {
+                            return `${cacheGroupKey}-${chunks[0].name}`;
+                        }
+                    },
+                    shared: {
+                        chunks: 'all',
+                        minSize: 0,
+                        minChunks: 2,
+                        name: 'dash_vtk-shared'
+                    }
+                }
+            }
+        },
+        plugins: [
+            new WebpackDashDynamicImport(),
+            new webpack.SourceMapDevToolPlugin({
+                filename: '[file].map',
+                exclude: ['async-plotlyjs']
+            })
+        ]
     }
 };
