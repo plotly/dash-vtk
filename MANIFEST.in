@@ -5,3 +5,5 @@ include dash_vtk/package-info.json
 include README.md
 include LICENSE
 include package.json
+include dash_vtk/async-*.js
+include dash_vtk/async-*.js.map
