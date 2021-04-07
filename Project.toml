@@ -1,12 +1,12 @@
 
 name = "DashVtk"
-uuid = "1b08a953-4be3-4667-9a23-818b1eccd4c7"
+uuid = "1b08a953-4be3-4667-9a23-4fdd99ec3e46"
 authors = ["Kitware Inc <sebastien.jourdain@kitware.com> and Plotly Technologies <xinghan@plot.ly>"]
 version = "0.0.7"
 
 [deps]
 Dash = "1b08a953-4be3-4667-9a23-3db579824955"
 
-[compat]
+[compact]
 julia = "1.2"
-Dash = "0.1.3"
+Dash = ">=0.1"
