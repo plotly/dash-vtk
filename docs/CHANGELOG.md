@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.7] - 2021-04-06
+
+### Added
+
+* Adding picking capabilities
+* Adding CubeAxes on GeometryRepresentation
+
+### Fixed
+* fix bug when using cell data with `to_mesh_state`
+
+## [0.0.6] - 2021-02-22
+
+### Fixed
+* fix(react-vtk-js): fix dynamic handling of DataArray update
+
+### Changed
+* update to react-vtk-js 1.1.4
+* doc(View): Update props to include style/className
+
 ## [0.0.5] - 2021-02-15
 
 ### Added

@@ -118,6 +118,25 @@ View.propTypes = {
   triggerResetCamera: PropTypes.number,
 
   /**
+   * List of picking listeners to bind. The supported values are `click` and `hover`. By default it is disabled (empty array).
+   */
+  pickingModes: PropTypes.arrayOf(PropTypes.string),
+
+  /**
+   * Read-only prop. To use this, make sure that `pickingModes` contains `click`.
+   * This prop is updated when an element in the map is clicked. This contains
+   * the picking info describing the object being clicked on.
+   */
+  clickInfo: PropTypes.object,
+
+  /**
+   * Read-only prop. To use this, make sure that `pickingModes` contains `hover`.
+   * This prop is updated when an element in the map is hovered. This contains
+   * the picking info describing the object being hovered.
+   */
+  hoverInfo: PropTypes.object,
+
+  /**
    * List of representation to show
    */
   children: PropTypes.oneOfType([
