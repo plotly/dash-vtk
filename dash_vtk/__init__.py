@@ -10,6 +10,12 @@ import dash as _dash
 from ._imports_ import *
 from ._imports_ import __all__
 
+
+async_resources = [
+    "view"
+]
+
+
 if not hasattr(_dash, '__plotly_dash') and not hasattr(_dash, 'development'):
     print('Dash was not successfully imported. '
           'Make sure you don\'t have a file '
@@ -44,6 +50,27 @@ _js_dist = [
         'dynamic': True
     }
 ]
+
+
+_js_dist.extend([{
+    'relative_package_path': 'async-{}.js'.format(async_resource),
+    'external_url': (
+        'https://unpkg.com/dash-vtk@{}'
+        '/dash_vtk/async-{}.js'
+    ).format(__version__, async_resource),
+    'namespace': 'dash_vtk',
+    'async': True
+} for async_resource in async_resources])
+
+_js_dist.extend([{
+    'relative_package_path': 'async-{}.js.map'.format(async_resource),
+    'external_url': (
+        'https://unpkg.com/dash-vtk@{}'
+        '/dash_vtk/async-{}.js.map'
+    ).format(__version__, async_resource),
+    'namespace': 'dash_vtk',
+    'dynamic': True
+} for async_resource in async_resources])
 
 _css_dist = []
 

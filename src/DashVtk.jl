@@ -46,6 +46,20 @@ DashBase.Resource(
     dynamic = true,
     async = nothing,
     type = :js
+),
+DashBase.Resource(
+    relative_package_path = "async-view.js",
+    external_url = "https://unpkg.com/dash-vtk@0.0.7/dash_vtk/async-view.js",
+    dynamic = nothing,
+    async = :true,
+    type = :js
+),
+DashBase.Resource(
+    relative_package_path = "async-view.js.map",
+    external_url = "https://unpkg.com/dash-vtk@0.0.7/dash_vtk/async-view.js.map",
+    dynamic = true,
+    async = nothing,
+    type = :js
 )
             ]
         )
