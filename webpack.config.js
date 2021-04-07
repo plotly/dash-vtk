@@ -120,12 +120,12 @@ module.exports = (env, argv) => {
                             return `${cacheGroupKey}-${chunks[0].name}`;
                         }
                     },
-                    shared: {
-                        chunks: 'all',
-                        minSize: 0,
-                        minChunks: 2,
-                        name: 'dash_vtk-shared'
-                    }
+                    // shared: {
+                    //     chunks: 'all',
+                    //     minSize: 0,
+                    //     minChunks: 2,
+                    //     name: 'dash_vtk-shared'
+                    // }
                 }
             }
         },
