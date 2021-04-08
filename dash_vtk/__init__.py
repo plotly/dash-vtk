@@ -12,7 +12,26 @@ from ._imports_ import __all__
 
 
 async_resources = [
-    "View"
+    "Algorithm",
+    "Calculator",
+    "CellData",
+    "DataArray",
+    "FieldData",
+    "GeometryRepresentation",
+    "GlyphRepresentation",
+    "ImageData",
+    "Mesh",
+    "PointCloudRepresentation",
+    "PointData",
+    "PolyData",
+    "Reader",
+    "ShareDataSet",
+    "SliceRepresentation",
+    "View",
+    "Volume",
+    "VolumeController",
+    "VolumeDataRepresentation",
+    "VolumeRepresentation"
 ]
 
 
