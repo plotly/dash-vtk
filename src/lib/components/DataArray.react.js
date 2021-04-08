@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// import VtkItem from '../utils/DataArray';
 import { DataArray as VtkItem } from 'react-vtk-js';
 
 /**
@@ -14,6 +15,15 @@ import { DataArray as VtkItem } from 'react-vtk-js';
 export default function DataArray(props) {
   return <VtkItem {...props} />;
 };
+//  export default class DataArray extends React.Component {
+//   render() {
+//     return (
+//       <React.Suspense fallback={null}>
+//         <VtkItem {...this.props} />
+//       </React.Suspense>
+//     )
+//   }
+// }
 
 DataArray.defaultProps = {
   name: 'scalars',
