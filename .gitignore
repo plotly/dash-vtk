@@ -279,3 +279,6 @@ dash_vtk/output.js
 *deps/output.js
 .vscode/settings.json
 .build_cache
+render_js.py
+fragment_react_template.jinja2
+util_template.jinja2
