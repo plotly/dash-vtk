@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PointCloudRepresentation as VtkItem } from 'react-vtk-js';
+// import { PointCloudRepresentation as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/PointCloudRepresentation';
+
 
 /**
  * PointCloudRepresentation expect the following set of properties
@@ -11,7 +13,7 @@ import { PointCloudRepresentation as VtkItem } from 'react-vtk-js';
  *   - scalars: [...]
  */
 export default function PointCloudRepresentation(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense><VtkItem {...props} /></React.Suspense>;
 };
 
 PointCloudRepresentation.defaultProps = {

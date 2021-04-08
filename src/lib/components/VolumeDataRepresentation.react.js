@@ -2,7 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { VolumeDataRepresentation as VtkItem } from 'react-vtk-js';
+// import { VolumeDataRepresentation as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/VolumeDataRepresentation';
+
 
 /**
  * VolumeDataRepresentation expect the following set of properties
@@ -15,7 +17,7 @@ import { VolumeDataRepresentation as VtkItem } from 'react-vtk-js';
  *   - scalarsType: Float32Array
  */
 export default function VolumeDataRepresentation(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense><VtkItem {...props} /></React.Suspense>;
 };
 
 VolumeDataRepresentation.defaultProps = {

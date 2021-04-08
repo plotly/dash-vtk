@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PointData as VtkItem } from 'react-vtk-js';
+// import { PointData as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/PointData';
 
 /**
  * PointData is exposing a vtkPointData to a downstream element
  */
 export default function PointData(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense><VtkItem {...props} /></React.Suspense>;
 };
 
 PointData.defaultProps = {};
