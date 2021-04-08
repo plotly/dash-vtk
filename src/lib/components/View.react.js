@@ -1,7 +1,7 @@
 /* eslint-disable no-magic-numbers */
-import React, { Suspense } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {View as VtkItem} from '../LazyComponents';
+import { View as VtkItem } from 'react-vtk-js';
 
 
 /**
@@ -13,7 +13,7 @@ import {View as VtkItem} from '../LazyComponents';
  *   - `cameraParallelProjection`: false
  */
 export default function View(props) {
-  return <Suspense fallback={null}><VtkItem {...props} /></Suspense>;
+  return <VtkItem {...props} />;
 };
 
 View.defaultProps = {
