@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import VtkItem from '../utils/DataArray';
-import { DataArray as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/DataArray';
+// import { DataArray as VtkItem } from 'react-vtk-js';
 
 /**
  * DataArray is creating a vtkDataArray for the container fields
