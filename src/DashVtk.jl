@@ -48,15 +48,15 @@ DashBase.Resource(
     type = :js
 ),
 DashBase.Resource(
-    relative_package_path = "async-view.js",
-    external_url = "https://unpkg.com/dash-vtk@0.0.7/dash_vtk/async-view.js",
+    relative_package_path = "async-View.js",
+    external_url = "https://unpkg.com/dash-vtk@0.0.7/dash_vtk/async-View.js",
     dynamic = nothing,
     async = :true,
     type = :js
 ),
 DashBase.Resource(
-    relative_package_path = "async-view.js.map",
-    external_url = "https://unpkg.com/dash-vtk@0.0.7/dash_vtk/async-view.js.map",
+    relative_package_path = "async-View.js.map",
+    external_url = "https://unpkg.com/dash-vtk@0.0.7/dash_vtk/async-View.js.map",
     dynamic = true,
     async = nothing,
     type = :js

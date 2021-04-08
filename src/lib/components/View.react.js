@@ -2,9 +2,7 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 // import {View as VtkItem} from 'react-vtk-js';
-import view from '../utils/view';
-
-const VtkItem = lazy(view);
+import VtkItem from '../utils/View';
 
 
 /**

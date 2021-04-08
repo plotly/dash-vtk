@@ -12,7 +12,7 @@ from ._imports_ import __all__
 
 
 async_resources = [
-    "view"
+    "View"
 ]
 
 
