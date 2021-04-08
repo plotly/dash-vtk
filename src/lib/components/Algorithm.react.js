@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Algorithm as VtkItem } from 'react-vtk-js';
+// import { Algorithm as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/Algorithm';
 
 /**
  * Algorithm is exposing a source or filter to a downstream filter
@@ -10,7 +11,7 @@ import { Algorithm as VtkItem } from 'react-vtk-js';
  *   - state: {}
  */
 export default function Algorithm(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense><VtkItem {...props} /></React.Suspense>;
 };
 
 Algorithm.defaultProps = {
