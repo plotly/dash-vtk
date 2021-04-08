@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GlyphRepresentation as VtkItem } from 'react-vtk-js';
+// import { GlyphRepresentation as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/GlyphRepresentation';
 
 /**
  * GlyphRepresentation using a source on port=1 as Glyph and the points of the source on port=0 to position the given glyphs
@@ -13,7 +14,7 @@ import { GlyphRepresentation as VtkItem } from 'react-vtk-js';
  * - colorDataRange: Range to use for the color scale
  */
 export default function GeometryRepresentation(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense><VtkItem {...props} /></React.Suspense>;
 };
 
 GeometryRepresentation.defaultProps = {

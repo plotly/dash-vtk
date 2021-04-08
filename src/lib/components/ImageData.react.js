@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ImageData as VtkItem } from 'react-vtk-js';
+// import { ImageData as VtkItem } from 'react-vtk-js';
+import VtkItem from '../utils/ImageData';
+
 
 /**
  * ImageData is exposing a vtkImageData to a downstream filter
@@ -16,7 +18,7 @@ import { ImageData as VtkItem } from 'react-vtk-js';
  *     ]
  */
 export default function ImageData(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense><VtkItem {...props} /></React.Suspense>;
 };
 
 ImageData.defaultProps = {
