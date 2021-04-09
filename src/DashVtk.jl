@@ -37,7 +37,7 @@ function __init__()
     relative_package_path = "dash_vtk.min.js",
     external_url = "https://unpkg.com/dash_vtk@0.0.7/dash_vtk/dash_vtk.min.js",
     dynamic = nothing,
-    async = :eager,
+    async = nothing,
     type = :js
 ),
 DashBase.Resource(
