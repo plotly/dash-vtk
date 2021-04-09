@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Import react-vtk-js async
 // import { Algorithm as VtkItem } from 'react-vtk-js';
 import VtkItem from '../utils/Algorithm';
 
