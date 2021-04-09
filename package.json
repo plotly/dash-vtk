@@ -24,6 +24,7 @@
   "author": "Kitware Inc <sebastien.jourdain@kitware.com> and Plotly Technologies <xinghan@plot.ly>",
   "license": "MIT",
   "dependencies": {
+    "@plotly/dash-component-plugins": "^1.2.0",
     "ramda": "^0.26.1",
     "react-vtk-js": "^1.2.2"
   },
