@@ -2,7 +2,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { View as VtkItem } from 'react-vtk-js';
+// import { View as VtkItem } from 'react-vtk-js';
+// import ReactVTK from 'react-vtk-js';
+
+
+// import ReactVTKPromise from '../LazyVTK';
+// const AsyncVTK = React.lazy(ReactVTKPromise);
+
+import AsyncVTK, {AsyncView} from '../LazyVTK';
+const LazyView = React.lazy(AsyncView);
+
+window.AsyncView = AsyncView;
+window.AsyncVTK = AsyncVTK;
+
 
 /**
  * View is responsible to render vtk.js data.
@@ -13,7 +25,13 @@ import { View as VtkItem } from 'react-vtk-js';
  *   - `cameraParallelProjection`: false
  */
 export default function View(props) {
-  return <VtkItem {...props} />;
+  // return <ReactVTK.Core.View {...props} />;
+  AsyncVTK().then(ReactVTK => console.log(ReactVTK));
+  return (
+    <React.Suspense fallback={null}>
+      <LazyView {...props} />
+    </React.Suspense>
+  );
 };
 
 View.defaultProps = {
