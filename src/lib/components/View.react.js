@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { View as VtkItem } from 'react-vtk-js';
-import {AsyncView} from '../LazyVTK';
+import {AsyncView} from '../AsyncReactVTK';
 
 const LazyView = React.lazy(AsyncView);
 
