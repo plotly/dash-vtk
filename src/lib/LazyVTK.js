@@ -3,9 +3,7 @@
 
 const AsyncView = async () => {
     const LazyVTK = await import('react-vtk-js');
-    console.log("LazyVTK", LazyVTK);
-    console.log("LazyVTK.View", LazyVTK.View);
-    return LazyVTK.View;
+    return {default: LazyVTK.View};
 }
 
 export {AsyncView};
