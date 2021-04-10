@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PolyData as VtkItem } from 'react-vtk-js';
+import { PolyData as VtkItem } from '../AsyncReactVTK';
 
 /**
  * PolyData is exposing a vtkPolyData to a downstream filter
@@ -15,7 +15,7 @@ import { PolyData as VtkItem } from 'react-vtk-js';
  *   - connectivity: 'manual', // [manual, points, triangles, strips]
  */
 export default function PolyData(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 PolyData.defaultProps = {

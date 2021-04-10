@@ -1,7 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { View as VtkItem } from 'react-vtk-js';
 import { View as VtkItem } from '../AsyncReactVTK';
 
 /**

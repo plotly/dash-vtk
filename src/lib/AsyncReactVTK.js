@@ -10,6 +10,11 @@ const AsyncComponentBuilder = name => async () => {
 }
 
 const Algorithm = lazy(AsyncComponentBuilder("Algorithm"));
+const DataArray = lazy(AsyncComponentBuilder("DataArray"));
+const GeometryRepresentation = lazy(AsyncComponentBuilder("GeometryRepresentation"));
+const PolyData = lazy(AsyncComponentBuilder("PolyData"));
+const PointData = lazy(AsyncComponentBuilder("PointData"));
+const Reader = lazy(AsyncComponentBuilder("Reader"));
 const View = lazy(AsyncComponentBuilder("View"));
 
-export {View, Algorithm};
+export {View, Algorithm, GeometryRepresentation, Reader, PolyData, PointData, DataArray};

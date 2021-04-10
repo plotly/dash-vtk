@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Reader as VtkItem } from 'react-vtk-js';
+import { Reader as VtkItem } from '../AsyncReactVTK';
 
 /**
  * Reader is exposing a reader to a downstream filter
@@ -12,7 +12,7 @@ import { Reader as VtkItem } from 'react-vtk-js';
  *   - parseAsArrayBuffer: base64String
  */
 export default function Reader(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 Reader.defaultProps = {
