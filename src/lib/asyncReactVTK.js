@@ -1,1 +1,1 @@
-export default import(/*webpackChunkName: "ReactVTK" */ 'react-vtk-js');
+export default import(/*webpackChunkName: "ReactVTK" */ './ReactVTK');
