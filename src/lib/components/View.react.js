@@ -2,9 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { View as VtkItem } from 'react-vtk-js';
-import {AsyncView} from '../AsyncReactVTK';
-
-const LazyView = React.lazy(AsyncView);
+import { View as VtkItem } from '../AsyncReactVTK';
 
 /**
  * View is responsible to render vtk.js data.
@@ -16,11 +14,7 @@ const LazyView = React.lazy(AsyncView);
  */
 export default function View(props) {
   // return <VtkItem {...props} />;
-  return (
-    <React.Suspense fallback={null}>
-      <LazyView {...props} />
-    </React.Suspense>
-  )
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 View.defaultProps = {

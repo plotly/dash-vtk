@@ -1,10 +1,15 @@
+import {lazy} from 'react';
+
 const AsyncReactVTK = import(/*webpackChunkName: "ReactVTK" */ './ReactVTK');
 
-const AsyncView = async () => {
+const AsyncComponentBuilder = name => async () => {
     const LazyVTK = await AsyncReactVTK;
-    console.log("LazyVTK", LazyVTK);
-    window.LazyVTK = LazyVTK;
-    return {default: LazyVTK.default.View};
+    // console.log("LazyVTK", LazyVTK);
+    // window.LazyVTK = LazyVTK;
+    return {default: LazyVTK.default[name]};
 }
 
-export {AsyncView};
+const Algorithm = lazy(AsyncComponentBuilder("Algorithm"));
+const View = lazy(AsyncComponentBuilder("View"));
+
+export {View, Algorithm};
