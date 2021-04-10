@@ -14,14 +14,14 @@ It takes the following set of properties:
   - registration: 'addArray', 'setScalars', ...
 Keyword arguments:
 - `id` (String; optional): The ID used to identify this component.
-- `type` (String; optional): Typed array name
 - `name` (String; optional): Field name
-- `values` (Array of Reals; optional): Actual values to use inside our array
 - `numberOfComponents` (Real; optional): Number of components / Tuple size
 - `registration` (String; optional): Name of the method to call on the fieldData (addArray, setScalars, setVectors...)
+- `type` (String; optional): Typed array name
+- `values` (Array of Reals; optional): Actual values to use inside our array
 """
 function vtk_dataarray(; kwargs...)
-        available_props = Symbol[:id, :type, :name, :values, :numberOfComponents, :registration]
+        available_props = Symbol[:id, :name, :numberOfComponents, :registration, :type, :values]
         wild_props = Symbol[]
         return Component("vtk_dataarray", "DataArray", "dash_vtk", available_props, wild_props; kwargs...)
 end

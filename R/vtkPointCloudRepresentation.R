@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkPointCloudRepresentation <- function(xyz=NULL, rgb=NULL, rgba=NULL, scalars=NULL, colorMapPreset=NULL, colorDataRange=NULL, property=NULL) {
+vtkPointCloudRepresentation <- function(colorDataRange=NULL, colorMapPreset=NULL, property=NULL, rgb=NULL, rgba=NULL, scalars=NULL, xyz=NULL) {
     
-    props <- list(xyz=xyz, rgb=rgb, rgba=rgba, scalars=scalars, colorMapPreset=colorMapPreset, colorDataRange=colorDataRange, property=property)
+    props <- list(colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, property=property, rgb=rgb, rgba=rgba, scalars=scalars, xyz=xyz)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkPointCloudRepresentation <- function(xyz=NULL, rgb=NULL, rgba=NULL, scalars=N
         props = props,
         type = 'PointCloudRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('xyz', 'rgb', 'rgba', 'scalars', 'colorMapPreset', 'colorDataRange', 'property'),
+        propNames = c('colorDataRange', 'colorMapPreset', 'property', 'rgb', 'rgba', 'scalars', 'xyz'),
         package = 'dashVtk'
         )
 

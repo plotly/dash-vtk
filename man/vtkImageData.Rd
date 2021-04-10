@@ -10,8 +10,8 @@ ImageData is exposing a vtkImageData to a downstream filter It takes the followi
 }
 
 \usage{
-vtkImageData(children=NULL, id=NULL, port=NULL, dimensions=NULL,
-spacing=NULL, origin=NULL, direction=NULL)
+vtkImageData(children=NULL, id=NULL, dimensions=NULL, direction=NULL,
+origin=NULL, port=NULL, spacing=NULL)
 }
 
 \arguments{
@@ -19,15 +19,15 @@ spacing=NULL, origin=NULL, direction=NULL)
 
 \item{id}{Character. The ID used to identify this component.}
 
-\item{port}{Numeric. downstream connection port}
-
 \item{dimensions}{List of numerics. Number of points along x, y, z}
 
-\item{spacing}{List of numerics. Spacing along x, y, z between points in world coordinates}
+\item{direction}{List of numerics. 3x3 matrix use to orient the image data}
 
 \item{origin}{List of numerics. World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).}
 
-\item{direction}{List of numerics. 3x3 matrix use to orient the image data}
+\item{port}{Numeric. downstream connection port}
+
+\item{spacing}{List of numerics. Spacing along x, y, z between points in world coordinates}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

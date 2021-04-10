@@ -10,8 +10,8 @@ PolyData is exposing a vtkPolyData to a downstream filter It takes the following
 }
 
 \usage{
-vtkPolyData(children=NULL, id=NULL, port=NULL, points=NULL, verts=NULL,
-lines=NULL, polys=NULL, strips=NULL, connectivity=NULL)
+vtkPolyData(children=NULL, id=NULL, connectivity=NULL, lines=NULL,
+points=NULL, polys=NULL, port=NULL, strips=NULL, verts=NULL)
 }
 
 \arguments{
@@ -19,19 +19,19 @@ lines=NULL, polys=NULL, strips=NULL, connectivity=NULL)
 
 \item{id}{Character. The ID used to identify this component.}
 
-\item{port}{Numeric. downstream connection port}
-
-\item{points}{List of numerics. xyz coordinates}
-
-\item{verts}{List of numerics. verts cells}
+\item{connectivity}{Character. Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`}
 
 \item{lines}{List of numerics. lines cells}
 
+\item{points}{List of numerics. xyz coordinates}
+
 \item{polys}{List of numerics. polys cells}
+
+\item{port}{Numeric. downstream connection port}
 
 \item{strips}{List of numerics. strips cells}
 
-\item{connectivity}{Character. Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`}
+\item{verts}{List of numerics. verts cells}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

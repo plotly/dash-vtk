@@ -10,9 +10,9 @@ Reader is exposing a reader to a downstream filter It takes the following set of
 }
 
 \usage{
-vtkReader(children=NULL, id=NULL, port=NULL, vtkClass=NULL, url=NULL,
-parseAsText=NULL, parseAsArrayBuffer=NULL,
-renderOnUpdate=NULL, resetCameraOnUpdate=NULL)
+vtkReader(children=NULL, id=NULL, parseAsArrayBuffer=NULL,
+parseAsText=NULL, port=NULL, renderOnUpdate=NULL,
+resetCameraOnUpdate=NULL, url=NULL, vtkClass=NULL)
 }
 
 \arguments{
@@ -20,19 +20,19 @@ renderOnUpdate=NULL, resetCameraOnUpdate=NULL)
 
 \item{id}{Character. The ID used to identify this component.}
 
-\item{port}{Numeric. downstream connection port}
-
-\item{vtkClass}{Character. vtkClass name}
-
-\item{url}{Character. set of url to fetch data from}
+\item{parseAsArrayBuffer}{Character. set binary data to process from base64 string}
 
 \item{parseAsText}{Character. set text data to process}
 
-\item{parseAsArrayBuffer}{Character. set binary data to process from base64 string}
+\item{port}{Numeric. downstream connection port}
 
 \item{renderOnUpdate}{Logical. Automatically render on data loaded}
 
 \item{resetCameraOnUpdate}{Logical. Automatically reset camera on data loaded}
+
+\item{url}{Character. set of url to fetch data from}
+
+\item{vtkClass}{Character. vtkClass name}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

@@ -18,16 +18,16 @@ It takes the following set of properties:
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional)
 - `id` (String; optional): The ID used to identify this component.
-- `port` (Real; optional): downstream connection port
-- `vtkClass` (String; optional): vtkClass name
-- `url` (String; optional): set of url to fetch data from
-- `parseAsText` (String; optional): set text data to process
 - `parseAsArrayBuffer` (String; optional): set binary data to process from base64 string
+- `parseAsText` (String; optional): set text data to process
+- `port` (Real; optional): downstream connection port
 - `renderOnUpdate` (Bool; optional): Automatically render on data loaded
 - `resetCameraOnUpdate` (Bool; optional): Automatically reset camera on data loaded
+- `url` (String; optional): set of url to fetch data from
+- `vtkClass` (String; optional): vtkClass name
 """
 function vtk_reader(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :vtkClass, :url, :parseAsText, :parseAsArrayBuffer, :renderOnUpdate, :resetCameraOnUpdate]
+        available_props = Symbol[:children, :id, :parseAsArrayBuffer, :parseAsText, :port, :renderOnUpdate, :resetCameraOnUpdate, :url, :vtkClass]
         wild_props = Symbol[]
         return Component("vtk_reader", "Reader", "dash_vtk", available_props, wild_props; kwargs...)
 end

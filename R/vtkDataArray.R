@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkDataArray <- function(id=NULL, type=NULL, name=NULL, values=NULL, numberOfComponents=NULL, registration=NULL) {
+vtkDataArray <- function(id=NULL, name=NULL, numberOfComponents=NULL, registration=NULL, type=NULL, values=NULL) {
     
-    props <- list(id=id, type=type, name=name, values=values, numberOfComponents=numberOfComponents, registration=registration)
+    props <- list(id=id, name=name, numberOfComponents=numberOfComponents, registration=registration, type=type, values=values)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkDataArray <- function(id=NULL, type=NULL, name=NULL, values=NULL, numberOfCom
         props = props,
         type = 'DataArray',
         namespace = 'dash_vtk',
-        propNames = c('id', 'type', 'name', 'values', 'numberOfComponents', 'registration'),
+        propNames = c('id', 'name', 'numberOfComponents', 'registration', 'type', 'values'),
         package = 'dashVtk'
         )
 

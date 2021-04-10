@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkVolumeRepresentation <- function(children=NULL, id=NULL, mapper=NULL, volume=NULL, property=NULL, colorMapPreset=NULL, colorDataRange=NULL) {
+vtkVolumeRepresentation <- function(children=NULL, id=NULL, colorDataRange=NULL, colorMapPreset=NULL, mapper=NULL, property=NULL, volume=NULL) {
     
-    props <- list(children=children, id=id, mapper=mapper, volume=volume, property=property, colorMapPreset=colorMapPreset, colorDataRange=colorDataRange)
+    props <- list(children=children, id=id, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, mapper=mapper, property=property, volume=volume)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkVolumeRepresentation <- function(children=NULL, id=NULL, mapper=NULL, volume=
         props = props,
         type = 'VolumeRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'mapper', 'volume', 'property', 'colorMapPreset', 'colorDataRange'),
+        propNames = c('children', 'id', 'colorDataRange', 'colorMapPreset', 'mapper', 'property', 'volume'),
         package = 'dashVtk'
         )
 

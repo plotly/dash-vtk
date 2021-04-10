@@ -10,22 +10,22 @@ DataArray is creating a vtkDataArray for the container fields It takes the follo
 }
 
 \usage{
-vtkDataArray(id=NULL, type=NULL, name=NULL, values=NULL,
-numberOfComponents=NULL, registration=NULL)
+vtkDataArray(id=NULL, name=NULL, numberOfComponents=NULL,
+registration=NULL, type=NULL, values=NULL)
 }
 
 \arguments{
 \item{id}{Character. The ID used to identify this component.}
 
-\item{type}{Character. Typed array name}
-
 \item{name}{Character. Field name}
-
-\item{values}{List of numerics. Actual values to use inside our array}
 
 \item{numberOfComponents}{Numeric. Number of components / Tuple size}
 
 \item{registration}{Character. Name of the method to call on the fieldData (addArray, setScalars, setVectors...)}
+
+\item{type}{Character. Typed array name}
+
+\item{values}{List of numerics. Actual values to use inside our array}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

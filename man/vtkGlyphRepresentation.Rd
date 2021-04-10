@@ -10,8 +10,8 @@ GlyphRepresentation using a source on port=1 as Glyph and the points of the sour
 }
 
 \usage{
-vtkGlyphRepresentation(children=NULL, id=NULL, actor=NULL, mapper=NULL,
-property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
+vtkGlyphRepresentation(children=NULL, id=NULL, actor=NULL, colorDataRange=NULL,
+colorMapPreset=NULL, mapper=NULL, property=NULL)
 }
 
 \arguments{
@@ -21,13 +21,13 @@ property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
 
 \item{actor}{Named list. Properties to set to the actor}
 
-\item{mapper}{Named list. Properties to set to the vtkGlyph3DMapper}
-
-\item{property}{Named list. Properties to set to the actor.property}
+\item{colorDataRange}{List of numerics. Data range use for the colorMap}
 
 \item{colorMapPreset}{Character. Preset name for the lookup table color map}
 
-\item{colorDataRange}{List of numerics. Data range use for the colorMap}
+\item{mapper}{Named list. Properties to set to the vtkGlyph3DMapper}
+
+\item{property}{Named list. Properties to set to the actor.property}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

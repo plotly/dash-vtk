@@ -13,26 +13,37 @@ It takes the following set of properties:
   - registration: 'addArray', 'setScalars', ...
 
 Keyword arguments:
-- id (string; optional): The ID used to identify this component.
-- type (string; default 'Float32Array'): Typed array name
-- name (string; default 'scalars'): Field name
-- values (list of numbers; optional): Actual values to use inside our array
-- numberOfComponents (number; default 1): Number of components / Tuple size
-- registration (string; default 'addArray'): Name of the method to call on the fieldData (addArray, setScalars, setVectors...)"""
+
+- id (string; optional):
+    The ID used to identify this component.
+
+- name (string; default 'scalars'):
+    Field name.
+
+- numberOfComponents (number; default 1):
+    Number of components / Tuple size.
+
+- registration (string; default 'addArray'):
+    Name of the method to call on the fieldData (addArray, setScalars,
+    setVectors...).
+
+- type (string; default 'Float32Array'):
+    Typed array name.
+
+- values (list of numbers; optional):
+    Actual values to use inside our array."""
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, type=Component.UNDEFINED, name=Component.UNDEFINED, values=Component.UNDEFINED, numberOfComponents=Component.UNDEFINED, registration=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'type', 'name', 'values', 'numberOfComponents', 'registration']
+        self._prop_names = ['id', 'name', 'numberOfComponents', 'registration', 'type', 'values']
         self._type = 'DataArray'
         self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'type', 'name', 'values', 'numberOfComponents', 'registration']
+        self.available_properties = ['id', 'name', 'numberOfComponents', 'registration', 'type', 'values']
         self.available_wildcard_properties =            []
-
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
         _locals.update(kwargs)  # For wildcard attrs
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-
         for k in []:
             if k not in args:
                 raise TypeError(

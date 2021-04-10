@@ -22,14 +22,14 @@ It takes the following set of properties:
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional)
 - `id` (String; optional): The ID used to identify this component.
-- `port` (Real; optional): downstream connection port
 - `dimensions` (Array of Reals; optional): Number of points along x, y, z
-- `spacing` (Array of Reals; optional): Spacing along x, y, z between points in world coordinates
-- `origin` (Array of Reals; optional): World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
 - `direction` (Array of Reals; optional): 3x3 matrix use to orient the image data
+- `origin` (Array of Reals; optional): World coordinate of the lower left corner of your vtkImageData (i=0, j=0, k=0).
+- `port` (Real; optional): downstream connection port
+- `spacing` (Array of Reals; optional): Spacing along x, y, z between points in world coordinates
 """
 function vtk_imagedata(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :dimensions, :spacing, :origin, :direction]
+        available_props = Symbol[:children, :id, :dimensions, :direction, :origin, :port, :spacing]
         wild_props = Symbol[]
         return Component("vtk_imagedata", "ImageData", "dash_vtk", available_props, wild_props; kwargs...)
 end

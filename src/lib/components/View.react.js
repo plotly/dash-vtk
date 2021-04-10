@@ -1,8 +1,10 @@
 /* eslint-disable no-magic-numbers */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View as VtkItem } from 'react-vtk-js';
+// import { View as VtkItem } from 'react-vtk-js';
+import {AsyncView} from '../LazyVTK';
 
+const LazyView = React.lazy(AsyncView);
 
 /**
  * View is responsible to render vtk.js data.
@@ -13,7 +15,12 @@ import { View as VtkItem } from 'react-vtk-js';
  *   - `cameraParallelProjection`: false
  */
 export default function View(props) {
-  return <VtkItem {...props} />;
+  // return <VtkItem {...props} />;
+  return (
+    <React.Suspense fallback={null}>
+      <LazyView {...props} />
+    </React.Suspense>
+  )
 };
 
 View.defaultProps = {
