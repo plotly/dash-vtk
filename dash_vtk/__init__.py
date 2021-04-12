@@ -51,7 +51,7 @@ _js_dist = [
         'async': True
     },
     {
-        'relative_package_path': 'dash_vtk.min.js.map',
+        'relative_package_path': 'async-ReactVTK.js.map',
 'external_url': 'https://unpkg.com/{0}@{2}/{1}/async-ReactVTK.js.map'.format(
             package_name, __name__, __version__),
         'namespace': package_name,
