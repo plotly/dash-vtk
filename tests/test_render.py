@@ -63,8 +63,8 @@ def build_test(name, sleep=10):
 
 for n in names:
     var_name = "test_" + n.replace("-", "_").replace("demos.", "").replace(".app", "")
-    locals()[var_name] = build_test(n)
+    locals()[var_name] = build_test(n, sleep=20)
 
 for n in tutorials:
     var_name = "test_" + n
-    locals()[var_name] = build_test(n)
+    locals()[var_name] = build_test(n, sleep=5)
