@@ -3,10 +3,10 @@ import {lazy} from 'react';
 const AsyncReactVTK = import(/*webpackChunkName: "ReactVTK" */ './ReactVTK');
 
 const AsyncComponentBuilder = name => async () => {
-    const LazyVTK = await AsyncReactVTK;
-    // console.log("LazyVTK", LazyVTK);
-    // window.LazyVTK = LazyVTK;
-    return {default: LazyVTK.default[name]};
+    const ReactVTK = await AsyncReactVTK;
+    // console.log("ReactVTK", ReactVTK);
+    // window.ReactVTK = ReactVTK;
+    return {default: ReactVTK.default[name]};
 }
 
 const Algorithm = lazy(AsyncComponentBuilder("Algorithm"));
