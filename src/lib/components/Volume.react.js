@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ImageData, PointData, DataArray } from 'react-vtk-js';
+import { ImageData, PointData, DataArray } from '../AsyncReactVTK';
 
 /**
  * Volume is exposing a vtkImageData to a downstream filter

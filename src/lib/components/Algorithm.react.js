@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import { Algorithm as VtkItem } from 'react-vtk-js';
 import { Algorithm as VtkItem } from '../AsyncReactVTK';
 
 
@@ -12,7 +11,6 @@ import { Algorithm as VtkItem } from '../AsyncReactVTK';
  *   - state: {}
  */
 export default function Algorithm(props) {
-  // return <VtkItem {...props} />;
   return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 

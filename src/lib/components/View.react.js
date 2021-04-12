@@ -12,7 +12,6 @@ import { View as VtkItem } from '../AsyncReactVTK';
  *   - `cameraParallelProjection`: false
  */
 export default function View(props) {
-  // return <VtkItem {...props} />;
   return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
