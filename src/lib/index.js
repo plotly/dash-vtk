@@ -7,7 +7,7 @@ import FieldData from './components/FieldData.react';
 import GeometryRepresentation from './components/GeometryRepresentation.react';
 import GlyphRepresentation from './components/GlyphRepresentation.react';
 import ImageData from './components/ImageData.react';
-// import Mesh from './components/Mesh.react';
+import Mesh from './components/Mesh.react';
 import PointCloudRepresentation from './components/PointCloudRepresentation.react';
 import PointData from './components/PointData.react';
 import PolyData from './components/PolyData.react';
@@ -29,7 +29,7 @@ export {
     GeometryRepresentation,
     GlyphRepresentation,
     ImageData,
-    // Mesh,
+    Mesh,
     PointCloudRepresentation,
     PointData,
     PolyData,
