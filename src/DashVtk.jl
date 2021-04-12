@@ -55,7 +55,7 @@ DashBase.Resource(
     type = :js
 ),
 DashBase.Resource(
-    relative_package_path = "dash_vtk.min.js.map",
+    relative_package_path = "async-ReactVTK.js.map",
     external_url = "https://unpkg.com/dash_vtk@0.0.7/dash_vtk/async-ReactVTK.js.map",
     dynamic = true,
     async = nothing,
