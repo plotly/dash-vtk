@@ -1,8 +1,8 @@
 import {lazy} from 'react';
 
-const AsyncReactVTK = import(/*webpackChunkName: "ReactVTK" */ './ReactVTK');
 
 const AsyncComponentBuilder = name => async () => {
+    const AsyncReactVTK = import(/*webpackChunkName: "ReactVTK" */ './ReactVTK');
     const ReactVTK = await AsyncReactVTK;
     // console.log("ReactVTK", ReactVTK);
     // window.ReactVTK = ReactVTK;
