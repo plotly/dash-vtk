@@ -30,6 +30,24 @@ names = [
     "demos.synthetic-volume-rendering.app",
 ]
 
+tutorials = [
+    "docs.tutorials.t04_algorithm",
+    "docs.tutorials.t05_reader",
+    "docs.tutorials.s02_mesh_field",
+    "docs.tutorials.s05_volume_slice",
+    "docs.tutorials.t01_volume_rendering",
+    "docs.tutorials.s04_slice",
+    "docs.tutorials.s03_volume",
+    "docs.tutorials.t03_polydata",
+    "docs.tutorials.s01_mesh",
+    "docs.tutorials.s00_point_cloud",
+    "docs.tutorials.s06_vtk_mesh",
+    "docs.tutorials.t02_imagedata",
+    "docs.tutorials.t00_geometry_rendering",
+    "docs.tutorials.t06_shared_dataset",
+    "docs.tutorials.s07_vtk_volume",
+]
+
 
 def build_test(name, sleep=10):
     def test_fn(dash_duo):
@@ -45,4 +63,8 @@ def build_test(name, sleep=10):
 
 for n in names:
     var_name = "test_" + n.replace("-", "_").replace("demos.", "").replace(".app", "")
+    locals()[var_name] = build_test(n)
+
+for n in tutorials:
+    var_name = "test_" + n
     locals()[var_name] = build_test(n)
