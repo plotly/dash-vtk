@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataArray as VtkItem } from 'react-vtk-js';
+import { DataArray as VtkItem } from '../AsyncReactVTK';
 
 /**
  * DataArray is creating a vtkDataArray for the container fields
@@ -12,7 +12,7 @@ import { DataArray as VtkItem } from 'react-vtk-js';
  *   - registration: 'addArray', 'setScalars', ...
  */
 export default function DataArray(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 DataArray.defaultProps = {

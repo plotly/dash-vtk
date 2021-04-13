@@ -10,7 +10,7 @@ Algorithm is exposing a source or filter to a downstream filter It takes the fol
 }
 
 \usage{
-vtkAlgorithm(children=NULL, id=NULL, port=NULL, vtkClass=NULL, state=NULL)
+vtkAlgorithm(children=NULL, id=NULL, port=NULL, state=NULL, vtkClass=NULL)
 }
 
 \arguments{
@@ -20,9 +20,9 @@ vtkAlgorithm(children=NULL, id=NULL, port=NULL, vtkClass=NULL, state=NULL)
 
 \item{port}{Numeric. downstream connection port}
 
-\item{vtkClass}{Character. vtkClass name}
-
 \item{state}{Named list. set of property values for vtkClass}
+
+\item{vtkClass}{Character. vtkClass name}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

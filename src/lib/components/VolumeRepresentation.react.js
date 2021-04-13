@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { VolumeRepresentation as VtkItem } from 'react-vtk-js';
+import { VolumeRepresentation as VtkItem } from '../AsyncReactVTK';
 
 /**
  * VolumeRepresentation is responsible to convert a vtkPolyData into rendering
@@ -11,7 +11,7 @@ import { VolumeRepresentation as VtkItem } from 'react-vtk-js';
  *   - color: [1,1,1],
  */
 export default function VolumeRepresentation(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 VolumeRepresentation.defaultProps = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Calculator as VtkItem } from 'react-vtk-js';
+import { Calculator as VtkItem } from '../AsyncReactVTK';
 
 /**
  * Calculator is exposing a source or filter to a downstream filter
@@ -12,7 +12,7 @@ import { Calculator as VtkItem } from 'react-vtk-js';
  *   - formula: fn
  */
 export default function Calculator(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 Calculator.defaultProps = {

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ShareDataSet as VtkItem } from 'react-vtk-js';
+import { ShareDataSet as VtkItem } from '../AsyncReactVTK';
 
 /**
  * ShareDataSet capture a dataset or a source and allow it to use it in another
  * pipeline or representation.
  */
 export default function ShareDataSet(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 ShareDataSet.defaultProps = {

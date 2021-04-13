@@ -42,6 +42,20 @@ _js_dist = [
             package_name, __name__, __version__),
         'namespace': package_name,
         'dynamic': True
+    },
+    {
+        'relative_package_path': 'async-ReactVTK.js',
+'external_url': 'https://unpkg.com/{0}@{2}/{1}/async-ReactVTK.js'.format(
+            package_name, __name__, __version__),
+        'namespace': package_name,
+        'async': True
+    },
+    {
+        'relative_package_path': 'async-ReactVTK.js.map',
+'external_url': 'https://unpkg.com/{0}@{2}/{1}/async-ReactVTK.js.map'.format(
+            package_name, __name__, __version__),
+        'namespace': package_name,
+        'dynamic': True
     }
 ]
 

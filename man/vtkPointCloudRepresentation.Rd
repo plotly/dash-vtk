@@ -10,12 +10,16 @@ PointCloudRepresentation expect the following set of properties   - xyz: [x0, y0
 }
 
 \usage{
-vtkPointCloudRepresentation(xyz=NULL, rgb=NULL, rgba=NULL, scalars=NULL,
-colorMapPreset=NULL, colorDataRange=NULL, property=NULL)
+vtkPointCloudRepresentation(colorDataRange=NULL, colorMapPreset=NULL, property=NULL,
+rgb=NULL, rgba=NULL, scalars=NULL, xyz=NULL)
 }
 
 \arguments{
-\item{xyz}{List of numerics. Points coordinates}
+\item{colorDataRange}{List of numerics. Data range use for the colorMap}
+
+\item{colorMapPreset}{Character. Preset name for the lookup table color map}
+
+\item{property}{Named list. Properties to set to the actor.property}
 
 \item{rgb}{List of numerics. Use RGB values to attach to the points/vertex}
 
@@ -23,11 +27,7 @@ colorMapPreset=NULL, colorDataRange=NULL, property=NULL)
 
 \item{scalars}{List of numerics. Field values to attach to the points}
 
-\item{colorMapPreset}{Character. Preset name for the lookup table color map}
-
-\item{colorDataRange}{List of numerics. Data range use for the colorMap}
-
-\item{property}{Named list. Properties to set to the actor.property}
+\item{xyz}{List of numerics. Points coordinates}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

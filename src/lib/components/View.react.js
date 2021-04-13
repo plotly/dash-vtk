@@ -1,8 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View as VtkItem } from 'react-vtk-js';
-
+import { View as VtkItem } from '../AsyncReactVTK';
 
 /**
  * View is responsible to render vtk.js data.
@@ -13,7 +12,7 @@ import { View as VtkItem } from 'react-vtk-js';
  *   - `cameraParallelProjection`: false
  */
 export default function View(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 View.defaultProps = {

@@ -21,16 +21,16 @@ Cell connectivity helper property:
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional)
 - `id` (String; optional): The ID used to identify this component.
-- `port` (Real; optional): downstream connection port
-- `points` (Array of Reals; optional): xyz coordinates
-- `verts` (Array of Reals; optional): verts cells
-- `lines` (Array of Reals; optional): lines cells
-- `polys` (Array of Reals; optional): polys cells
-- `strips` (Array of Reals; optional): strips cells
 - `connectivity` (String; optional): Type of connectivity `manual` or implicit such as `points`, `triangles`, `strips`
+- `lines` (Array of Reals; optional): lines cells
+- `points` (Array of Reals; optional): xyz coordinates
+- `polys` (Array of Reals; optional): polys cells
+- `port` (Real; optional): downstream connection port
+- `strips` (Array of Reals; optional): strips cells
+- `verts` (Array of Reals; optional): verts cells
 """
 function vtk_polydata(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :points, :verts, :lines, :polys, :strips, :connectivity]
+        available_props = Symbol[:children, :id, :connectivity, :lines, :points, :polys, :port, :strips, :verts]
         wild_props = Symbol[]
         return Component("vtk_polydata", "PolyData", "dash_vtk", available_props, wild_props; kwargs...)
 end

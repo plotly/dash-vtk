@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SliceRepresentation as VtkItem } from 'react-vtk-js';
+import { SliceRepresentation as VtkItem } from '../AsyncReactVTK';
 
 /**
  * SliceRepresentation is responsible to convert a vtkPolyData into rendering
@@ -11,7 +11,7 @@ import { SliceRepresentation as VtkItem } from 'react-vtk-js';
  *   - color: [1,1,1],
  */
 export default function SliceRepresentation(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 SliceRepresentation.defaultProps = {

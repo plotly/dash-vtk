@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkPolyData <- function(children=NULL, id=NULL, port=NULL, points=NULL, verts=NULL, lines=NULL, polys=NULL, strips=NULL, connectivity=NULL) {
+vtkPolyData <- function(children=NULL, id=NULL, connectivity=NULL, lines=NULL, points=NULL, polys=NULL, port=NULL, strips=NULL, verts=NULL) {
     
-    props <- list(children=children, id=id, port=port, points=points, verts=verts, lines=lines, polys=polys, strips=strips, connectivity=connectivity)
+    props <- list(children=children, id=id, connectivity=connectivity, lines=lines, points=points, polys=polys, port=port, strips=strips, verts=verts)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkPolyData <- function(children=NULL, id=NULL, port=NULL, points=NULL, verts=NU
         props = props,
         type = 'PolyData',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'port', 'points', 'verts', 'lines', 'polys', 'strips', 'connectivity'),
+        propNames = c('children', 'id', 'connectivity', 'lines', 'points', 'polys', 'port', 'strips', 'verts'),
         package = 'dashVtk'
         )
 

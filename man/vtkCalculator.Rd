@@ -10,8 +10,8 @@ Calculator is exposing a source or filter to a downstream filter It takes the fo
 }
 
 \usage{
-vtkCalculator(children=NULL, id=NULL, port=NULL, name=NULL, location=NULL,
-arrays=NULL, formula=NULL)
+vtkCalculator(children=NULL, id=NULL, arrays=NULL, formula=NULL,
+location=NULL, name=NULL, port=NULL)
 }
 
 \arguments{
@@ -19,15 +19,15 @@ arrays=NULL, formula=NULL)
 
 \item{id}{Character. The ID used to identify this component.}
 
-\item{port}{Numeric. downstream connection port}
-
-\item{name}{Character. Field name}
-
-\item{location}{Character. Field location [POINT, CELL, COORDINATE, SCALARS, ]}
-
 \item{arrays}{List of characters. List of fields you want available for your formula}
 
 \item{formula}{Field formula}
+
+\item{location}{Character. Field location [POINT, CELL, COORDINATE, SCALARS, ]}
+
+\item{name}{Character. Field name}
+
+\item{port}{Numeric. downstream connection port}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

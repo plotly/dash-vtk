@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkVolumeController <- function(id=NULL, size=NULL, rescaleColorMap=NULL) {
+vtkVolumeController <- function(id=NULL, rescaleColorMap=NULL, size=NULL) {
     
-    props <- list(id=id, size=size, rescaleColorMap=rescaleColorMap)
+    props <- list(id=id, rescaleColorMap=rescaleColorMap, size=size)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkVolumeController <- function(id=NULL, size=NULL, rescaleColorMap=NULL) {
         props = props,
         type = 'VolumeController',
         namespace = 'dash_vtk',
-        propNames = c('id', 'size', 'rescaleColorMap'),
+        propNames = c('id', 'rescaleColorMap', 'size'),
         package = 'dashVtk'
         )
 

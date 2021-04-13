@@ -14,11 +14,11 @@ pipeline or representation.
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional)
 - `id` (String; optional): The ID used to identify this component.
-- `port` (Real; optional): downstream connection port
 - `name` (String; optional): Unique dataset name to cross reference
+- `port` (Real; optional): downstream connection port
 """
 function vtk_sharedataset(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :name]
+        available_props = Symbol[:children, :id, :name, :port]
         wild_props = Symbol[]
         return Component("vtk_sharedataset", "ShareDataSet", "dash_vtk", available_props, wild_props; kwargs...)
 end

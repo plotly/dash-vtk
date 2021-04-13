@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkAlgorithm <- function(children=NULL, id=NULL, port=NULL, vtkClass=NULL, state=NULL) {
+vtkAlgorithm <- function(children=NULL, id=NULL, port=NULL, state=NULL, vtkClass=NULL) {
     
-    props <- list(children=children, id=id, port=port, vtkClass=vtkClass, state=state)
+    props <- list(children=children, id=id, port=port, state=state, vtkClass=vtkClass)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkAlgorithm <- function(children=NULL, id=NULL, port=NULL, vtkClass=NULL, state
         props = props,
         type = 'Algorithm',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'port', 'vtkClass', 'state'),
+        propNames = c('children', 'id', 'port', 'state', 'vtkClass'),
         package = 'dashVtk'
         )
 

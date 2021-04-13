@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkShareDataSet <- function(children=NULL, id=NULL, port=NULL, name=NULL) {
+vtkShareDataSet <- function(children=NULL, id=NULL, name=NULL, port=NULL) {
     
-    props <- list(children=children, id=id, port=port, name=name)
+    props <- list(children=children, id=id, name=name, port=port)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkShareDataSet <- function(children=NULL, id=NULL, port=NULL, name=NULL) {
         props = props,
         type = 'ShareDataSet',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'port', 'name'),
+        propNames = c('children', 'id', 'name', 'port'),
         package = 'dashVtk'
         )
 
