@@ -1,38 +1,38 @@
-import {lazy} from 'react';
+import { lazy } from 'react';
 
-
-const AsyncComponentBuilder = name => async () => {
-    const AsyncReactVTK = import(/*webpackChunkName: "ReactVTK" */ './ReactVTK');
+/**
+ * fakeModules: We need to trick React.lazy into thinking we are 
+ * giving the output of an import("my-module.js") Promise.
+ */
+const asyncComponentBuilder = name => async () => {
+    // eslint-disable-next-line
+    const AsyncReactVTK = import(/* webpackChunkName: "ReactVTK" */ './ReactVTK');
     const ReactVTK = await AsyncReactVTK;
-    // console.log("ReactVTK", ReactVTK);
-    // window.ReactVTK = ReactVTK;
 
     const reactComponent = ReactVTK.default[name];
-    // We need to trick React.lazy into thinking we are giving
-    // the output of an import("my-module.js") Promise.
-    const fakeModule = {default: reactComponent};
+    const fakeModule = { default: reactComponent };
     return fakeModule;
 }
 
-const Algorithm = lazy(AsyncComponentBuilder("Algorithm"));
-const Calculator = lazy(AsyncComponentBuilder("Calculator"));
-const CellData = lazy(AsyncComponentBuilder("CellData"));
-const DataArray = lazy(AsyncComponentBuilder("DataArray"));
-const FieldData = lazy(AsyncComponentBuilder("FieldData"));
-const GeometryRepresentation = lazy(AsyncComponentBuilder("GeometryRepresentation"));
-const GlyphRepresentation = lazy(AsyncComponentBuilder("GlyphRepresentation"));
-const ImageData = lazy(AsyncComponentBuilder("ImageData"));
-const PointCloudRepresentation = lazy(AsyncComponentBuilder("PointCloudRepresentation"));
-const PointData = lazy(AsyncComponentBuilder("PointData"));
-const PolyData = lazy(AsyncComponentBuilder("PolyData"));
-const Reader = lazy(AsyncComponentBuilder("Reader"));
-const SliceRepresentation = lazy(AsyncComponentBuilder("SliceRepresentation"));
-const ShareDataSet = lazy(AsyncComponentBuilder("ShareDataSet"));
-const View = lazy(AsyncComponentBuilder("View"));
-const Volume = lazy(AsyncComponentBuilder("Volume"));
-const VolumeController = lazy(AsyncComponentBuilder("VolumeController"));
-const VolumeDataRepresentation = lazy(AsyncComponentBuilder("VolumeDataRepresentation"));
-const VolumeRepresentation = lazy(AsyncComponentBuilder("VolumeRepresentation"));
+const Algorithm = lazy(asyncComponentBuilder("Algorithm"));
+const Calculator = lazy(asyncComponentBuilder("Calculator"));
+const CellData = lazy(asyncComponentBuilder("CellData"));
+const DataArray = lazy(asyncComponentBuilder("DataArray"));
+const FieldData = lazy(asyncComponentBuilder("FieldData"));
+const GeometryRepresentation = lazy(asyncComponentBuilder("GeometryRepresentation"));
+const GlyphRepresentation = lazy(asyncComponentBuilder("GlyphRepresentation"));
+const ImageData = lazy(asyncComponentBuilder("ImageData"));
+const PointCloudRepresentation = lazy(asyncComponentBuilder("PointCloudRepresentation"));
+const PointData = lazy(asyncComponentBuilder("PointData"));
+const PolyData = lazy(asyncComponentBuilder("PolyData"));
+const Reader = lazy(asyncComponentBuilder("Reader"));
+const SliceRepresentation = lazy(asyncComponentBuilder("SliceRepresentation"));
+const ShareDataSet = lazy(asyncComponentBuilder("ShareDataSet"));
+const View = lazy(asyncComponentBuilder("View"));
+const Volume = lazy(asyncComponentBuilder("Volume"));
+const VolumeController = lazy(asyncComponentBuilder("VolumeController"));
+const VolumeDataRepresentation = lazy(asyncComponentBuilder("VolumeDataRepresentation"));
+const VolumeRepresentation = lazy(asyncComponentBuilder("VolumeRepresentation"));
 
 
 export {
