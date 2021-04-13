@@ -217,4 +217,3 @@ You can find the complete API reference in [`docs/REFERENCES.md`](https://github
 [dicom-ct-lung]: https://github.com/plotly/dash-vtk/blob/master/demos/dicom-ct-lung/demo.jpg?raw=true
 [dicom-mri-brain]: https://github.com/plotly/dash-vtk/blob/master/demos/dicom-mri-brain/demo.jpg?raw=true
 [dicom-mri-pancreas]: https://github.com/plotly/dash-vtk/blob/master/demos/dicom-mri-pancreas/demo.jpg?raw=true
-
