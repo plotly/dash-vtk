@@ -58,7 +58,6 @@ module.exports = (env, argv) => {
         devtool,
         externals,
         module: {
-            // noParse: /node_modules[\\\/]plotly.js/,
             rules: [
                 {
                     test: /\.jsx?$/,
@@ -67,21 +66,6 @@ module.exports = (env, argv) => {
                         loader: 'babel-loader'
                     }
                 },
-                {
-                    test: /\.jsx?$/,
-                    include: /node_modules[\\\/](react-jsx-parser|highlight[.]js)[\\\/]/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            babelrc: false,
-                            configFile: false,
-                            presets: [
-                                '@babel/preset-env'
-                            ]
-                        }
-                    },
-                },
-
                 {
                     test: /\.css$/,
                     use: [
@@ -119,12 +103,6 @@ module.exports = (env, argv) => {
                         name(module, chunks, cacheGroupKey) {
                             return `${cacheGroupKey}-${chunks[0].name}`;
                         }
-                    },
-                    shared: {
-                        chunks: 'all',
-                        minSize: 0,
-                        minChunks: 2,
-                        name: 'dash_vtk-shared'
                     }
                 }
             }
