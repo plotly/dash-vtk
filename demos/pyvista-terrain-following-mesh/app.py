@@ -118,7 +118,7 @@ app.layout = dbc.Container(
                     ),
                 ),
             ],
-            style={"height": "12%", "align-items": "center"},
+            style={"height": "12%", "alignItems": "center"},
         ),
         html.Div(
             html.Div(vtk_view, style={"height": "100%", "width": "100%"}),
