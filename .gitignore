@@ -278,3 +278,4 @@ GitHub.sublime-settings
 dash_vtk/output.js
 *deps/output.js
 .vscode/settings.json
+.build_cache

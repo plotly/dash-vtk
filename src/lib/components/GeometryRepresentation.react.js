@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { GeometryRepresentation as VtkItem } from 'react-vtk-js';
+import { GeometryRepresentation as VtkItem } from '../AsyncReactVTK';
 
 /**
  * GeometryRepresentation is responsible to convert a vtkPolyData into rendering
@@ -13,7 +13,7 @@ import { GeometryRepresentation as VtkItem } from 'react-vtk-js';
  *   - colorDataRange: Range to use for the color scale
  */
 export default function GeometryRepresentation(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 GeometryRepresentation.defaultProps = {

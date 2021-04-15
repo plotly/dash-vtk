@@ -17,20 +17,20 @@ It takes the following set of properties:
 Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional)
 - `id` (String; optional): The ID used to identify this component.
-- `mapper` (Dict; optional): Properties to set to the mapper
 - `actor` (Dict; optional): Properties to set to the slice/actor
-- `property` (Dict; optional): Properties to set to the volume.property
-- `colorMapPreset` (String; optional): Preset name for the lookup table color map
 - `colorDataRange` (Array of Reals | String; optional): Data range use for the colorMap
+- `colorMapPreset` (String; optional): Preset name for the lookup table color map
 - `iSlice` (Real; optional): index of the slice along i
 - `jSlice` (Real; optional): index of the slice along j
 - `kSlice` (Real; optional): index of the slice along k
+- `mapper` (Dict; optional): Properties to set to the mapper
+- `property` (Dict; optional): Properties to set to the volume.property
 - `xSlice` (Real; optional): index of the slice along x
 - `ySlice` (Real; optional): index of the slice along y
 - `zSlice` (Real; optional): index of the slice along z
 """
 function vtk_slicerepresentation(; kwargs...)
-        available_props = Symbol[:children, :id, :mapper, :actor, :property, :colorMapPreset, :colorDataRange, :iSlice, :jSlice, :kSlice, :xSlice, :ySlice, :zSlice]
+        available_props = Symbol[:children, :id, :actor, :colorDataRange, :colorMapPreset, :iSlice, :jSlice, :kSlice, :mapper, :property, :xSlice, :ySlice, :zSlice]
         wild_props = Symbol[]
         return Component("vtk_slicerepresentation", "SliceRepresentation", "dash_vtk", available_props, wild_props; kwargs...)
 end

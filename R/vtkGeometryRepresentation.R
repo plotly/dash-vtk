@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkGeometryRepresentation <- function(children=NULL, id=NULL, actor=NULL, mapper=NULL, property=NULL, colorMapPreset=NULL, colorDataRange=NULL, showCubeAxes=NULL, cubeAxesStyle=NULL) {
+vtkGeometryRepresentation <- function(children=NULL, id=NULL, actor=NULL, colorDataRange=NULL, colorMapPreset=NULL, cubeAxesStyle=NULL, mapper=NULL, property=NULL, showCubeAxes=NULL) {
     
-    props <- list(children=children, id=id, actor=actor, mapper=mapper, property=property, colorMapPreset=colorMapPreset, colorDataRange=colorDataRange, showCubeAxes=showCubeAxes, cubeAxesStyle=cubeAxesStyle)
+    props <- list(children=children, id=id, actor=actor, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, cubeAxesStyle=cubeAxesStyle, mapper=mapper, property=property, showCubeAxes=showCubeAxes)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkGeometryRepresentation <- function(children=NULL, id=NULL, actor=NULL, mapper
         props = props,
         type = 'GeometryRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'actor', 'mapper', 'property', 'colorMapPreset', 'colorDataRange', 'showCubeAxes', 'cubeAxesStyle'),
+        propNames = c('children', 'id', 'actor', 'colorDataRange', 'colorMapPreset', 'cubeAxesStyle', 'mapper', 'property', 'showCubeAxes'),
         package = 'dashVtk'
         )
 

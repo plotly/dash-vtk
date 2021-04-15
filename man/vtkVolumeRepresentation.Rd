@@ -10,8 +10,8 @@ VolumeRepresentation is responsible to convert a vtkPolyData into rendering It t
 }
 
 \usage{
-vtkVolumeRepresentation(children=NULL, id=NULL, mapper=NULL, volume=NULL,
-property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
+vtkVolumeRepresentation(children=NULL, id=NULL, colorDataRange=NULL,
+colorMapPreset=NULL, mapper=NULL, property=NULL, volume=NULL)
 }
 
 \arguments{
@@ -19,15 +19,15 @@ property=NULL, colorMapPreset=NULL, colorDataRange=NULL)
 
 \item{id}{Character. The ID used to identify this component.}
 
-\item{mapper}{Named list. Properties to set to the mapper}
-
-\item{volume}{Named list. Properties to set to the volume}
-
-\item{property}{Named list. Properties to set to the volume.property}
+\item{colorDataRange}{List of numerics | character. Data range use for the colorMap}
 
 \item{colorMapPreset}{Character. Preset name for the lookup table color map}
 
-\item{colorDataRange}{List of numerics | character. Data range use for the colorMap}
+\item{mapper}{Named list. Properties to set to the mapper}
+
+\item{property}{Named list. Properties to set to the volume.property}
+
+\item{volume}{Named list. Properties to set to the volume}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}

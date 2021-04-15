@@ -24,14 +24,17 @@
   "author": "Kitware Inc <sebastien.jourdain@kitware.com> and Plotly Technologies <xinghan@plot.ly>",
   "license": "MIT",
   "dependencies": {
+    "@plotly/dash-component-plugins": "^1.2.0",
     "ramda": "^0.26.1",
-    "react-vtk-js": "1.2.1"
+    "react-vtk-js": "^1.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
+    "@plotly/webpack-dash-dynamic-import": "^1.2.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "copyfiles": "^2.1.1",
@@ -45,8 +48,9 @@
     "react": "^16.8.6",
     "react-docgen": "^4.1.1",
     "react-dom": "^16.8.6",
-    "styled-jsx": "^3.2.1",
     "style-loader": "^0.23.1",
+    "styled-jsx": "^3.2.1",
+    "terser-webpack-plugin": "^2.3.8",
     "webpack": "4.36.1",
     "webpack-cli": "3.3.6",
     "webpack-serve": "3.1.0"

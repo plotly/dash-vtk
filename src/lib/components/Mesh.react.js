@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PolyData, PointData, CellData, DataArray } from 'react-vtk-js';
+import { PolyData, PointData, CellData, DataArray } from '../AsyncReactVTK';
 
 /**
  * Mesh is exposing a vtkPolyData to a downstream filter
@@ -10,30 +10,32 @@ import { PolyData, PointData, CellData, DataArray } from 'react-vtk-js';
  */
 export default function Mesh(props) {
   return (
-    <PolyData
-      id={props.id}
-      port={props.port}
-      {...props.state.mesh}
-    >
-        <PointData>
-        {props.state.field && props.state.field.location === 'PointData' &&
-          <DataArray
-            registration="setScalars"
-            {...props.state.field}
-          />
-        }
-        {props.state.pointArrays && props.state.pointArrays.map((array) => (<DataArray key={array.name} {...array} />))}
-        </PointData>
-        <CellData>
-        {props.state.field && props.state.field.location === 'CellData' &&
-          <DataArray
-            registration="setScalars"
-            {...props.state.field}
-          />
-        }
-        {props.state.cellArrays && props.state.cellArrays.map((array) => (<DataArray key={array.name} {...array} />))}
-        </CellData>
-    </PolyData>
+    <React.Suspense>
+      <PolyData
+        id={props.id}
+        port={props.port}
+        {...props.state.mesh}
+      >
+          <PointData>
+          {props.state.field && props.state.field.location === 'PointData' &&
+            <DataArray
+              registration="setScalars"
+              {...props.state.field}
+            />
+          }
+          {props.state.pointArrays && props.state.pointArrays.map((array) => (<DataArray key={array.name} {...array} />))}
+          </PointData>
+          <CellData>
+          {props.state.field && props.state.field.location === 'CellData' &&
+            <DataArray
+              registration="setScalars"
+              {...props.state.field}
+            />
+          }
+          {props.state.cellArrays && props.state.cellArrays.map((array) => (<DataArray key={array.name} {...array} />))}
+          </CellData>
+      </PolyData>
+    </React.Suspense>
   );
 };
 

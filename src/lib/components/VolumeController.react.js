@@ -2,13 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { VolumeController as VtkItem } from 'react-vtk-js';
+import { VolumeController as VtkItem } from '../AsyncReactVTK';
 
 /**
  * VolumeController is a GUI to control the piecewise function
  */
 export default function VolumeController(props) {
-  return <VtkItem {...props} />;
+  return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
 };
 
 VolumeController.defaultProps = {

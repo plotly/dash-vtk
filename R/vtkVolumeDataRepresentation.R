@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkVolumeDataRepresentation <- function(id=NULL, dimensions=NULL, spacing=NULL, origin=NULL, rgb=NULL, rgba=NULL, scalars=NULL, scalarsType=NULL, mapper=NULL, volume=NULL, property=NULL, colorMapPreset=NULL, volumeController=NULL, controllerSize=NULL, rescaleColorMap=NULL, colorDataRange=NULL) {
+vtkVolumeDataRepresentation <- function(id=NULL, colorDataRange=NULL, colorMapPreset=NULL, controllerSize=NULL, dimensions=NULL, mapper=NULL, origin=NULL, property=NULL, rescaleColorMap=NULL, rgb=NULL, rgba=NULL, scalars=NULL, scalarsType=NULL, spacing=NULL, volume=NULL, volumeController=NULL) {
     
-    props <- list(id=id, dimensions=dimensions, spacing=spacing, origin=origin, rgb=rgb, rgba=rgba, scalars=scalars, scalarsType=scalarsType, mapper=mapper, volume=volume, property=property, colorMapPreset=colorMapPreset, volumeController=volumeController, controllerSize=controllerSize, rescaleColorMap=rescaleColorMap, colorDataRange=colorDataRange)
+    props <- list(id=id, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, controllerSize=controllerSize, dimensions=dimensions, mapper=mapper, origin=origin, property=property, rescaleColorMap=rescaleColorMap, rgb=rgb, rgba=rgba, scalars=scalars, scalarsType=scalarsType, spacing=spacing, volume=volume, volumeController=volumeController)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkVolumeDataRepresentation <- function(id=NULL, dimensions=NULL, spacing=NULL, 
         props = props,
         type = 'VolumeDataRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('id', 'dimensions', 'spacing', 'origin', 'rgb', 'rgba', 'scalars', 'scalarsType', 'mapper', 'volume', 'property', 'colorMapPreset', 'volumeController', 'controllerSize', 'rescaleColorMap', 'colorDataRange'),
+        propNames = c('id', 'colorDataRange', 'colorMapPreset', 'controllerSize', 'dimensions', 'mapper', 'origin', 'property', 'rescaleColorMap', 'rgb', 'rgba', 'scalars', 'scalarsType', 'spacing', 'volume', 'volumeController'),
         package = 'dashVtk'
         )
 

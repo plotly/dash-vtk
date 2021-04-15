@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkGlyphRepresentation <- function(children=NULL, id=NULL, actor=NULL, mapper=NULL, property=NULL, colorMapPreset=NULL, colorDataRange=NULL) {
+vtkGlyphRepresentation <- function(children=NULL, id=NULL, actor=NULL, colorDataRange=NULL, colorMapPreset=NULL, mapper=NULL, property=NULL) {
     
-    props <- list(children=children, id=id, actor=actor, mapper=mapper, property=property, colorMapPreset=colorMapPreset, colorDataRange=colorDataRange)
+    props <- list(children=children, id=id, actor=actor, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, mapper=mapper, property=property)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkGlyphRepresentation <- function(children=NULL, id=NULL, actor=NULL, mapper=NU
         props = props,
         type = 'GlyphRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'actor', 'mapper', 'property', 'colorMapPreset', 'colorDataRange'),
+        propNames = c('children', 'id', 'actor', 'colorDataRange', 'colorMapPreset', 'mapper', 'property'),
         package = 'dashVtk'
         )
 

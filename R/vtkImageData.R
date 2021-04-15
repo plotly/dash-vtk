@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkImageData <- function(children=NULL, id=NULL, port=NULL, dimensions=NULL, spacing=NULL, origin=NULL, direction=NULL) {
+vtkImageData <- function(children=NULL, id=NULL, dimensions=NULL, direction=NULL, origin=NULL, port=NULL, spacing=NULL) {
     
-    props <- list(children=children, id=id, port=port, dimensions=dimensions, spacing=spacing, origin=origin, direction=direction)
+    props <- list(children=children, id=id, dimensions=dimensions, direction=direction, origin=origin, port=port, spacing=spacing)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkImageData <- function(children=NULL, id=NULL, port=NULL, dimensions=NULL, spa
         props = props,
         type = 'ImageData',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'port', 'dimensions', 'spacing', 'origin', 'direction'),
+        propNames = c('children', 'id', 'dimensions', 'direction', 'origin', 'port', 'spacing'),
         package = 'dashVtk'
         )
 

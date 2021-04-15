@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkReader <- function(children=NULL, id=NULL, port=NULL, vtkClass=NULL, url=NULL, parseAsText=NULL, parseAsArrayBuffer=NULL, renderOnUpdate=NULL, resetCameraOnUpdate=NULL) {
+vtkReader <- function(children=NULL, id=NULL, parseAsArrayBuffer=NULL, parseAsText=NULL, port=NULL, renderOnUpdate=NULL, resetCameraOnUpdate=NULL, url=NULL, vtkClass=NULL) {
     
-    props <- list(children=children, id=id, port=port, vtkClass=vtkClass, url=url, parseAsText=parseAsText, parseAsArrayBuffer=parseAsArrayBuffer, renderOnUpdate=renderOnUpdate, resetCameraOnUpdate=resetCameraOnUpdate)
+    props <- list(children=children, id=id, parseAsArrayBuffer=parseAsArrayBuffer, parseAsText=parseAsText, port=port, renderOnUpdate=renderOnUpdate, resetCameraOnUpdate=resetCameraOnUpdate, url=url, vtkClass=vtkClass)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkReader <- function(children=NULL, id=NULL, port=NULL, vtkClass=NULL, url=NULL
         props = props,
         type = 'Reader',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'port', 'vtkClass', 'url', 'parseAsText', 'parseAsArrayBuffer', 'renderOnUpdate', 'resetCameraOnUpdate'),
+        propNames = c('children', 'id', 'parseAsArrayBuffer', 'parseAsText', 'port', 'renderOnUpdate', 'resetCameraOnUpdate', 'url', 'vtkClass'),
         package = 'dashVtk'
         )
 

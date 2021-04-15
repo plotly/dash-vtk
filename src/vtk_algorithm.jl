@@ -17,11 +17,11 @@ Keyword arguments:
 - `children` (Array of a list of or a singular dash component, string or numbers | a list of or a singular dash component, string or number; optional)
 - `id` (String; optional): The ID used to identify this component.
 - `port` (Real; optional): downstream connection port
-- `vtkClass` (String; optional): vtkClass name
 - `state` (Dict; optional): set of property values for vtkClass
+- `vtkClass` (String; optional): vtkClass name
 """
 function vtk_algorithm(; kwargs...)
-        available_props = Symbol[:children, :id, :port, :vtkClass, :state]
+        available_props = Symbol[:children, :id, :port, :state, :vtkClass]
         wild_props = Symbol[]
         return Component("vtk_algorithm", "Algorithm", "dash_vtk", available_props, wild_props; kwargs...)
 end

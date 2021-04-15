@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkCalculator <- function(children=NULL, id=NULL, port=NULL, name=NULL, location=NULL, arrays=NULL, formula=NULL) {
+vtkCalculator <- function(children=NULL, id=NULL, arrays=NULL, formula=NULL, location=NULL, name=NULL, port=NULL) {
     
-    props <- list(children=children, id=id, port=port, name=name, location=location, arrays=arrays, formula=formula)
+    props <- list(children=children, id=id, arrays=arrays, formula=formula, location=location, name=name, port=port)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ vtkCalculator <- function(children=NULL, id=NULL, port=NULL, name=NULL, location
         props = props,
         type = 'Calculator',
         namespace = 'dash_vtk',
-        propNames = c('children', 'id', 'port', 'name', 'location', 'arrays', 'formula'),
+        propNames = c('children', 'id', 'arrays', 'formula', 'location', 'name', 'port'),
         package = 'dashVtk'
         )
 

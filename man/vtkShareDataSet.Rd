@@ -10,7 +10,7 @@ ShareDataSet capture a dataset or a source and allow it to use it in another pip
 }
 
 \usage{
-vtkShareDataSet(children=NULL, id=NULL, port=NULL, name=NULL)
+vtkShareDataSet(children=NULL, id=NULL, name=NULL, port=NULL)
 }
 
 \arguments{
@@ -18,9 +18,9 @@ vtkShareDataSet(children=NULL, id=NULL, port=NULL, name=NULL)
 
 \item{id}{Character. The ID used to identify this component.}
 
-\item{port}{Numeric. downstream connection port}
-
 \item{name}{Character. Unique dataset name to cross reference}
+
+\item{port}{Numeric. downstream connection port}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}
