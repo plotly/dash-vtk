@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [0.0.8] - 2021-04-15
+
+### Changed
+
+- `react-vtk-js` was updated from `1.2.1` to `1.5.0`. See [diffs](https://github.com/Kitware/react-vtk-js/compare/v1.2.1...v1.5.0)
+- dash-vtk is now loaded asynchronously (see https://github.com/plotly/dash-vtk/pull/29). It will only be loaded when one or more components is called/displayed; this helps optimize for multi-page apps and use cases where dash-vtk is dynamically loaded.
+
+
 ## [0.0.7] - 2021-04-06
 
 ### Added
