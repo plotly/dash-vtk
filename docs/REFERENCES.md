@@ -1,4 +1,4 @@
-# Component References
+# Components Reference
 
 - [Algorithm](#Algorithm)
 - [Calculator](#Calculator)
