@@ -55,7 +55,7 @@ controls = dbc.Card(
 
 app.layout = dbc.Container(
     fluid=True,
-    style={"margin-top": "15px", "height": "calc(100vh - 30px)"},
+    style={"marginTop": "15px", "height": "calc(100vh - 30px)"},
     children=[
         dbc.Row(
             [

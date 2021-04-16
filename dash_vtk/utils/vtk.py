@@ -1,4 +1,7 @@
 import dash_vtk
+import base64
+import numpy as np
+
 try:
     # v9 and above
     from vtkmodules.util.numpy_support import vtk_to_numpy
@@ -11,183 +14,242 @@ except:
 
 # Numpy to JS TypedArray
 to_js_type = {
-    'int8': 'Int8Array',
-    'uint8': 'Uint8Array',
-    'int16': 'Int16Array',
-    'uint16': 'Uint16Array',
-    'int32': 'Int32Array',
-    'uint32': 'Uint32Array',
-    'int64': 'Int32Array',
-    'uint64': 'Uint32Array',
-    'float32': 'Float32Array',
-    'float64': 'Float64Array',
+    "int8": "Int8Array",
+    "uint8": "Uint8Array",
+    "int16": "Int16Array",
+    "uint16": "Uint16Array",
+    "int32": "Int32Array",
+    "uint32": "Uint32Array",
+    "int64": "Int32Array",
+    "uint64": "Uint32Array",
+    "float32": "Float32Array",
+    "float64": "Float64Array",
 }
 
 
+def b64_encode_numpy(obj):
+    # Convert 1D numpy arrays with numeric types to memoryviews with
+    # datatype and shape metadata.
+    if len(obj) == 0:
+        return obj.tolist()
+
+    dtype = obj.dtype
+    if (
+        dtype.kind in ["u", "i", "f"]
+        and str(dtype) != "int64"
+        and str(dtype) != "uint64"
+    ):
+        # We have a numpy array that is compatible with JavaScript typed
+        # arrays
+        buffer = base64.b64encode(memoryview(obj.ravel(order="C"))).decode("utf-8")
+        return {"bvals": buffer, "dtype": str(dtype), "shape": obj.shape}
+    else:
+        buffer = None
+        dtype_str = None
+        # Try to see if we can downsize the array
+        max_value = np.amax(obj)
+        min_value = np.amin(obj)
+        signed = min_value < 0
+        test_value = max(max_value, -min_value)
+        if test_value < np.iinfo(np.int16).max and signed:
+            dtype_str = 'int16'
+            buffer = base64.b64encode(memoryview(obj.astype(np.int16).ravel(order="C"))).decode("utf-8")
+        elif test_value < np.iinfo(np.int32).max and signed:
+            dtype_str = 'int32'
+            buffer = base64.b64encode(memoryview(obj.astype(np.int32).ravel(order="C"))).decode("utf-8")
+        elif test_value < np.iinfo(np.uint16).max and not signed:
+            dtype_str = 'uint16'
+            buffer = base64.b64encode(memoryview(obj.astype(np.uint16).ravel(order="C"))).decode("utf-8")
+        elif test_value < np.iinfo(np.uint32).max and not signed:
+            dtype_str = 'uint32'
+            buffer = base64.b64encode(memoryview(obj.astype(np.uint32).ravel(order="C"))).decode("utf-8")
+
+        if dtype:
+            return {"bvals": buffer, "dtype": dtype_str, "shape": obj.shape}
+
+    # Convert all other numpy arrays to lists
+    return obj.tolist()
+
+
 def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=None):
-  '''Expect any dataset and extract its surface into a dash_vtk.Mesh state property'''
-  if dataset is None:
-    return None
+    """Expect any dataset and extract its surface into a dash_vtk.Mesh state property"""
+    if dataset is None:
+        return None
 
-  if point_arrays is None:
-    point_arrays = []
-  if cell_arrays is None:
-    cell_arrays = []
+    if point_arrays is None:
+        point_arrays = []
+    if cell_arrays is None:
+        cell_arrays = []
 
-  # Make sure we have a polydata to export
-  polydata = None
-  if dataset.IsA('vtkPolyData'):
-    polydata = dataset
-  else:
-    extractSkinFilter = vtkGeometryFilter()
-    extractSkinFilter.SetInputData(dataset)
-    extractSkinFilter.Update()
-    polydata = extractSkinFilter.GetOutput()
+    # Make sure we have a polydata to export
+    polydata = None
+    if dataset.IsA("vtkPolyData"):
+        polydata = dataset
+    else:
+        extractSkinFilter = vtkGeometryFilter()
+        extractSkinFilter.SetInputData(dataset)
+        extractSkinFilter.Update()
+        polydata = extractSkinFilter.GetOutput()
 
-  if polydata.GetPoints() is None:
-    return None
+    if polydata.GetPoints() is None:
+        return None
 
-  # Extract mesh
-  points = vtk_to_numpy(polydata.GetPoints().GetData()).ravel()
-  verts = vtk_to_numpy(polydata.GetVerts().GetData()
-                      ) if polydata.GetVerts() else []
-  lines = vtk_to_numpy(polydata.GetLines().GetData()
-                      ) if polydata.GetLines() else []
-  polys = vtk_to_numpy(polydata.GetPolys().GetData()
-                      ) if polydata.GetPolys() else []
-  strips = vtk_to_numpy(polydata.GetStrips().GetData()
-                       ) if polydata.GetStrips() else []
+    # Extract mesh
+    points = b64_encode_numpy(vtk_to_numpy(polydata.GetPoints().GetData()))
+    verts = (
+        b64_encode_numpy(vtk_to_numpy(polydata.GetVerts().GetData()))
+        if polydata.GetVerts()
+        else []
+    )
+    lines = (
+        b64_encode_numpy(vtk_to_numpy(polydata.GetLines().GetData()))
+        if polydata.GetLines()
+        else []
+    )
+    polys = (
+        b64_encode_numpy(vtk_to_numpy(polydata.GetPolys().GetData()))
+        if polydata.GetPolys()
+        else []
+    )
+    strips = (
+        b64_encode_numpy(vtk_to_numpy(polydata.GetStrips().GetData()))
+        if polydata.GetStrips()
+        else []
+    )
 
-  # Extract field
-  values = None
-  js_types = 'Float32Array'
-  nb_comp = 1
-  dataRange = [0, 1]
-  location = None
-  if field_to_keep is not None:
-    p_array = polydata.GetPointData().GetArray(field_to_keep)
-    c_array = polydata.GetCellData().GetArray(field_to_keep)
+    # Extract field
+    values = None
+    js_types = "Float32Array"
+    nb_comp = 1
+    dataRange = [0, 1]
+    location = None
+    if field_to_keep is not None:
+        p_array = polydata.GetPointData().GetArray(field_to_keep)
+        c_array = polydata.GetCellData().GetArray(field_to_keep)
 
-    if c_array:
-      dataRange = c_array.GetRange(-1)
-      nb_comp = c_array.GetNumberOfComponents()
-      values = vtk_to_numpy(c_array).ravel()
-      js_types = to_js_type[str(values.dtype)]
-      location = 'CellData'
+        if c_array:
+            dataRange = c_array.GetRange(-1)
+            nb_comp = c_array.GetNumberOfComponents()
+            values = vtk_to_numpy(c_array)
+            js_types = to_js_type[str(values.dtype)]
+            location = "CellData"
 
-    if p_array:
-      dataRange = p_array.GetRange(-1)
-      nb_comp = p_array.GetNumberOfComponents()
-      values = vtk_to_numpy(p_array).ravel()
-      js_types = to_js_type[str(values.dtype)]
-      location = 'PointData'
+        if p_array:
+            dataRange = p_array.GetRange(-1)
+            nb_comp = p_array.GetNumberOfComponents()
+            values = vtk_to_numpy(p_array)
+            js_types = to_js_type[str(values.dtype)]
+            location = "PointData"
 
-  # other arrays (points)
-  point_data = []
-  for name in point_arrays:
-    array = polydata.GetPointData().GetArray(name)
-    if array:
-      dataRange = array.GetRange(-1)
-      nb_comp = array.GetNumberOfComponents()
-      values = vtk_to_numpy(array).ravel()
-      js_types = to_js_type[str(values.dtype)]
-      point_data.append({
-        'name': name,
-        'values': values,
-        'numberOfComponents': nb_comp,
-        'type': js_types,
-        'location': 'PointData',
-        'dataRange': dataRange,
-      })
+    # other arrays (points)
+    point_data = []
+    for name in point_arrays:
+        array = polydata.GetPointData().GetArray(name)
+        if array:
+            dataRange = array.GetRange(-1)
+            nb_comp = array.GetNumberOfComponents()
+            values = vtk_to_numpy(array)
+            js_types = to_js_type[str(values.dtype)]
+            point_data.append(
+                {
+                    "name": name,
+                    "values": b64_encode_numpy(values),
+                    "numberOfComponents": nb_comp,
+                    "type": js_types,
+                    "location": "PointData",
+                    "dataRange": dataRange,
+                }
+            )
 
-  # other arrays (cells)
-  cell_data = []
-  for name in point_arrays:
-    array = polydata.GetCellData().GetArray(name)
-    if array:
-      dataRange = array.GetRange(-1)
-      nb_comp = array.GetNumberOfComponents()
-      values = vtk_to_numpy(array).ravel()
-      js_types = to_js_type[str(values.dtype)]
-      cell_data.append({
-        'name': name,
-        'values': values,
-        'numberOfComponents': nb_comp,
-        'type': js_types,
-        'location': 'CellData',
-        'dataRange': dataRange,
-      })
+    # other arrays (cells)
+    cell_data = []
+    for name in point_arrays:
+        array = polydata.GetCellData().GetArray(name)
+        if array:
+            dataRange = array.GetRange(-1)
+            nb_comp = array.GetNumberOfComponents()
+            values = vtk_to_numpy(array)
+            js_types = to_js_type[str(values.dtype)]
+            cell_data.append(
+                {
+                    "name": name,
+                    "values": b64_encode_numpy(values),
+                    "numberOfComponents": nb_comp,
+                    "type": js_types,
+                    "location": "CellData",
+                    "dataRange": dataRange,
+                }
+            )
 
-  state = {
-      'mesh': {
-          'points': points,
-      },
-  }
-  if len(verts):
-    state['mesh']['verts'] = verts
-  if len(lines):
-    state['mesh']['lines'] = lines
-  if len(polys):
-    state['mesh']['polys'] = polys
-  if len(strips):
-    state['mesh']['strips'] = strips
+    state = {
+        "mesh": {"points": points,},
+    }
+    if len(verts):
+        state["mesh"]["verts"] = verts
+    if len(lines):
+        state["mesh"]["lines"] = lines
+    if len(polys):
+        state["mesh"]["polys"] = polys
+    if len(strips):
+        state["mesh"]["strips"] = strips
 
-  if values is not None:
-    state.update({
-      'field': {
-          'name': field_to_keep,
-          'values': values,
-          'numberOfComponents': nb_comp,
-          'type': js_types,
-          'location': location,
-          'dataRange': dataRange,
-      },
-    })
+    if values is not None:
+        state.update(
+            {
+                "field": {
+                    "name": field_to_keep,
+                    "values": b64_encode_numpy(values),
+                    "numberOfComponents": nb_comp,
+                    "type": js_types,
+                    "location": location,
+                    "dataRange": dataRange,
+                },
+            }
+        )
 
-  if len(point_data):
-    state.update({ 'pointArrays': point_data })
-  if len(cell_data):
-    state.update({ 'cellArrays': cell_data })
+    if len(point_data):
+        state.update({"pointArrays": point_data})
+    if len(cell_data):
+        state.update({"cellArrays": cell_data})
 
-  return state
+    return state
 
 
 def to_volume_state(dataset):
-    '''Expect a vtkImageData and extract its setting for the dash_vtk.Volume state'''
-    if dataset is None or not dataset.IsA('vtkImageData'):
+    """Expect a vtkImageData and extract its setting for the dash_vtk.Volume state"""
+    if dataset is None or not dataset.IsA("vtkImageData"):
         return None
 
     state = {
-        'image': {
-            'dimensions': dataset.GetDimensions(),
-            'spacing': dataset.GetSpacing(),
-            'origin': dataset.GetOrigin(),
+        "image": {
+            "dimensions": dataset.GetDimensions(),
+            "spacing": dataset.GetSpacing(),
+            "origin": dataset.GetOrigin(),
         },
     }
 
     # Capture image orientation if any
-    if hasattr(dataset, 'GetDirectionMatrix'):
-      matrix = dataset.GetDirectionMatrix()
-      js_mat = []
-      for j in range(3):
-        for i in range(3):
-          js_mat.append(matrix.GetElement(i, j))
+    if hasattr(dataset, "GetDirectionMatrix"):
+        matrix = dataset.GetDirectionMatrix()
+        js_mat = []
+        for j in range(3):
+            for i in range(3):
+                js_mat.append(matrix.GetElement(i, j))
 
-      state['image']['direction'] = js_mat
+        state["image"]["direction"] = js_mat
 
     scalars = dataset.GetPointData().GetScalars()
 
     if scalars is not None:
-        values = vtk_to_numpy(scalars).ravel()
+        values = vtk_to_numpy(scalars)
         js_types = to_js_type[str(values.dtype)]
-        state['field'] = {
-            'name': scalars.GetName(),
-            'numberOfComponents': scalars.GetNumberOfComponents(),
-            'dataRange': scalars.GetRange(-1),
-            'type': js_types,
-            'values': values,
+        state["field"] = {
+            "name": scalars.GetName(),
+            "numberOfComponents": scalars.GetNumberOfComponents(),
+            "dataRange": scalars.GetRange(-1),
+            "type": js_types,
+            "values": b64_encode_numpy(values),
         }
-
 
     return state
 
@@ -383,8 +445,9 @@ presets = [
     "BlueObeliskElements",
 ]
 
+
 def toDropOption(name):
-    return {'label': name, 'value': name}
+    return {"label": name, "value": name}
 
 
 preset_as_options = list(map(toDropOption, presets))
