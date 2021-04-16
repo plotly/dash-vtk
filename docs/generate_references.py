@@ -37,7 +37,7 @@ components = [
 ]
 
 with open('./docs/REFERENCES.md', 'w') as f:
-    f.write("# Component References\n\n")
+    f.write("# Components Reference\n\n")
     for c in components:
         f.write(f"- [{c.__name__}](#{c.__name__})\n")
     for c in components:
