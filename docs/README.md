@@ -1,1 +1,3 @@
-You can find the interactive documentations [here](http://dash.plotly.com/vtk).
+* [Interactive Docs & User Guide](http://dash.plotly.com/vtk)
+* [Instructions for contributions](./CONTRIBUTING.md)
+* [API Reference](./REFERENCES.md)
