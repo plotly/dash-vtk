@@ -1,6 +1,6 @@
 {
   "name": "dash_vtk",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React based declarative usage of vtk.js for Dash",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   "dependencies": {
     "@plotly/dash-component-plugins": "^1.2.0",
     "ramda": "^0.26.1",
-    "react-vtk-js": "^1.5.0"
+    "react-vtk-js": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
