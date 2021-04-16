@@ -7,7 +7,7 @@
 | --- | --- | --- |
 | ![][volume-rendering] | ![][vtk-cfd] | ![][synthetic-volume] |
 
-* [Docs](https://github.com/plotly/dash-vtk/tree/master/docs)
+* [Docs](https://dash.plotly.com/vtk)
 * [Demo Explorer](https://dash-gallery.plotly.host/dash-vtk-explorer/)
 * [Repository](https://github.com/plotly/dash-vtk)
 * [Webinar](https://go.plotly.com/dash-vtk)
