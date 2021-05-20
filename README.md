@@ -83,6 +83,36 @@ app$layout(htmlDiv(
 
 app$run_server()
 ```
+
+### Quickstart (Julia)
+
+First, install the package -- until it's published via the Registrator, you may install the current version via GitHub URL instead:
+```
+using Pkg
+Pkg.add(PackageSpec(url="https://github.com/plotly/dash-vtk.git"))
+```
+
+then, create your component and add it to your layout:
+
+```julia
+using Dash, DashVtk, DashHtmlComponents
+
+app = dash();
+
+app.layout = html_div(style = (width = "100%", height = "calc(100vh - 16px)",)) do
+    vtk_view(
+        vtk_geometryrepresentation(
+            vtk_algorithm(
+                vtkClass = "vtkConeSource",
+                state = (resolution = 64, capping = false)
+            )
+        )
+    )
+end;
+
+run_server(app)
+```
+
 ## Contributing
 
 See [docs/CONTRIBUTING.md](./docs/CONTRIBUTING.md) to learn about:
