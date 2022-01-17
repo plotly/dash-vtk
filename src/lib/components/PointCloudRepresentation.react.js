@@ -22,6 +22,10 @@ PointCloudRepresentation.defaultProps = {
 
 PointCloudRepresentation.propTypes = {
   /**
+   * The ID used to identify this component.
+   */
+  id: PropTypes.string,
+  /**
    * Points coordinates
    */
   xyz: PropTypes.arrayOf(PropTypes.number),
