@@ -163,7 +163,7 @@ def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=No
 
     # other arrays (cells)
     cell_data = []
-    for name in point_arrays:
+    for name in cell_arrays:
         array = polydata.GetCellData().GetArray(name)
         if array:
             dataRange = array.GetRange(-1)
