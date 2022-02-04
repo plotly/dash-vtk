@@ -141,6 +141,32 @@ def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=No
             js_types = to_js_type[str(values.dtype)]
             location = "PointData"
 
+    state = {
+        "mesh": {"points": points,},
+    }
+    if len(verts):
+        state["mesh"]["verts"] = verts
+    if len(lines):
+        state["mesh"]["lines"] = lines
+    if len(polys):
+        state["mesh"]["polys"] = polys
+    if len(strips):
+        state["mesh"]["strips"] = strips
+
+    if values is not None:
+        state.update(
+            {
+                "field": {
+                    "name": field_to_keep,
+                    "values": b64_encode_numpy(values),
+                    "numberOfComponents": nb_comp,
+                    "type": js_types,
+                    "location": location,
+                    "dataRange": dataRange,
+                },
+            }
+        )
+
     # other arrays (points)
     point_data = []
     for name in point_arrays:
@@ -180,32 +206,6 @@ def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=No
                     "dataRange": dataRange,
                 }
             )
-
-    state = {
-        "mesh": {"points": points,},
-    }
-    if len(verts):
-        state["mesh"]["verts"] = verts
-    if len(lines):
-        state["mesh"]["lines"] = lines
-    if len(polys):
-        state["mesh"]["polys"] = polys
-    if len(strips):
-        state["mesh"]["strips"] = strips
-
-    if values is not None:
-        state.update(
-            {
-                "field": {
-                    "name": field_to_keep,
-                    "values": b64_encode_numpy(values),
-                    "numberOfComponents": nb_comp,
-                    "type": js_types,
-                    "location": location,
-                    "dataRange": dataRange,
-                },
-            }
-        )
 
     if len(point_data):
         state.update({"pointArrays": point_data})
