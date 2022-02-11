@@ -10,6 +10,7 @@ import { View as VtkItem } from '../AsyncReactVTK';
  *   - `cameraPosition`: [0, 0, 1]
  *   - `cameraViewUp`: [0, 1, 0]
  *   - `cameraParallelProjection`: false
+ *   - `showOrientationAxes`: true
  */
 export default function View(props) {
   return <React.Suspense fallback={null}><VtkItem {...props} /></React.Suspense>;
@@ -62,6 +63,7 @@ View.defaultProps = {
       shift: true,
     },
   ],
+  showOrientationAxes: true,
 };
 
 View.propTypes = {
@@ -142,4 +144,9 @@ View.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+
+  /**
+   * Show/Hide orientation axes.
+   */
+  showOrientationAxes: PropTypes.bool,
 };
