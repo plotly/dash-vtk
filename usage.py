@@ -44,6 +44,8 @@ app.layout = html.Div(
                         "pointSize": 10,
                     },
                     colorDataRange=[0, 3],
+                    showScalarBar=True,
+                    scalarBarTitle="Temperature",
                     mapper={
                         "colorByArrayName": "Temperature",
                         "scalarMode": 3,
