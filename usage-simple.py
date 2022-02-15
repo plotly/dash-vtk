@@ -8,7 +8,12 @@ server = app.server
 
 app.layout = html.Div(
     style={"width": "100%", "height": "calc(100vh - 16px)"},
-    children=[dash_vtk.View(id="view",), html.Div(id="output"),],
+    children=[
+        dash_vtk.View(
+            id="view",
+        ),
+        html.Div(id="output"),
+    ],
 )
 
 
