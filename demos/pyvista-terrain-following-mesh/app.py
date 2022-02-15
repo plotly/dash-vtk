@@ -79,7 +79,9 @@ vtk_view = dash_vtk.View(
             actor={"visibility": False},
             children=[
                 dash_vtk.Algorithm(
-                    id="pick-sphere", vtkClass="vtkSphereSource", state={"radius": 100},
+                    id="pick-sphere",
+                    vtkClass="vtkSphereSource",
+                    state={"radius": 100},
                 )
             ],
         ),
@@ -112,7 +114,9 @@ app.layout = dbc.Container(
                 dbc.Col(
                     children=dcc.Checklist(
                         id="toggle-cube-axes",
-                        options=[{"label": " Show axis grid", "value": "grid"},],
+                        options=[
+                            {"label": " Show axis grid", "value": "grid"},
+                        ],
                         value=[],
                         labelStyle={"display": "inline-block"},
                     ),
@@ -173,7 +177,10 @@ def updatePresetName(name, scale_factor, cubeAxes):
         Output("pick-sphere", "state"),
         Output("pick-rep", "actor"),
     ],
-    [Input("vtk-view", "clickInfo"), Input("vtk-view", "hoverInfo"),],
+    [
+        Input("vtk-view", "clickInfo"),
+        Input("vtk-view", "hoverInfo"),
+    ],
 )
 def onInfo(clickData, hoverData):
     info = hoverData if hoverData else clickData

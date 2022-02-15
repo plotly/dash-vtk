@@ -16,13 +16,21 @@ app.layout = html.Div(
                     [
                         dash_vtk.Algorithm(
                             vtkClass="vtkConeSource",
-                            state={"resolution": 64, "capping": False,},
+                            state={
+                                "resolution": 64,
+                                "capping": False,
+                            },
                         )
                     ]
                 ),
                 dash_vtk.GeometryRepresentation(
-                    property={"color": [0.4, 0.4, 0.4],},
-                    actor={"position": [0.5, 0.2, 0.4], "scale": [0.3, 0.3, 0.3],},
+                    property={
+                        "color": [0.4, 0.4, 0.4],
+                    },
+                    actor={
+                        "position": [0.5, 0.2, 0.4],
+                        "scale": [0.3, 0.3, 0.3],
+                    },
                     children=[
                         dash_vtk.Reader(
                             vtkClass="vtkOBJReader",
@@ -32,7 +40,9 @@ app.layout = html.Div(
                 ),
                 dash_vtk.GeometryRepresentation(
                     id="rep",
-                    property={"pointSize": 10,},
+                    property={
+                        "pointSize": 10,
+                    },
                     colorDataRange=[0, 3],
                     mapper={
                         "colorByArrayName": "Temperature",
