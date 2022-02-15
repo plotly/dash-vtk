@@ -38,7 +38,7 @@ controls = dbc.Card(
     body=True,
     children=dbc.Row(
         [
-            dbc.Col(dbc.FormGroup([dbc.Label(label), component]))
+            dbc.Col([dbc.Label(label), component], style={"width": "150px"})
             for label, component in sliders.items()
         ]
     ),
