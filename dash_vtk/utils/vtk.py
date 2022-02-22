@@ -141,46 +141,6 @@ def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=No
             js_types = to_js_type[str(values.dtype)]
             location = "PointData"
 
-    # other arrays (points)
-    point_data = []
-    for name in point_arrays:
-        array = polydata.GetPointData().GetArray(name)
-        if array:
-            dataRange = array.GetRange(-1)
-            nb_comp = array.GetNumberOfComponents()
-            values = vtk_to_numpy(array)
-            js_types = to_js_type[str(values.dtype)]
-            point_data.append(
-                {
-                    "name": name,
-                    "values": b64_encode_numpy(values),
-                    "numberOfComponents": nb_comp,
-                    "type": js_types,
-                    "location": "PointData",
-                    "dataRange": dataRange,
-                }
-            )
-
-    # other arrays (cells)
-    cell_data = []
-    for name in point_arrays:
-        array = polydata.GetCellData().GetArray(name)
-        if array:
-            dataRange = array.GetRange(-1)
-            nb_comp = array.GetNumberOfComponents()
-            values = vtk_to_numpy(array)
-            js_types = to_js_type[str(values.dtype)]
-            cell_data.append(
-                {
-                    "name": name,
-                    "values": b64_encode_numpy(values),
-                    "numberOfComponents": nb_comp,
-                    "type": js_types,
-                    "location": "CellData",
-                    "dataRange": dataRange,
-                }
-            )
-
     state = {
         "mesh": {"points": points,},
     }
@@ -206,6 +166,46 @@ def to_mesh_state(dataset, field_to_keep=None, point_arrays=None, cell_arrays=No
                 },
             }
         )
+
+    # other arrays (points)
+    point_data = []
+    for name in point_arrays:
+        array = polydata.GetPointData().GetArray(name)
+        if array:
+            dataRange = array.GetRange(-1)
+            nb_comp = array.GetNumberOfComponents()
+            values = vtk_to_numpy(array)
+            js_types = to_js_type[str(values.dtype)]
+            point_data.append(
+                {
+                    "name": name,
+                    "values": b64_encode_numpy(values),
+                    "numberOfComponents": nb_comp,
+                    "type": js_types,
+                    "location": "PointData",
+                    "dataRange": dataRange,
+                }
+            )
+
+    # other arrays (cells)
+    cell_data = []
+    for name in cell_arrays:
+        array = polydata.GetCellData().GetArray(name)
+        if array:
+            dataRange = array.GetRange(-1)
+            nb_comp = array.GetNumberOfComponents()
+            values = vtk_to_numpy(array)
+            js_types = to_js_type[str(values.dtype)]
+            cell_data.append(
+                {
+                    "name": name,
+                    "values": b64_encode_numpy(values),
+                    "numberOfComponents": nb_comp,
+                    "type": js_types,
+                    "location": "CellData",
+                    "dataRange": dataRange,
+                }
+            )
 
     if len(point_data):
         state.update({"pointArrays": point_data})
