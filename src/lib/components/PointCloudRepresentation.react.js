@@ -18,6 +18,9 @@ PointCloudRepresentation.defaultProps = {
   xyz: [0, 0, 0],
   colorMapPreset: 'erdc_rainbow_bright',
   colorDataRange: [0, 1],
+  showCubeAxes: false,
+  showScalarBar: false,
+  scalarBarTitle: '',
 };
 
 PointCloudRepresentation.propTypes = {
@@ -57,4 +60,31 @@ PointCloudRepresentation.propTypes = {
    * Properties to set to the actor.property
    */
   property: PropTypes.object,
+
+  /**
+   * Show/Hide Cube Axes for the given representation
+   */
+  showCubeAxes: PropTypes.bool,
+
+  /**
+   * Configure cube Axes style by overriding the set of properties defined
+   * https://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor/index.js#L703-L719
+   */
+  cubeAxesStyle: PropTypes.object,
+
+  /**
+   * Show hide scalar bar for that representation
+   */
+  showScalarBar: PropTypes.bool,
+
+  /**
+   * Use given string as title for scalar bar. By default it is empty (no title).
+   */
+  scalarBarTitle: PropTypes.string,
+
+  /**
+   * Configure scalar bar style by overriding the set of properties defined
+   * https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ScalarBarActor/index.js#L776-L796
+   */
+  scalarBarStyle: PropTypes.object,
 };
