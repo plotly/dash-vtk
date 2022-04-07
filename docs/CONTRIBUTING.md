@@ -97,7 +97,7 @@ You can find the token in the [project settings of the Percy project](https://pe
 
 ## Publishing
 
-Create a pull request and tag the Plotly team (`@plotly/dash-core`) and tag / request review from [@xhlulu](https://github.com/xhlulu).
+Create a pull request and tag and request a review from the Plotly team (`@plotly/dash-core`).
 
 After a review has been done and your changes have been approved, create a prerelease and comment in the PR. Version numbers should follow [semantic versioning][].
 
