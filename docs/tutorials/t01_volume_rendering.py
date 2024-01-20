@@ -1,5 +1,5 @@
 import dash
-import dash_html_components as html
+from dash import html
 
 import dash_vtk
 from dash_vtk.utils import to_volume_state

@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkShareDataSet <- function(children=NULL, id=NULL, name=NULL, port=NULL) {
     
     props <- list(children=children, id=id, name=name, port=port)

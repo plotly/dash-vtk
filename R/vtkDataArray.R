@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkDataArray <- function(id=NULL, name=NULL, numberOfComponents=NULL, registration=NULL, type=NULL, values=NULL) {
     
     props <- list(id=id, name=name, numberOfComponents=numberOfComponents, registration=registration, type=type, values=values)

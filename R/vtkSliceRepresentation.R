@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkSliceRepresentation <- function(children=NULL, id=NULL, actor=NULL, colorDataRange=NULL, colorMapPreset=NULL, iSlice=NULL, jSlice=NULL, kSlice=NULL, mapper=NULL, property=NULL, xSlice=NULL, ySlice=NULL, zSlice=NULL) {
     
     props <- list(children=children, id=id, actor=actor, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, iSlice=iSlice, jSlice=jSlice, kSlice=kSlice, mapper=mapper, property=property, xSlice=xSlice, ySlice=ySlice, zSlice=zSlice)

@@ -6,7 +6,7 @@
 \title{View component}
 
 \description{
-View is responsible to render vtk.js data. It takes the following set of properties:   - `background`: [0.2, 0.3, 0.4]   - `cameraPosition`: [0, 0, 1]   - `cameraViewUp`: [0, 1, 0]   - `cameraParallelProjection`: false
+View is responsible to render vtk.js data. It takes the following set of properties:   - `background`: [0.2, 0.3, 0.4]   - `cameraPosition`: [0, 0, 1]   - `cameraViewUp`: [0, 1, 0]   - `cameraParallelProjection`: false   - `showOrientationAxes`: true
 }
 
 \usage{
@@ -14,7 +14,8 @@ vtkView(children=NULL, id=NULL, background=NULL,
 cameraParallelProjection=NULL, cameraPosition=NULL,
 cameraViewUp=NULL, className=NULL, clickInfo=NULL,
 hoverInfo=NULL, interactorSettings=NULL, pickingModes=NULL,
-style=NULL, triggerRender=NULL, triggerResetCamera=NULL)
+showOrientationAxes=NULL, style=NULL, triggerRender=NULL,
+triggerResetCamera=NULL)
 }
 
 \arguments{
@@ -44,6 +45,8 @@ the picking info describing the object being hovered.}
 \item{interactorSettings}{Unnamed list. Configure the interactions}
 
 \item{pickingModes}{List of characters. List of picking listeners to bind. The supported values are `click` and `hover`. By default it is disabled (empty array).}
+
+\item{showOrientationAxes}{Logical. Show/Hide orientation axes.}
 
 \item{style}{Named list. Allow user to override the default View style { width: '100\%', height: '100\%' }}
 

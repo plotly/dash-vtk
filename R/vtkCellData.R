@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkCellData <- function(children=NULL) {
     
     props <- list(children=children)

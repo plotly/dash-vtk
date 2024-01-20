@@ -12,7 +12,8 @@ GeometryRepresentation is responsible to convert a vtkPolyData into rendering It
 \usage{
 vtkGeometryRepresentation(children=NULL, id=NULL, actor=NULL, colorDataRange=NULL,
 colorMapPreset=NULL, cubeAxesStyle=NULL, mapper=NULL,
-property=NULL, showCubeAxes=NULL)
+property=NULL, scalarBarStyle=NULL, scalarBarTitle=NULL,
+showCubeAxes=NULL, showScalarBar=NULL)
 }
 
 \arguments{
@@ -33,7 +34,14 @@ https://github.com/Kitware/vtk-js/blob/HEAD/Sources/Rendering/Core/CubeAxesActor
 
 \item{property}{Named list. Properties to set to the actor.property}
 
+\item{scalarBarStyle}{Named list. Configure scalar bar style by overriding the set of properties defined
+https://github.com/Kitware/vtk-js/blob/master/Sources/Rendering/Core/ScalarBarActor/index.js#L776-L796}
+
+\item{scalarBarTitle}{Character. Use given string as title for scalar bar. By default it is empty (no title).}
+
 \item{showCubeAxes}{Logical. Show/Hide Cube Axes for the given representation}
+
+\item{showScalarBar}{Logical. Show hide scalar bar for that representation}
 }
 
 \value{named list of JSON elements corresponding to React.js properties and their values}
