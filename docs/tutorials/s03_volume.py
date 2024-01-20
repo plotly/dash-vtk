@@ -1,6 +1,6 @@
 import dash
 import random
-import dash_html_components as html
+from dash import html
 import dash_vtk
 
 field = [random.random()*i for i in range(10*10*10)]

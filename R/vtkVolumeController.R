@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkVolumeController <- function(id=NULL, rescaleColorMap=NULL, size=NULL) {
     
     props <- list(id=id, rescaleColorMap=rescaleColorMap, size=size)

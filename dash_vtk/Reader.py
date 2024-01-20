@@ -39,20 +39,19 @@ Keyword arguments:
 
 - vtkClass (string; default ''):
     vtkClass name."""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'dash_vtk'
+    _type = 'Reader'
     @_explicitize_args
     def __init__(self, children=None, id=Component.UNDEFINED, port=Component.UNDEFINED, vtkClass=Component.UNDEFINED, url=Component.UNDEFINED, parseAsText=Component.UNDEFINED, parseAsArrayBuffer=Component.UNDEFINED, renderOnUpdate=Component.UNDEFINED, resetCameraOnUpdate=Component.UNDEFINED, **kwargs):
         self._prop_names = ['children', 'id', 'parseAsArrayBuffer', 'parseAsText', 'port', 'renderOnUpdate', 'resetCameraOnUpdate', 'url', 'vtkClass']
-        self._type = 'Reader'
-        self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
         self.available_properties = ['children', 'id', 'parseAsArrayBuffer', 'parseAsText', 'port', 'renderOnUpdate', 'resetCameraOnUpdate', 'url', 'vtkClass']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
         args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in []:
-            if k not in args:
-                raise TypeError(
-                    'Required argument `' + k + '` was not specified.')
+
         super(Reader, self).__init__(children=children, **args)

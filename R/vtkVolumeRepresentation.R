@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkVolumeRepresentation <- function(children=NULL, id=NULL, colorDataRange=NULL, colorMapPreset=NULL, mapper=NULL, property=NULL, volume=NULL) {
     
     props <- list(children=children, id=id, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, mapper=mapper, property=property, volume=volume)
