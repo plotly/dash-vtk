@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkPolyData <- function(children=NULL, id=NULL, connectivity=NULL, lines=NULL, points=NULL, polys=NULL, port=NULL, strips=NULL, verts=NULL) {
     
     props <- list(children=children, id=id, connectivity=connectivity, lines=lines, points=points, polys=polys, port=port, strips=strips, verts=verts)
