@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkCalculator <- function(children=NULL, id=NULL, arrays=NULL, formula=NULL, location=NULL, name=NULL, port=NULL) {
     
     props <- list(children=children, id=id, arrays=arrays, formula=formula, location=location, name=name, port=port)

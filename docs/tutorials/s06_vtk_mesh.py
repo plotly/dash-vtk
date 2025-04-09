@@ -3,7 +3,7 @@ import os
 import dash
 import dash_vtk
 from dash_vtk.utils import to_mesh_state
-import dash_html_components as html
+from dash import html
 
 repo_path = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))

@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkAlgorithm <- function(children=NULL, id=NULL, port=NULL, state=NULL, vtkClass=NULL) {
     
     props <- list(children=children, id=id, port=port, state=state, vtkClass=vtkClass)

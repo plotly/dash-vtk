@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkImageData <- function(children=NULL, id=NULL, dimensions=NULL, direction=NULL, origin=NULL, port=NULL, spacing=NULL) {
     
     props <- list(children=children, id=id, dimensions=dimensions, direction=direction, origin=origin, port=port, spacing=spacing)

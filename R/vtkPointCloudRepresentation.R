@@ -1,8 +1,9 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-vtkPointCloudRepresentation <- function(colorDataRange=NULL, colorMapPreset=NULL, property=NULL, rgb=NULL, rgba=NULL, scalars=NULL, xyz=NULL) {
+#' @export
+vtkPointCloudRepresentation <- function(id=NULL, colorDataRange=NULL, colorMapPreset=NULL, cubeAxesStyle=NULL, property=NULL, rgb=NULL, rgba=NULL, scalarBarStyle=NULL, scalarBarTitle=NULL, scalars=NULL, showCubeAxes=NULL, showScalarBar=NULL, xyz=NULL) {
     
-    props <- list(colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, property=property, rgb=rgb, rgba=rgba, scalars=scalars, xyz=xyz)
+    props <- list(id=id, colorDataRange=colorDataRange, colorMapPreset=colorMapPreset, cubeAxesStyle=cubeAxesStyle, property=property, rgb=rgb, rgba=rgba, scalarBarStyle=scalarBarStyle, scalarBarTitle=scalarBarTitle, scalars=scalars, showCubeAxes=showCubeAxes, showScalarBar=showScalarBar, xyz=xyz)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +11,7 @@ vtkPointCloudRepresentation <- function(colorDataRange=NULL, colorMapPreset=NULL
         props = props,
         type = 'PointCloudRepresentation',
         namespace = 'dash_vtk',
-        propNames = c('colorDataRange', 'colorMapPreset', 'property', 'rgb', 'rgba', 'scalars', 'xyz'),
+        propNames = c('id', 'colorDataRange', 'colorMapPreset', 'cubeAxesStyle', 'property', 'rgb', 'rgba', 'scalarBarStyle', 'scalarBarTitle', 'scalars', 'showCubeAxes', 'showScalarBar', 'xyz'),
         package = 'dashVtk'
         )
 

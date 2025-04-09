@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkVolume <- function(id=NULL, port=NULL, state=NULL) {
     
     props <- list(id=id, port=port, state=state)

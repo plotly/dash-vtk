@@ -1,5 +1,6 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
+#' @export
 vtkReader <- function(children=NULL, id=NULL, parseAsArrayBuffer=NULL, parseAsText=NULL, port=NULL, renderOnUpdate=NULL, resetCameraOnUpdate=NULL, url=NULL, vtkClass=NULL) {
     
     props <- list(children=children, id=id, parseAsArrayBuffer=parseAsArrayBuffer, parseAsText=parseAsText, port=port, renderOnUpdate=renderOnUpdate, resetCameraOnUpdate=resetCameraOnUpdate, url=url, vtkClass=vtkClass)

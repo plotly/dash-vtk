@@ -64,20 +64,19 @@ Keyword arguments:
 
 - volumeController (boolean; default True):
     Show volumeController."""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'dash_vtk'
+    _type = 'VolumeDataRepresentation'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, dimensions=Component.UNDEFINED, spacing=Component.UNDEFINED, origin=Component.UNDEFINED, rgb=Component.UNDEFINED, rgba=Component.UNDEFINED, scalars=Component.UNDEFINED, scalarsType=Component.UNDEFINED, mapper=Component.UNDEFINED, volume=Component.UNDEFINED, property=Component.UNDEFINED, colorMapPreset=Component.UNDEFINED, volumeController=Component.UNDEFINED, controllerSize=Component.UNDEFINED, rescaleColorMap=Component.UNDEFINED, colorDataRange=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'colorDataRange', 'colorMapPreset', 'controllerSize', 'dimensions', 'mapper', 'origin', 'property', 'rescaleColorMap', 'rgb', 'rgba', 'scalars', 'scalarsType', 'spacing', 'volume', 'volumeController']
-        self._type = 'VolumeDataRepresentation'
-        self._namespace = 'dash_vtk'
         self._valid_wildcard_attributes =            []
         self.available_properties = ['id', 'colorDataRange', 'colorMapPreset', 'controllerSize', 'dimensions', 'mapper', 'origin', 'property', 'rescaleColorMap', 'rgb', 'rgba', 'scalars', 'scalarsType', 'spacing', 'volume', 'volumeController']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
-        args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in []:
-            if k not in args:
-                raise TypeError(
-                    'Required argument `' + k + '` was not specified.')
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
+        args = {k: _locals[k] for k in _explicit_args}
+
         super(VolumeDataRepresentation, self).__init__(**args)
